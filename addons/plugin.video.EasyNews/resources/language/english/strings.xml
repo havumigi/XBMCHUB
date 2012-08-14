@@ -1,0 +1,12 @@
+<strings>
+	<!-- Easy News -->
+	<string id="30300">Easy account</string>
+	<string id="easy_user">Username</string>
+    <string id="easy_pass">Password</string>
+	<!-- TV Settings -->
+	<string id="tvfilename">tvfilename</string>
+    <string id="tvfilesize">tvfilesize</string>
+    	<!-- Movie Settings -->
+	<string id="moviefilename">moviefilenamee</string>
+    <string id="moviefilesize">moviefilesize</string>      
+</strings>
