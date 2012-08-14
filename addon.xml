@@ -1,20 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<addons>
-<addon id="plugin.video.EasyNews"
-       name="EasyNews...XBMCHUB.COM"
-       version="v1.3"
-       provider-name="Mikey1234">
-  <requires>
-    <import addon="xbmc.python" version="2.0"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource"
-            library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">Easynews</summary>
-    <description lang="en">Stream From EasyNews.....Official Support....XBMCHUB.COM</description>
-    <platform>all</platform>
-  </extension>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.XBMCHUB" name="XBMCHUB REPO" version="1.0" provider-name="Mikey 1234">
+	<extension point="xbmc.addon.repository" name="t0mm0's XBMC Addon Repository">
+		<info compressed="false">http://raw.github.com/mikey1234/XBMCHUB/master/addons.xml</info>
+		<checksum>http://raw.github.com/mikey1234/XBMCHUB/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://github.com/mikey1234/XBMCHUB/tree/master/repo</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Install XBMCHUB Addons</summary>
+		<description>Download and install addons from XBMCHUB.COM</description>
+		<platform>all</platform>
+	</extension>
 </addon>
-</addons>
+
