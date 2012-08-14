@@ -1,0 +1,18 @@
+V1.2
+Added "Found Languages" In Easynews Search
+Added "OUT ON DVD AND BLURAY"
+Added some ratings unsure if it works
+Added Plot to Movies 
+
+V1.1
+09/08/2012
+Added Auto Views
+Added Minimum File Size In Settings
+Added Choose File Extension (MKV,AVI,blah blah blah)
+Fanart in Movies
+Better image control in Tv Shows
+Added Plot to Episodes
+
+
+v1.0
+Initial Release

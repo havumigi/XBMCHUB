@@ -1,0 +1,25 @@
+<settings>
+    <category label="Auto-View">
+		<setting id="auto-view" type="bool" label="30600" default="false"/>
+		<setting id="MAIN" type="number" label="30601" default="50" enable="!eq(-1,false)"/>
+		<setting id="A-Z" type="number" label="30602" default="50" enable="!eq(-2,false)"/>
+		<setting id="GENRE" type="number" label="30603" default="50" enable="!eq(-3,false)"/>	
+		<setting id="VIDEO" type="number" label="30604" default="500" enable="!eq(-4,false)"/>
+		<setting id="DEFAULT" type="number" label="30605" default="50" enable="!eq(-4,false)"/>/>
+   	</category>	
+    <category label="History_Search">
+		<setting id="History" type="bool" label="30607" default="false"/>
+		<setting id="history_10" type="text" label="30608" default="history_10" visible="false" enable="!eq(-1,false)"/>
+		<setting id="history_9" type="text" label="30609" default="history_9" visible="false" enable="!eq(-2,false)"/>
+		<setting id="history_8" type="text" label="306010" default="history_8" visible="false" enable="!eq(-3,false)"/>	
+		<setting id="history_7" type="text" label="306011" default="history_7" visible="false" enable="!eq(-4,false)"/>
+		<setting id="history_6" type="text" label="306012" default="history_6" visible="false" enable="!eq(-5,false)"/>
+		<setting id="history_5" type="text" label="306013" default="history_5" visible="false" enable="!eq(-6,false)"/>
+		<setting id="history_4" type="text" label="306014" default="history_4" visible="false" enable="!eq(-7,false)"/>
+		<setting id="history_3" type="text" label="306015" default="history_3" visible="false" enable="!eq(-8,false)"/>
+		<setting id="history_2" type="text" label="306016" default="history_2" visible="false" enable="!eq(-8,false)"/>
+		<setting id="history_1" type="text" label="306017" default="history_1" visible="false" enable="!eq(-8,false)"/>/>
+   	</category>	
+   	
+   	
+</settings>
