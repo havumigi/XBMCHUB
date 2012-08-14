@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <addons>
 <addon id="plugin.video.EasyNews"
        name="EasyNews...XBMCHUB.COM"
-       version="v1.3"
+       version="v1.2"
        provider-name="Mikey1234">
   <requires>
     <import addon="xbmc.python" version="2.0"/>
