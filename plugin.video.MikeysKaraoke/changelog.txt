@@ -1,0 +1,21 @@
+v1.3
+30/07/2012
+Added Fanart
+Better website Scraping for artist lists nearly all song ever made
+Fixed Genre not showing all Titles
+store saved searches (working on it) they store but dont show up
+
+v1.2
+26/07/2012
+Fixed script error
+
+v1.1
+11/07/2012
+Added Gui
+Artist Order
+Title Order
+Genre Order
+
+v1.0.2
+09/072012
+Initial Realease
