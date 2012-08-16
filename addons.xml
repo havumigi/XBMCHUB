@@ -41,7 +41,7 @@
 	<extension point="xbmc.addon.repository" name="Mikey1234 Addon Repository">
 		<info compressed="false">https://github.com/mikey1234/XBMCHUB/raw/master/addons.xml</info>
 		<checksum>https://github.com/mikey1234/XBMCHUB/raw/master/addons.xml.md5</checksum>
-		<datadir zip="true">https://raw.github.com/mikey1234/XBMCHUB/tree/master/repo/</datadir>
+		<datadir zip="true">https://raw.github.com/mikey1234/XBMCHUB/master/repo/</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Install Mikey1234 Addons</summary>
