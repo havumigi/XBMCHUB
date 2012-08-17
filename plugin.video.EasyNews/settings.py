@@ -72,53 +72,53 @@ def MOVIE_FILENAME():
     if quality == '0':
         return ''
     elif quality == '1':   
-        return 'avi'
+        return 'AVI'
     elif quality == '2':
-        return 'mkv'
+        return 'MKV'
     elif quality == '3':
-        return 'mp4'
+        return 'MP4'
     elif quality == '4':
-        return 'iso'
+        return 'ISO'
     elif quality == '5':
-        return 'divx'
+        return 'DIVX'
     elif quality == '6':
-        return 'mpg'
+        return 'MPG'
     elif quality == '7':
-        return 'flv'
+        return 'FLV'
     elif quality == '8':
-        return 'wmv'
+        return 'WMV'
     elif quality == '9':
-        return 'mov'
+        return 'MOV'
     elif quality == '10':
-        return 'asf'
+        return 'ASF'
     elif quality == '11':
-        return 'rm'
+        return 'RM'
 
 def TV_FILENAME():
     quality = ADDON.getSetting('tvfilename')
     if quality == '0':
         return ''
     elif quality == '1':   
-        return 'avi'
+        return 'AVI'
     elif quality == '2':
-        return 'mkv'
+        return 'MKV'
     elif quality == '3':
-        return 'mp4'
+        return 'MP4'
     elif quality == '4':
-        return 'iso'
+        return 'ISO'
     elif quality == '5':
-        return 'divx'
+        return 'DIVX'
     elif quality == '6':
-        return 'mpg'
+        return 'MPG'
     elif quality == '7':
-        return 'flv'
+        return 'FLV'
     elif quality == '8':
-        return 'wmv'
+        return 'WMV'
     elif quality == '9':
-        return 'mov'
+        return 'MOV'
     elif quality == '10':
-        return 'asf'
+        return 'ASF'
     elif quality == '11':
-        return 'rm'
+        return 'RM'
         
         

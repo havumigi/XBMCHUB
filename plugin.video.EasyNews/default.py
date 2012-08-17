@@ -9,7 +9,6 @@ tvfn = settings.TV_FILENAME()
 mvfn = settings.MOVIE_FILENAME()
 
 
-
 def CATEGORIES():
         addDir('Search Easy News','url',1,'','','','','')
         addDir('Movies','url',4,'','','','','')
@@ -19,6 +18,7 @@ def CATEGORIES():
 def MOVIE_CATEGORIES():
         addDir('Search Movies','url',6,'','','','','')
         addDir('Now Playing','http://www.themoviedb.org/movie/now-playing',2,'','','','','')
+        addDir('Blu-ray & DVD This Week','http://www.lovefilm.com/browse/film/new-releases/dvd/films/new-this-week/?sort_by=release_date&rows=50',14,'','','','','')
         addDir('Blu-ray & DVD Last Week','http://www.lovefilm.com/browse/film/new-releases/dvd/films/new-last-week/?sort_by=release_date&rows=50',14,'','','','','')
         addDir('Blu-ray & DVD 2 Weeks Ago','http://www.lovefilm.com/browse/film/new-releases/dvd/films/new-2-weeks/?sort_by=release_date&rows=50',14,'','','','','')
         addDir('Blu-ray & DVD 3 Weeks Ago','http://www.lovefilm.com/browse/film/new-releases/dvd/films/new-3-weeks/?sort_by=release_date&rows=50',14,'','','','','')
@@ -189,7 +189,12 @@ def GENRE_LIST(url):
                     
 def EasySearch(name,iconimage,fanart):
         search_entered = str(name).replace(' ','+') .replace(':','') .replace(', ','+').replace(',','+').replace('[','').replace(']',' ').replace('(The)','').replace('(','') .replace(')','') .replace('-','+').replace("'",'+')       
-        theurl = 'http://members.easynews.com/global5/index.html?&gps='+search_entered+'&sbj=&from=&ns=&fil=&fex='+mvfn+'&vc=&ac=&fty%5B%5D=VIDEO&s1=nsubject&s1d=%2B&s2=nrfile&s2d=%2B&s3=dsize&s3d=%2B&pby=1000&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t='+mvfs+'&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
+        dialog = xbmcgui.Dialog()
+        if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", mvfn, "Any"):
+                theurl = 'http://members.easynews.com/global5/index.html?&gps='+search_entered+'&sbj=&from=&ns=&fil=&fex=&vc=&ac=&fty%5B%5D=VIDEO&s1=nsubject&s1d=%2B&s2=nrfile&s2d=%2B&s3=dsize&s3d=%2B&pby=1000&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t='+mvfs+'&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
+        else:
+                theurl = 'http://members.easynews.com/global5/index.html?&gps='+search_entered+'&sbj=&from=&ns=&fil=&fex='+mvfn+'&vc=&ac=&fty%5B%5D=VIDEO&s1=nsubject&s1d=%2B&s2=nrfile&s2d=%2B&s3=dsize&s3d=%2B&pby=1000&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t='+mvfs+'&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
+                print theurl
         username = ADDON.getSetting('easy_user')
         password = ADDON.getSetting('easy_pass')
         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -341,11 +346,15 @@ def TV_SEARCH(name, iconimage):
             setView('movies', 'seasons-view')
                   
 def TV_EASY_SEARCH(series):
-        search_entered = str(series).replace(' ','+') .replace(':','') .replace(',','').replace('[','').replace(']','')     
-        theurl = 'http://members.easynews.com/global5/index.html?&gps='+search_entered+'&sbj=&from=&ns=&fil=&fex='+tvfn+'&vc=&ac=&fty%5B%5D=VIDEO&s1=nsubject&s1d=%2B&s2=nrfile&s2d=%2B&s3=dsize&s3d=%2B&pby=1000&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t='+tvfs+'&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
+        search_entered = str(series).replace(' ','+') .replace(':','') .replace(',','').replace('[','').replace(']','')   
+        dialog = xbmcgui.Dialog()
+        if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", tvfn, "Any"):
+                theurl = 'http://members.easynews.com/global5/index.html?&gps='+search_entered+'&sbj=&from=&ns=&fil=&fex=&vc=&ac=&fty%5B%5D=VIDEO&s1=nsubject&s1d=%2B&s2=nrfile&s2d=%2B&s3=dsize&s3d=%2B&pby=1000&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t='+tvfs+'&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
+        else:
+                theurl = 'http://members.easynews.com/global5/index.html?&gps='+search_entered+'&sbj=&from=&ns=&fil=&fex='+tvfn+'&vc=&ac=&fty%5B%5D=VIDEO&s1=nsubject&s1d=%2B&s2=nrfile&s2d=%2B&s3=dsize&s3d=%2B&pby=1000&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t='+tvfs+'&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
+                print theurl
         username = ADDON.getSetting('easy_user')
         password = ADDON.getSetting('easy_pass')
-        print theurl
         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
         passman.add_password(None, theurl, username, password)
         authhandler = urllib2.HTTPBasicAuthHandler(passman)
