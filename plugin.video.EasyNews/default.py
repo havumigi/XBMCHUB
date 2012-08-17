@@ -194,7 +194,6 @@ def EasySearch(name,iconimage,fanart):
                 theurl = 'http://members.easynews.com/global5/index.html?&gps='+search_entered+'&sbj=&from=&ns=&fil=&fex=&vc=&ac=&fty%5B%5D=VIDEO&s1=nsubject&s1d=%2B&s2=nrfile&s2d=%2B&s3=dsize&s3d=%2B&pby=1000&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t='+mvfs+'&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
         else:
                 theurl = 'http://members.easynews.com/global5/index.html?&gps='+search_entered+'&sbj=&from=&ns=&fil=&fex='+mvfn+'&vc=&ac=&fty%5B%5D=VIDEO&s1=nsubject&s1d=%2B&s2=nrfile&s2d=%2B&s3=dsize&s3d=%2B&pby=1000&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t='+mvfs+'&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
-                print theurl
         username = ADDON.getSetting('easy_user')
         password = ADDON.getSetting('easy_pass')
         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
