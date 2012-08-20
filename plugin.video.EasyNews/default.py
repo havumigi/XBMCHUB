@@ -45,7 +45,7 @@ def SEARCH(url):
             search_entered = keyboard.getText() .replace(' ','+')  # sometimes you need to replace spaces with + or %20#
             if search_entered == None:
                 return False          
-        theurl = 'http://members.easynews.com/global5/index.html?&gps='+search_entered+'&sbj=&from=&ns=&fil=&fex=&vc=&ac=&fty%5B%5D=VIDEO&s1=nsubject&s1d=%2B&s2=nrfile&s2d=%2B&s3=dsize&s3d=%2B&pby=1000&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t=&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
+        theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'&fex=&pby=1000&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO&spamf=1&u=1&st=adv&safeO=0&boost=1&sb=1'
         username = ADDON.getSetting('easy_user')
         password = ADDON.getSetting('easy_pass')
         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -131,7 +131,6 @@ def TMDB(url):
             url=url1
             name = str(name).replace('&hellip;','')
             iconimage = str(iconimage).replace('w92','original')
-            fanart = iconimage
             addDir(name,url,3,iconimage,fanart,series,description,rating)
             setView('movies', 'default-view')   
              
@@ -181,19 +180,18 @@ def GENRE_LIST(url):
                     iconimage= '%s.gif'%(match.group(1))
             except:
                     pass
-                    fanart= iconimage
                     url = 'http://www.imdb.com/title/'+str(url)+'/'
                     name = str(name).replace('&#xB7;','').replace('&#x27;','').replace('&#x2;','And')
                     addDir(name,url,3,iconimage,fanart,series,description,rating)   
                     setView('movies', 'movies-view') 
                     
-def EasySearch(name,iconimage,fanart):
+def EasySearch(name,iconimage):
         search_entered = str(name).replace(' ','+') .replace(':','') .replace(', ','+').replace(',','+').replace('[','').replace(']',' ').replace('(The)','').replace('(','') .replace(')','') .replace('-','+').replace("'",'+')       
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", mvfn, "Any"):
-                theurl = 'http://members.easynews.com/global5/index.html?&gps='+search_entered+'&sbj=&from=&ns=&fil=&fex=&vc=&ac=&fty%5B%5D=VIDEO&s1=nsubject&s1d=%2B&s2=nrfile&s2d=%2B&s3=dsize&s3d=%2B&pby=1000&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t='+mvfs+'&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
+                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'&fex=&pby=1000&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mvfs+'&b2t=&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO&spamf=1&u=1&st=adv&safeO=0&boost=1&sb=1'
         else:
-                theurl = 'http://members.easynews.com/global5/index.html?&gps='+search_entered+'&sbj=&from=&ns=&fil=&fex='+mvfn+'&vc=&ac=&fty%5B%5D=VIDEO&s1=nsubject&s1d=%2B&s2=nrfile&s2d=%2B&s3=dsize&s3d=%2B&pby=1000&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t='+mvfs+'&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
+                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'&fex='+mvfn+'&pby=1000&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mvfs+'&b2t=&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO&spamf=1&u=1&st=adv&safeO=0&boost=1&sb=1'
         username = ADDON.getSetting('easy_user')
         password = ADDON.getSetting('easy_pass')
         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -270,7 +268,6 @@ def TV_POPULAR(url):
                     iconimage= '%s.gif'%(match.group(1))
             except:
                     pass
-                    fanart= iconimage
                     addDir(name,url,10,iconimage,fanart,series,description,rating)   
                     setView('movies', 'tvshows-view') 
              
@@ -313,7 +310,6 @@ def TV_EPISODE(url,iconimage,series):
                     iconimage= '%s.gif'%(match.group(1))
             except:
                     pass
-                    fanart= iconimage
                     addDir(name,url,13,iconimage,fanart,series,description,rating)                
                     setView('movies', 'episodes-view') 
             
@@ -348,9 +344,9 @@ def TV_EASY_SEARCH(series):
         search_entered = str(series).replace(' ','+') .replace(':','') .replace(',','').replace('[','').replace(']','')   
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", tvfn, "Any"):
-                theurl = 'http://members.easynews.com/global5/index.html?&gps='+search_entered+'&sbj=&from=&ns=&fil=&fex=&vc=&ac=&fty%5B%5D=VIDEO&s1=nsubject&s1d=%2B&s2=nrfile&s2d=%2B&s3=dsize&s3d=%2B&pby=1000&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t='+tvfs+'&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
+                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'&fex=&pby=1000&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfs+'&b2t=&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO&spamf=1&u=1&st=adv&safeO=0&boost=1&sb=1'
         else:
-                theurl = 'http://members.easynews.com/global5/index.html?&gps='+search_entered+'&sbj=&from=&ns=&fil=&fex='+tvfn+'&vc=&ac=&fty%5B%5D=VIDEO&s1=nsubject&s1d=%2B&s2=nrfile&s2d=%2B&s3=dsize&s3d=%2B&pby=1000&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t='+tvfs+'&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
+                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'&fex='+tvfn+'&pby=1000&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfs+'&b2t=&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO&spamf=1&u=1&st=adv&safeO=0&boost=1&sb=1'
                 print theurl
         username = ADDON.getSetting('easy_user')
         password = ADDON.getSetting('easy_pass')
@@ -520,7 +516,7 @@ elif mode==2:
 
 elif mode==3:
         print ""+name+iconimage
-        EasySearch(name,iconimage,fanart)    
+        EasySearch(name,iconimage)    
         
 elif mode==4:
         print ""+name+iconimage
