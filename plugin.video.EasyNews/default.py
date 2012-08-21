@@ -13,6 +13,7 @@ def CATEGORIES():
         addDir('Search Easy News','url',1,'','','','','')
         addDir('Movies','url',4,'','','','','')
         addDir('TV','url',5,'','','','','')
+        addDir('Music','url',15,'','','','','')
    
         
 def MOVIE_CATEGORIES():
@@ -36,6 +37,10 @@ def TV_CATEGORIES():
         addDir('Most Popular 4','http://www.imdb.com/search/title?num_votes=5000,&sort=moviemeter,asc&start=151&title_type=tv_series',9,'','','','','')
         addDir('Most Popular 5','http://www.imdb.com/search/title?num_votes=5000,&sort=moviemeter,asc&start=201&title_type=tv_series',9,'','','','','')
         setView('movies', 'default-view')
+        
+def MUSIC_CATEGORIES():
+        addDir('Search Music','url',16,'','','','','')
+        addDir('Top iTunes Charts','http://www.apple.com/itunes/charts/albums/',17,'','','','','')
 
 def SEARCH(url):
         search_entered = ''
@@ -402,6 +407,89 @@ def TV_EASY_SEARCH(series):
             addLink(name,url,iconimage,fanart,series,description,rating)  
             setView('movies', 'easy-view')
             
+def MUSIC_SEARCH(url):
+        artist = ''
+        keyboard = xbmc.Keyboard(artist, 'Artist Name')
+        keyboard.doModal()
+        if keyboard.isConfirmed():
+            artist = keyboard.getText() .replace(' ','+')  # sometimes you need to replace spaces with + or %20#
+            if artist == None:
+                return False
+        album = ''
+        keyboard = xbmc.Keyboard(album, 'Album Name')
+        keyboard.doModal()
+        if keyboard.isConfirmed():
+            album = keyboard.getText() .replace(' ','+')  # sometimes you need to replace spaces with + or %20#
+            if album == None:
+                return False          
+        theurl = 'http://members.easynews.com/global5/index.html?&gps='+artist+'+'+album+'&sbj=&from=&ns=&fil=&fex=&vc=&ac=&fty%5B%5D=PARITY&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&pby=30&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t=&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
+        username = ADDON.getSetting('easy_user')
+        password = ADDON.getSetting('easy_pass')
+        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+        passman.add_password(None, theurl, username, password)
+        authhandler = urllib2.HTTPBasicAuthHandler(passman)
+        opener = urllib2.build_opener(authhandler)
+        urllib2.install_opener(opener)
+        pagehandle = urllib2.urlopen(theurl)
+        link= pagehandle.read()      
+        match=re.compile('members.easynews.com/.+?/.+?/.+?/.+?/(.+?)/(.+?)".+?ength=".+?"').findall(link)
+        for url, name in match:
+            url = 'http://members.easynews.com/global/allpar.html?fname='+str(url)
+            name= str(name).replace('.par2','').replace('%20',' ')
+            addDir(name,url,19,iconimage,fanart,series,description,rating)        
+            setView('movies', 'easy-view')     
+               
+            
+def MUSIC_LIST(url):
+        req = urllib2.Request(url)
+        req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+        response = urllib2.urlopen(req)
+        link=response.read()
+        response.close()
+        match = re.compile('<img src="(.+?)" width=".+?" height=".+?" alt=".+?"></a><h3><a href=".+?">(.+?)</a></h3><h4><a href=".+?">(.+?)</a>').findall(link)
+        for iconimage, url, name in match:
+            url=str(url).replace('+','plus').replace('Deluxe','').replace('deluxe','').replace('Version','').replace('version','').replace('(','').replace(')','').replace('&amp;','and')
+            name=str(name).replace('&amp;','and')
+            addDir(name,url,18,iconimage,fanart,series,description,rating)    
+            setView('movies', 'default-view')    
+            
+            
+def MUSIC_LIST_SEARCH(name, url):
+        theurl = 'http://members.easynews.com/global5/index.html?&gps='+str(name).replace(' ','+')+'+'+str(url).replace(' ','+')+'&sbj=&from=&ns=&fil=&fex=&vc=&ac=&fty%5B%5D=PARITY&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&pby=30&spamf=1&u=1&svL=&d1=&d1t=&d2=&d2t=&b1=&b1t=&b2=&b2t=&px1=&px1t=&px2=&px2t=&fps1=&fps1t=&fps2=&fps2t=&bps1=&bps1t=&bps2=&bps2t=&hz1=&hz1t=&hz2=&hz2t=&rn1=&rn1t=&rn2=&rn2t=&fly=2&pno=1&sS=5'
+        username = ADDON.getSetting('easy_user')
+        password = ADDON.getSetting('easy_pass')
+        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+        passman.add_password(None, theurl, username, password)
+        authhandler = urllib2.HTTPBasicAuthHandler(passman)
+        opener = urllib2.build_opener(authhandler)
+        urllib2.install_opener(opener)
+        pagehandle = urllib2.urlopen(theurl)
+        link= pagehandle.read()      
+        match=re.compile('members.easynews.com/.+?/.+?/.+?/.+?/(.+?)/(.+?)".+?ength=".+?"').findall(link)
+        for url, name in match:
+            url = 'http://members.easynews.com/global/allpar.html?fname='+str(url)
+            name= str(name).replace('.par2','').replace('%20',' ')
+            addDir(name,url,19,iconimage,fanart,series,description,rating)        
+            setView('movies', 'easy-view')     
+            
+def MUSIC_PAR_SEARCH(name, url):
+        username = ADDON.getSetting('easy_user')
+        password = ADDON.getSetting('easy_pass')
+        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+        passman.add_password(None, url, username, password)
+        authhandler = urllib2.HTTPBasicAuthHandler(passman)
+        opener = urllib2.build_opener(authhandler)
+        urllib2.install_opener(opener)
+        pagehandle = urllib2.urlopen(url)
+        link= pagehandle.read()      
+        match=re.compile('href="http://boost4-(.+?)".+?arget="fileTarget.+?>(.+?).mp3</a>').findall(link)
+        for url, name in match:
+            print name
+            changeboost4 = 'http://'+username+':'+password+'@' +boost
+            url = str(changeboost4)+str(url)
+            addLink1(name,url,iconimage,fanart,series,description,rating)        
+            setView('movies', 'easy-view')     
+            
 def get_params():
         param=[]
         paramstring=sys.argv[2]
@@ -439,6 +527,14 @@ def addLink(name,url,iconimage,fanart,series,description,rating):
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
         return ok 
                       
+def addLink1(name,url,iconimage,fanart,series,description,rating):
+        ok=True
+        liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
+        liz.setInfo( type="Audio", infoLabels={ "Title": name,"Plot":description  } )
+        liz.setProperty("IsPlayable","true")
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
+        return ok 
+        
 params=get_params()
 url=None
 name=None
@@ -562,5 +658,24 @@ elif mode==13:
 elif mode==14:
         print ""+url
         ONDVD(url)
-                                                     
+        
+elif mode==15:
+        print ""
+        MUSIC_CATEGORIES()
+        
+elif mode==16:
+        print ""+url
+        MUSIC_SEARCH(url) 
+        
+elif mode==17:
+        print ""+url
+        MUSIC_LIST(url)           
+
+elif mode==18:
+        print ""+name +url
+        MUSIC_LIST_SEARCH(name, url) 
+        
+elif mode==19:
+        print ""+name +url
+        MUSIC_PAR_SEARCH(name, url)                                                                  
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
