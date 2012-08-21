@@ -4,7 +4,7 @@
 	<setting id="easy_account" type="bool" label="30300" default="false"/>
 	<setting id="easy_user" type="text" label="Username" default="" enable="!eq(-1,false)"/>
 	<setting id="easy_pass" type="text" option="hidden" label="Password" default="" enable="!eq(-2,false)"/>
-</category>   	
+    <setting id="boost" type="enum" values="Easyboost4|Easyboost1|Easyboost5|Non" label="Easyboost" default="0" /></category>   	
 <category label="TV Settings">
 	<setting id="tvfilename" type="enum" values="Any|AVI|MKV|MP4|ISO|DIVX|MPG|FLV|WMV|MOV|ASF|RM" label="Tv File Extension" default="0" />
 	<setting id="tvfilesize" type="enum" values="Any|300Mb|400Mb|500Mb|750M|1Gb|1.5Gb|2Gb|3Gb|4Gb|5GB|6Gb" label="Tv Minimum File Size" default="2" />

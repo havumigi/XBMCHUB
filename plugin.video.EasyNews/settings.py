@@ -121,4 +121,13 @@ def TV_FILENAME():
     elif quality == '11':
         return 'RM'
         
-        
+def BOOST():
+    quality = ADDON.getSetting('boost')
+    if quality == '0':
+        return 'boost4-'
+    elif quality == '1':   
+        return 'boost1-'
+    elif quality == '2':
+        return 'boost5-'
+    elif quality == '3':
+        return ''

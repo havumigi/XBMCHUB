@@ -7,7 +7,7 @@ tvfs = settings.TV_FILESIZE()
 mvfs = settings.MOVIE_FILESIZE()
 tvfn = settings.TV_FILENAME()
 mvfn = settings.MOVIE_FILENAME()
-
+boost = settings.BOOST()
 
 def CATEGORIES():
         addDir('Search Easy News','url',1,'','','','','')
@@ -55,7 +55,7 @@ def SEARCH(url):
         urllib2.install_opener(opener)
         pagehandle = urllib2.urlopen(theurl)
         link= pagehandle.read()      
-        match=re.compile('url="(.+?)" length="(.+?)" type="application/octet-stream" />\n<link>http.+?com/news/.+?/.+?/.+?/.+?/(.+?)</link>').findall(link)
+        match=re.compile('url="http://.+?-(.+?)" length="(.+?)" type="application/octet-stream" />\n<link>http.+?com/news/.+?/.+?/.+?/.+?/(.+?)</link>').findall(link)
         eng=''
         ger=''
         fre=''
@@ -89,13 +89,13 @@ def SEARCH(url):
         all= '%s\n%s %s %s\n%s %s %s' % ('',eng,ger,fre,tur,jap,spa)
         xbmcgui.Dialog().ok('Found These Languages',str(all))
         for url1 ,filesize, name in match:
-            regex = re.compile("http://boost4-downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
+            regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
             match = regex.search(url1)
-            output = "http://boost4-downloads.members.easynews.com/news/%s/%s/%s/pr-%s/pr-%s" %(match.group(1), match.group(2), match.group(3), match.group(4), match.group(5))
+            output = "downloads.members.easynews.com/news/%s/%s/%s/pr-%s/pr-%s" %(match.group(1), match.group(2), match.group(3), match.group(4), match.group(5))
             name = '['+str(filesize)+']   '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')')
-            changeboost4 = 'http://'+username+':'+password+'@'
-            url = str(url1).replace('http://',str(changeboost4))
-            iconimage = str(output).replace('http://',str(changeboost4)).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
+            changeboost4 = 'http://'+username+':'+password+'@' +boost
+            url = str(changeboost4)+str(url1)
+            iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
             addLink(name,url,iconimage,fanart,series,description,rating)        
             setView('movies', 'easy-view')     
             
@@ -201,7 +201,7 @@ def EasySearch(name,iconimage):
         urllib2.install_opener(opener)
         pagehandle = urllib2.urlopen(theurl)
         link= pagehandle.read()      
-        match=re.compile('url="(.+?)" length="(.+?)" type="application/octet-stream" />\n<link>http.+?com/news/.+?/.+?/.+?/.+?/(.+?)</link>').findall(link)
+        match=re.compile('url="http://.+?-(.+?)" length="(.+?)" type="application/octet-stream" />\n<link>http.+?com/news/.+?/.+?/.+?/.+?/(.+?)</link>').findall(link)
         eng=''
         ger=''
         fre=''
@@ -235,13 +235,14 @@ def EasySearch(name,iconimage):
         all= '%s\n%s %s %s\n%s %s %s' % ('',eng,ger,fre,tur,jap,spa)
         xbmcgui.Dialog().ok('Found These Languages',str(all))
         for url1 ,filesize, name in match:
-            regex = re.compile("http://boost4-downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
+            regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
             match = regex.search(url1)
-            output = "http://boost4-downloads.members.easynews.com/news/%s/%s/%s/pr-%s/pr-%s" %(match.group(1), match.group(2), match.group(3), match.group(4), match.group(5))
+            output = "downloads.members.easynews.com/news/%s/%s/%s/pr-%s/pr-%s" %(match.group(1), match.group(2), match.group(3), match.group(4), match.group(5))
             name = '['+str(filesize)+']   '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')')
-            changeboost4 = 'http://'+username+':'+password+'@'
-            url = str(url1).replace('http://',str(changeboost4))
-            iconimage = str(output).replace('http://',str(changeboost4)).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
+            changeboost4 = 'http://'+username+':'+password+'@' +boost
+            url = str(changeboost4)+str(url1)
+            print url
+            iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
             addLink(name,url,iconimage,fanart,series,description,rating)  
             setView('movies', 'easy-view') 
     
@@ -357,7 +358,7 @@ def TV_EASY_SEARCH(series):
         urllib2.install_opener(opener)
         pagehandle = urllib2.urlopen(theurl)
         link= pagehandle.read()      
-        match=re.compile('url="(.+?)" length="(.+?)" type="application/octet-stream" />\n<link>http.+?com/news/.+?/.+?/.+?/.+?/(.+?)</link>').findall(link)
+        match=re.compile('url="http://.+?-(.+?)" length="(.+?)" type="application/octet-stream" />\n<link>http.+?com/news/.+?/.+?/.+?/.+?/(.+?)</link>').findall(link)
         eng=''
         ger=''
         fre=''
@@ -391,13 +392,13 @@ def TV_EASY_SEARCH(series):
         all= '%s\n%s %s %s\n%s %s %s' % ('',eng,ger,fre,tur,jap,spa)
         xbmcgui.Dialog().ok('Found These Languages',str(all))
         for url1 ,filesize, name in match:
-            regex = re.compile("http://boost4-downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
+            regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
             match = regex.search(url1)
-            output = "http://boost4-downloads.members.easynews.com/news/%s/%s/%s/pr-%s/pr-%s" %(match.group(1), match.group(2), match.group(3), match.group(4), match.group(5))
+            output = "downloads.members.easynews.com/news/%s/%s/%s/pr-%s/pr-%s" %(match.group(1), match.group(2), match.group(3), match.group(4), match.group(5))
             name = '['+str(filesize)+']   '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')')
-            changeboost4 = 'http://'+username+':'+password+'@'
-            url = str(url1).replace('http://',str(changeboost4))
-            iconimage = str(output).replace('http://',str(changeboost4)).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
+            changeboost4 = 'http://'+username+':'+password+'@' +boost
+            url = str(changeboost4)+str(url1)
+            iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
             addLink(name,url,iconimage,fanart,series,description,rating)  
             setView('movies', 'easy-view')
             
