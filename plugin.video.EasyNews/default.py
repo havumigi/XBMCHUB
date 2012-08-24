@@ -40,7 +40,7 @@ def TV_CATEGORIES():
         
 def MUSIC_CATEGORIES():
         addDir('Search Music','url',16,'','','','','')
-        addDir('Top iTunes Charts','http://www.apple.com/itunes/charts/albums/',17,'','','','','')
+        addDir('iTunes Charts','http://musicchartfeeds.com/itunes-rss/',17,'','','','','')
         addDir('HMV Best Selling','http://hmv.com/hmvweb/directQuery.do?pagingOptionSelect=%2Fhmvweb%2FdirectQuery.do%3FNo%3D0%26pagingOptionSelect%3D192%26N%3D1573%26adultFlag%3Dfalse%26rid%3D1394ED72CCC4',19,'','','','','')
 
 def SEARCH(url):
@@ -68,6 +68,7 @@ def SEARCH(url):
         tur=''
         jap=''
         spa=''
+        li=len(match)
         if re.search('alt=&#34;English', link, re.IGNORECASE):
                 eng= 'English'    
         if not re.search('alt=&#34;English', link, re.IGNORECASE):
@@ -92,7 +93,7 @@ def SEARCH(url):
                 spa= 'Spanish'
         if not re.search('alt=&#34;Spanish', link, re.IGNORECASE):
                 spa= '' 
-        all= '%s\n%s %s %s\n%s %s %s' % ('',eng,ger,fre,tur,jap,spa)
+        all= '[B]%s%s %s[/B] %s\n%s %s %s\n%s %s %s' % ('','Links Found',li,'',eng,ger,fre,tur,jap,spa)
         xbmcgui.Dialog().ok('Found These Languages',str(all))
         for url1 ,filesize, name in match:
             regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
@@ -215,6 +216,7 @@ def EasySearch(name,iconimage):
         tur=''
         jap=''
         spa=''
+        li=len(match)
         if re.search('alt=&#34;English', link, re.IGNORECASE):
                 eng= 'English'    
         if not re.search('alt=&#34;English', link, re.IGNORECASE):
@@ -239,7 +241,7 @@ def EasySearch(name,iconimage):
                 spa= 'Spanish'
         if not re.search('alt=&#34;Spanish', link, re.IGNORECASE):
                 spa= '' 
-        all= '%s\n%s %s %s\n%s %s %s' % ('',eng,ger,fre,tur,jap,spa)
+        all= '[B]%s%s %s[/B] %s\n%s %s %s\n%s %s %s' % ('','Links Found',li,'',eng,ger,fre,tur,jap,spa)
         xbmcgui.Dialog().ok('Found These Languages',str(all))
         for url1 ,filesize, name in match:
             regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
@@ -372,6 +374,7 @@ def TV_EASY_SEARCH(series):
         tur=''
         jap=''
         spa=''
+        li=len(match)
         if re.search('alt=&#34;English', link, re.IGNORECASE):
                 eng= 'English'    
         if not re.search('alt=&#34;English', link, re.IGNORECASE):
@@ -396,7 +399,7 @@ def TV_EASY_SEARCH(series):
                 spa= 'Spanish'
         if not re.search('alt=&#34;Spanish', link, re.IGNORECASE):
                 spa= '' 
-        all= '%s\n%s %s %s\n%s %s %s' % ('',eng,ger,fre,tur,jap,spa)
+        all= '[B]%s%s %s[/B] %s\n%s %s %s\n%s %s %s' % ('','Links Found',li,'',eng,ger,fre,tur,jap,spa)
         xbmcgui.Dialog().ok('Found These Languages',str(all))
         for url1 ,filesize, name in match:
             regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
@@ -423,102 +426,199 @@ def MUSIC_SEARCH(url):
         if keyboard.isConfirmed():
             album = keyboard.getText() .replace(' ','+')  # sometimes you need to replace spaces with + or %20#
             if album == None:
-                return False          
-        theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+artist+'+'+album+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
-        print theurl
-        username = ADDON.getSetting('easy_user')
-        password = ADDON.getSetting('easy_pass')
-        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
-        passman.add_password(None, theurl, username, password)
-        authhandler = urllib2.HTTPBasicAuthHandler(passman)
-        opener = urllib2.build_opener(authhandler)
-        urllib2.install_opener(opener)
-        pagehandle = urllib2.urlopen(theurl)
-        link= pagehandle.read()      
-        match=re.compile('downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?).mp3" length=".+?"').findall(link)
-        try:
-                thumb = 'http://www.htbackdrops.com/v2/thumbnails.php?search=%s&submit=search&album=search&title=checked&caption=checked&keywords=checked&type=AND' % str(artist).replace(", ","+").replace("(The)","").replace(" ","+")
-                print thumb
-                req2 = urllib2.Request(thumb)
-                req2.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
-                response2 = urllib2.urlopen(req2)
-                link2=response2.read()
-                response2.close()
-        except:
-        	pass
-        try:	
-                icon = re.compile('<img src="(.+?)" class="image" width=".+?" height=".+?" border="0" alt=".+?" title="Filename=.+?\r\nFilesize=.+?KiB\r\nDimensions=1.+?x.+?0').findall(link2)
-                normal = icon[0]
-        except:
-        	pass
-        try:	
-                iconimage = 'http://www.htbackdrops.com/v2/%s' % str(normal).replace('thumb','normal')
-        except:
-        	    iconimage= ''
-        try:
-                fanart = 'http://www.htbackdrops.com/v2/%s' % str(normal).replace('thumb_','')
-        except:
-        	    fanart = ''
-        for url1,url2, url3, url4, name in match:
-            changeboost4 = 'http://'+username+':'+password+'@' +boost
-            url = str(changeboost4)+'downloads.members.easynews.com/news/'+str(url1)+'/'+str(url2)+'/'+str(url3)+'/'+str(url4)+'/'+str(name)+'.mp3'
-            name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
-            addLink1(name,url,iconimage,fanart)        
-            setView('movies', 'easy-view')     
+                return False 
+        dialog = xbmcgui.Dialog()
+        if dialog.yesno("Add Album To Playlist", "     If Any Music Is Found Would You Like To", "       Add All The Songs To Your PlayList ?"):
+                theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+artist+'+'+album+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
+                print theurl
+                username = ADDON.getSetting('easy_user')
+                password = ADDON.getSetting('easy_pass')
+                passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+                passman.add_password(None, theurl, username, password)
+                authhandler = urllib2.HTTPBasicAuthHandler(passman)
+                opener = urllib2.build_opener(authhandler)
+                urllib2.install_opener(opener)
+                pagehandle = urllib2.urlopen(theurl)
+                link= pagehandle.read()      
+                match=re.compile('downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?).mp3" length=".+?"').findall(link)
+                try:
+                        thumb = 'http://www.htbackdrops.com/v2/thumbnails.php?search=%s&submit=search&album=search&title=checked&caption=checked&keywords=checked&type=AND' % str(artist).replace(", ","+").replace("(The)","").replace(" ","+")
+                        print thumb
+                        req2 = urllib2.Request(thumb)
+                        req2.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+                        response2 = urllib2.urlopen(req2)
+                        link2=response2.read()
+                        response2.close()
+                except:
+                        pass
+                try:    
+                        icon = re.compile('<img src="(.+?)" class="image" width=".+?" height=".+?" border="0" alt=".+?" title="Filename=.+?\r\nFilesize=.+?KiB\r\nDimensions=1.+?x.+?0').findall(link2)
+                        normal = icon[0]
+                except:
+                        pass
+                try:    
+                        iconimage = 'http://www.htbackdrops.com/v2/%s' % str(normal).replace('thumb','normal')
+                except:
+                            iconimage= ''
+                try:
+                        fanart = 'http://www.htbackdrops.com/v2/%s' % str(normal).replace('thumb_','')
+                except:
+                            fanart = ''
+                for url1,url2, url3, url4, name in match:
+                    changeboost4 = 'http://'+username+':'+password+'@' +boost
+                    url = str(changeboost4)+'downloads.members.easynews.com/news/'+str(url1)+'/'+str(url2)+'/'+str(url3)+'/'+str(url4)+'/'+str(name)+'.mp3'
+                    name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
+                    addLink1(name,url,iconimage,fanart)        
+                    setView('movies', 'easy-view') 
+        else:
+                theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+artist+'+'+album+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
+                print theurl
+                username = ADDON.getSetting('easy_user')
+                password = ADDON.getSetting('easy_pass')
+                passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+                passman.add_password(None, theurl, username, password)
+                authhandler = urllib2.HTTPBasicAuthHandler(passman)
+                opener = urllib2.build_opener(authhandler)
+                urllib2.install_opener(opener)
+                pagehandle = urllib2.urlopen(theurl)
+                link= pagehandle.read()      
+                match=re.compile('downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?).mp3" length=".+?"').findall(link)
+                try:
+                        thumb = 'http://www.htbackdrops.com/v2/thumbnails.php?search=%s&submit=search&album=search&title=checked&caption=checked&keywords=checked&type=AND' % str(artist).replace(", ","+").replace("(The)","").replace(" ","+")
+                        print thumb
+                        req2 = urllib2.Request(thumb)
+                        req2.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+                        response2 = urllib2.urlopen(req2)
+                        link2=response2.read()
+                        response2.close()
+                except:
+                        pass
+                try:    
+                        icon = re.compile('<img src="(.+?)" class="image" width=".+?" height=".+?" border="0" alt=".+?" title="Filename=.+?\r\nFilesize=.+?KiB\r\nDimensions=1.+?x.+?0').findall(link2)
+                        normal = icon[0]
+                except:
+                        pass
+                try:    
+                        iconimage = 'http://www.htbackdrops.com/v2/%s' % str(normal).replace('thumb','normal')
+                except:
+                            iconimage= ''
+                try:
+                        fanart = 'http://www.htbackdrops.com/v2/%s' % str(normal).replace('thumb_','')
+                except:
+                            fanart = ''
+                for url1,url2, url3, url4, name in match:
+                    changeboost4 = 'http://'+username+':'+password+'@' +boost
+                    url = str(changeboost4)+'downloads.members.easynews.com/news/'+str(url1)+'/'+str(url2)+'/'+str(url3)+'/'+str(url4)+'/'+str(name)+'.mp3'
+                    name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
+                    addLink2(name,url,iconimage,fanart)        
+                    setView('movies', 'easy-view')     
                
             
-def MUSIC_LIST(url):
+def ITUNES_LIST(url):
         req = urllib2.Request(url)
         req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
         response = urllib2.urlopen(req)
         link=response.read()
         response.close()
-        match = re.compile('<img src="(.+?)" width=".+?" height=".+?" alt=".+?"></a><h3><a href=".+?">(.+?)</a></h3><h4><a href=".+?">(.+?)</a>').findall(link)
+        match = re.compile('href="(.+?)">(.+?) RSS Feed').findall(link)
+        for url, name in match:
+            addDir(name,url,20,iconimage,fanart,series,description,rating)    
+            setView('movies', 'default-view')
+            
+def ITUNES_RSS(url):
+        req = urllib2.Request(url)
+        req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+        response = urllib2.urlopen(req)
+        link=response.read()
+        response.close()
+        match = re.compile('<img border="0" src="(.+?)" /></a></td>\n\t\t\t\t\t<td width="10"><img alt="" width="10" height="1" src="http://r.mzstatic.com/images/spacer.gif" /></td>\n\t\t\t\t\t<td width="95%"><B><a href=".+?">(.+?)</a></B><br>\n\t\t\t\t\t\t<a href=".+?">(.+?)</a>').findall(link)
         for iconimage, url, name in match:
             url=str(url).replace('+','plus').replace('Deluxe','').replace('deluxe','').replace('Version','').replace('version','').replace('(','').replace(')','').replace('&amp;','and').replace('Edition','').replace('edition','')
-            name=str(name).replace('&amp;','and').replace('&#039;','')
+            name=str(name).replace('&amp;','and').replace('&#039;','').replace("\'","")
+            iconimage=str(iconimage).replace('100x100','600x600')
             addDir(name,url,18,iconimage,fanart,series,description,rating)    
             setView('movies', 'default-view')    
             
             
 def MUSIC_LIST_SEARCH(name, url):
-        theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+str(name).replace(' ','+')+'+'+str(url).replace(' ','+')+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
-        print theurl
-        username = ADDON.getSetting('easy_user')
-        password = ADDON.getSetting('easy_pass')
-        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
-        passman.add_password(None, theurl, username, password)
-        authhandler = urllib2.HTTPBasicAuthHandler(passman)
-        opener = urllib2.build_opener(authhandler)
-        urllib2.install_opener(opener)
-        pagehandle = urllib2.urlopen(theurl)
-        link= pagehandle.read()      
-        match=re.compile('downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?).mp3" length=".+?"').findall(link)
-        try:
-                thumb = 'http://www.htbackdrops.com/v2/thumbnails.php?search=%s&submit=search&album=search&title=checked&caption=checked&keywords=checked&type=AND' % str(name).replace(", ","+").replace("(The)","").replace(" ","+")
-                print thumb
-                req2 = urllib2.Request(thumb)
-                req2.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
-                response2 = urllib2.urlopen(req2)
-                link2=response2.read()
-                response2.close()
-        except:
-        	pass
-        try:	
-                icon = re.compile('<img src="(.+?)" class="image" width=".+?" height=".+?" border="0" alt=".+?" title="Filename=.+?\r\nFilesize=.+?KiB\r\nDimensions=1.+?x.+?0').findall(link2)
-                normal = icon[0]
-        except:
-        	pass
-        try:
-                fanart = 'http://www.htbackdrops.com/v2/%s' % str(normal).replace('thumb_','')
-        except:
-        	    fanart = ''
-        for url1,url2, url3, url4, name in match:
-            changeboost4 = 'http://'+username+':'+password+'@' +boost
-            url = str(changeboost4)+'downloads.members.easynews.com/news/'+str(url1)+'/'+str(url2)+'/'+str(url3)+'/'+str(url4)+'/'+str(name)+'.mp3'
-            name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
-            addLink1(name,url,iconimage,fanart)        
-            setView('movies', 'easy-view')     
+        dialog = xbmcgui.Dialog()
+        if dialog.yesno("Add Album To Playlist", "     If Any Music Is Found Would You Like To", "       Add All The Songs To Your PlayList ?"):
+		        theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+str(name).replace(' ','+')+'+'+str(url).replace(' ','+')+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
+		        print theurl
+		        username = ADDON.getSetting('easy_user')
+		        password = ADDON.getSetting('easy_pass')
+		        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+		        passman.add_password(None, theurl, username, password)
+		        authhandler = urllib2.HTTPBasicAuthHandler(passman)
+		        opener = urllib2.build_opener(authhandler)
+		        urllib2.install_opener(opener)
+		        pagehandle = urllib2.urlopen(theurl)
+		        link= pagehandle.read()      
+		        match=re.compile('downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?).mp3" length=".+?"').findall(link)
+		        try:
+		                thumb = 'http://www.htbackdrops.com/v2/thumbnails.php?search=%s&submit=search&album=search&title=checked&caption=checked&keywords=checked&type=AND' % str(name).replace(", ","+").replace("(The)","").replace(" ","+")
+		                print thumb
+		                req2 = urllib2.Request(thumb)
+		                req2.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+		                response2 = urllib2.urlopen(req2)
+		                link2=response2.read()
+		                response2.close()
+		        except:
+		                pass
+		        try:    
+		                icon = re.compile('<img src="(.+?)" class="image" width=".+?" height=".+?" border="0" alt=".+?" title="Filename=.+?\r\nFilesize=.+?KiB\r\nDimensions=1.+?x.+?0').findall(link2)
+		                normal = icon[0]
+		        except:
+		                pass
+		        try:
+		                fanart = 'http://www.htbackdrops.com/v2/%s' % str(normal).replace('thumb_','')
+		        except:
+		                    fanart = ''
+		        for url1,url2, url3, url4, name in match:
+		            changeboost4 = 'http://'+username+':'+password+'@' +boost
+		            url = str(changeboost4)+'downloads.members.easynews.com/news/'+str(url1)+'/'+str(url2)+'/'+str(url3)+'/'+str(url4)+'/'+str(name)+'.mp3'
+		            name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
+		            addLink1(name,url,iconimage,fanart)
+		            setView('movies', 'easy-view')     
+ 
+        else:
+		        theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+str(name).replace(' ','+')+'+'+str(url).replace(' ','+')+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
+		        print theurl
+		        username = ADDON.getSetting('easy_user')
+		        password = ADDON.getSetting('easy_pass')
+		        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+		        passman.add_password(None, theurl, username, password)
+		        authhandler = urllib2.HTTPBasicAuthHandler(passman)
+		        opener = urllib2.build_opener(authhandler)
+		        urllib2.install_opener(opener)
+		        pagehandle = urllib2.urlopen(theurl)
+		        link= pagehandle.read()      
+		        match=re.compile('downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?).mp3" length=".+?"').findall(link)
+		        try:
+		                thumb = 'http://www.htbackdrops.com/v2/thumbnails.php?search=%s&submit=search&album=search&title=checked&caption=checked&keywords=checked&type=AND' % str(name).replace(", ","+").replace("(The)","").replace(" ","+")
+		                print thumb
+		                req2 = urllib2.Request(thumb)
+		                req2.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+		                response2 = urllib2.urlopen(req2)
+		                link2=response2.read()
+		                response2.close()
+		        except:
+		                pass
+		        try:    
+		                icon = re.compile('<img src="(.+?)" class="image" width=".+?" height=".+?" border="0" alt=".+?" title="Filename=.+?\r\nFilesize=.+?KiB\r\nDimensions=1.+?x.+?0').findall(link2)
+		                normal = icon[0]
+		        except:
+		                pass
+		        try:
+		                fanart = 'http://www.htbackdrops.com/v2/%s' % str(normal).replace('thumb_','')
+		        except:
+		                    fanart = ''
+		        for url1,url2, url3, url4, name in match:
+		            changeboost4 = 'http://'+username+':'+password+'@' +boost
+		            url = str(changeboost4)+'downloads.members.easynews.com/news/'+str(url1)+'/'+str(url2)+'/'+str(url3)+'/'+str(url4)+'/'+str(name)+'.mp3'
+		            name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
+		            addLink2(name,url,iconimage,fanart)
+		            setView('movies', 'easy-view')     
             
 def HMV_SEARCH(url):
         req = urllib2.Request(url)
@@ -573,13 +673,22 @@ def addLink(name,url,iconimage,fanart,series,description,rating):
                       
 def addLink1(name,url,iconimage,fanart):
         ok=True
-        pl=xbmc.PlayList(xbmc.PLAYLIST_MUSIC)
-        pl.clear()
+        pl=xbmc.PlayList(0)
         liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
-        liz.setInfo( type="Audio", infoLabels={ "Title": name})
+        liz.setInfo("music", infoLabels={ "Title": name})
         liz.setProperty('mimetype', 'audio/mpeg')
         liz.setProperty( "Fanart_Image", fanart )
-        pl.add(url=url,listitem=liz)
+        pl.add(url, liz)
+        xbmc.Player(xbmc.PLAYER_CORE_MPLAYER).play(pl)
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
+        return ok
+        
+def addLink2(name,url,iconimage,fanart):
+        ok=True
+        liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
+        liz.setInfo("music", infoLabels={ "Title": name})
+        liz.setProperty('mimetype', 'audio/mpeg')
+        liz.setProperty( "Fanart_Image", fanart )
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
         return ok
         
@@ -717,7 +826,7 @@ elif mode==16:
         
 elif mode==17:
         print ""+url
-        MUSIC_LIST(url)           
+        ITUNES_LIST(url)           
 
 elif mode==18:
         print ""+name +url
@@ -726,5 +835,9 @@ elif mode==18:
 elif mode==19:
         print ""+url
         HMV_SEARCH(url)         
-                                                              
+                         
+elif mode==20:
+        print ""+url
+        ITUNES_RSS(url)           
+                                             
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
