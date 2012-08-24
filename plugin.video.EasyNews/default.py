@@ -357,6 +357,7 @@ def TV_EASY_SEARCH(series):
                 theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'&fex=&pby=1000&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfs+'&b2t=&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO&spamf=1&u=1&st=adv&safeO=0&boost=1&sb=1'
         else:
                 theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'&fex='+tvfn+'&pby=1000&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfs+'&b2t=&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO&spamf=1&u=1&st=adv&safeO=0&boost=1&sb=1'
+                print theurl
         username = ADDON.getSetting('easy_user')
         password = ADDON.getSetting('easy_pass')
         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -412,6 +413,7 @@ def TV_EASY_SEARCH(series):
             setView('movies', 'easy-view')
             
 def MUSIC_SEARCH(url):
+        xbmc.PlayList(0).clear()
         artist = ''
         keyboard = xbmc.Keyboard(artist, 'Artist Name')
         keyboard.doModal()
@@ -429,6 +431,7 @@ def MUSIC_SEARCH(url):
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Add Album To Playlist", "     If Any Music Is Found Would You Like To", "       Add All The Songs To Your PlayList ?"):
                 theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+artist+'+'+album+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
+                print theurl
                 username = ADDON.getSetting('easy_user')
                 password = ADDON.getSetting('easy_pass')
                 passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -470,6 +473,7 @@ def MUSIC_SEARCH(url):
                     setView('movies', 'easy-view') 
         else:
                 theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+artist+'+'+album+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
+                print theurl
                 username = ADDON.getSetting('easy_user')
                 password = ADDON.getSetting('easy_pass')
                 passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -538,9 +542,11 @@ def ITUNES_RSS(url):
             
             
 def MUSIC_LIST_SEARCH(name, url):
+        xbmc.PlayList(0).clear()
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Add Album To Playlist", "     If Any Music Is Found Would You Like To", "       Add All The Songs To Your PlayList ?"):
 		        theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+str(name).replace(' ','+')+'+'+str(url).replace(' ','+')+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
+		        print theurl
 		        username = ADDON.getSetting('easy_user')
 		        password = ADDON.getSetting('easy_pass')
 		        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -579,6 +585,7 @@ def MUSIC_LIST_SEARCH(name, url):
  
         else:
 		        theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+str(name).replace(' ','+')+'+'+str(url).replace(' ','+')+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
+		        print theurl
 		        username = ADDON.getSetting('easy_user')
 		        password = ADDON.getSetting('easy_pass')
 		        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -668,15 +675,16 @@ def addLink(name,url,iconimage,fanart,series,description,rating):
                       
 def addLink1(name,url,iconimage,fanart):
         ok=True
-        pl=xbmc.PlayList(0)
         liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
         liz.setInfo("music", infoLabels={ "Title": name})
         liz.setProperty('mimetype', 'audio/mpeg')
         liz.setProperty( "Fanart_Image", fanart )
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
+        pl=xbmc.PlayList(0)
         pl.add(url, liz)
         xbmc.Player(xbmc.PLAYER_CORE_MPLAYER).play(pl)
-        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
         return ok
+        
         
 def addLink2(name,url,iconimage,fanart):
         ok=True
