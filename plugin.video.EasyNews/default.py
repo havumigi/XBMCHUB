@@ -357,7 +357,6 @@ def TV_EASY_SEARCH(series):
                 theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'&fex=&pby=1000&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfs+'&b2t=&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO&spamf=1&u=1&st=adv&safeO=0&boost=1&sb=1'
         else:
                 theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'&fex='+tvfn+'&pby=1000&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfs+'&b2t=&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO&spamf=1&u=1&st=adv&safeO=0&boost=1&sb=1'
-                print theurl
         username = ADDON.getSetting('easy_user')
         password = ADDON.getSetting('easy_pass')
         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -430,7 +429,6 @@ def MUSIC_SEARCH(url):
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Add Album To Playlist", "     If Any Music Is Found Would You Like To", "       Add All The Songs To Your PlayList ?"):
                 theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+artist+'+'+album+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
-                print theurl
                 username = ADDON.getSetting('easy_user')
                 password = ADDON.getSetting('easy_pass')
                 passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -472,7 +470,6 @@ def MUSIC_SEARCH(url):
                     setView('movies', 'easy-view') 
         else:
                 theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+artist+'+'+album+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
-                print theurl
                 username = ADDON.getSetting('easy_user')
                 password = ADDON.getSetting('easy_pass')
                 passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -544,7 +541,6 @@ def MUSIC_LIST_SEARCH(name, url):
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Add Album To Playlist", "     If Any Music Is Found Would You Like To", "       Add All The Songs To Your PlayList ?"):
 		        theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+str(name).replace(' ','+')+'+'+str(url).replace(' ','+')+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
-		        print theurl
 		        username = ADDON.getSetting('easy_user')
 		        password = ADDON.getSetting('easy_pass')
 		        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -583,7 +579,6 @@ def MUSIC_LIST_SEARCH(name, url):
  
         else:
 		        theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+str(name).replace(' ','+')+'+'+str(url).replace(' ','+')+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
-		        print theurl
 		        username = ADDON.getSetting('easy_user')
 		        password = ADDON.getSetting('easy_pass')
 		        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
