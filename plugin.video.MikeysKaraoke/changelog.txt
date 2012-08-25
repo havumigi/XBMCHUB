@@ -1,3 +1,6 @@
+v1.4
+fixes
+
 v1.3
 30/07/2012
 Added Fanart
