@@ -99,7 +99,38 @@ def SEARCH(url):
             regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
             match = regex.search(url1)
             output = "downloads.members.easynews.com/news/%s/%s/%s/pr-%s/pr-%s" %(match.group(1), match.group(2), match.group(3), match.group(4), match.group(5))
-            name = '['+str(filesize)+']   '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')')
+            mkv=''
+            avi=''
+            vob=''
+            mov=''
+            mp4=''
+            iso=''
+            if re.search('.mkv', name, re.IGNORECASE):
+                    mkv= 'MKV'    
+            if not re.search('.mkv', name, re.IGNORECASE):
+                    mkv= ''          
+            if re.search('.avi', name, re.IGNORECASE):
+                    avi= 'AVI' 
+            if not re.search('.avi', name, re.IGNORECASE):
+                    avi= ''          
+            if re.search('.vob', name, re.IGNORECASE):
+                    vob= 'VOB'
+            if not re.search('.vob', name, re.IGNORECASE):
+                    vob= ''     
+            if re.search('.mov', name, re.IGNORECASE):
+                    mov= 'MOV'
+            if not re.search('.mov', name, re.IGNORECASE):
+                    mov= '' 
+            if re.search('.mp4', name, re.IGNORECASE):
+                    mp4= 'MP4'
+            if not re.search('.mp4', name, re.IGNORECASE):
+                    mp4= '' 
+            if re.search('.iso', name, re.IGNORECASE):
+                    iso= 'ISO'
+            if not re.search('.iso', name, re.IGNORECASE):
+                    iso= ''  
+            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)
+            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.vob','')
             changeboost4 = 'http://'+username+':'+password+'@' +boost
             url = str(changeboost4)+str(url1)
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
@@ -249,10 +280,40 @@ def EasySearch(name,iconimage):
             regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
             match = regex.search(url1)
             output = "downloads.members.easynews.com/news/%s/%s/%s/pr-%s/pr-%s" %(match.group(1), match.group(2), match.group(3), match.group(4), match.group(5))
-            name = '['+str(filesize)+']   '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')')
+            mkv=''
+            avi=''
+            vob=''
+            mov=''
+            mp4=''
+            iso=''
+            if re.search('.mkv', name, re.IGNORECASE):
+                    mkv= 'MKV'    
+            if not re.search('.mkv', name, re.IGNORECASE):
+                    mkv= ''          
+            if re.search('.avi', name, re.IGNORECASE):
+                    avi= 'AVI' 
+            if not re.search('.avi', name, re.IGNORECASE):
+                    avi= ''          
+            if re.search('.vob', name, re.IGNORECASE):
+                    vob= 'VOB'
+            if not re.search('.vob', name, re.IGNORECASE):
+                    vob= ''     
+            if re.search('.mov', name, re.IGNORECASE):
+                    mov= 'MOV'
+            if not re.search('.mov', name, re.IGNORECASE):
+                    mov= '' 
+            if re.search('.mp4', name, re.IGNORECASE):
+                    mp4= 'MP4'
+            if not re.search('.mp4', name, re.IGNORECASE):
+                    mp4= '' 
+            if re.search('.iso', name, re.IGNORECASE):
+                    iso= 'ISO'
+            if not re.search('.iso', name, re.IGNORECASE):
+                    iso= ''  
+            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)
+            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.vob','')
             changeboost4 = 'http://'+username+':'+password+'@' +boost
             url = str(changeboost4)+str(url1)
-            print url
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
             addLink(name,url,iconimage,fanart,series,description,rating)  
@@ -408,7 +469,38 @@ def TV_EASY_SEARCH(series):
             regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
             match = regex.search(url1)
             output = "downloads.members.easynews.com/news/%s/%s/%s/pr-%s/pr-%s" %(match.group(1), match.group(2), match.group(3), match.group(4), match.group(5))
-            name = '['+str(filesize)+']   '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')')
+            mkv=''
+            avi=''
+            vob=''
+            mov=''
+            mp4=''
+            iso=''
+            if re.search('.mkv', name, re.IGNORECASE):
+                    mkv= 'MKV'    
+            if not re.search('.mkv', name, re.IGNORECASE):
+                    mkv= ''          
+            if re.search('.avi', name, re.IGNORECASE):
+                    avi= 'AVI' 
+            if not re.search('.avi', name, re.IGNORECASE):
+                    avi= ''          
+            if re.search('.vob', name, re.IGNORECASE):
+                    vob= 'VOB'
+            if not re.search('.vob', name, re.IGNORECASE):
+                    vob= ''     
+            if re.search('.mov', name, re.IGNORECASE):
+                    mov= 'MOV'
+            if not re.search('.mov', name, re.IGNORECASE):
+                    mov= '' 
+            if re.search('.mp4', name, re.IGNORECASE):
+                    mp4= 'MP4'
+            if not re.search('.mp4', name, re.IGNORECASE):
+                    mp4= '' 
+            if re.search('.iso', name, re.IGNORECASE):
+                    iso= 'ISO'
+            if not re.search('.iso', name, re.IGNORECASE):
+                    iso= ''  
+            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)
+            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.vob','')
             changeboost4 = 'http://'+username+':'+password+'@' +boost
             url = str(changeboost4)+str(url1)
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
@@ -434,8 +526,7 @@ def MUSIC_SEARCH(url):
                 return False 
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Add Album To Playlist", "     If Any Music Is Found Would You Like To", "       Add All The Songs To Your PlayList ?"):
-                theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+artist+'+'+album+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
-                print theurl
+                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+artist+'+'+album+'&pby=20&pno=1&s1=dtime&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=10&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=AUDIO&u=1&st=adv&safeO=0&boost=1&sb=1'
                 username = ADDON.getSetting('easy_user')
                 password = ADDON.getSetting('easy_pass')
                 passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -448,7 +539,6 @@ def MUSIC_SEARCH(url):
                 match=re.compile('downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?).mp3" length=".+?"').findall(link)
                 try:
                         thumb = 'http://www.htbackdrops.com/v2/thumbnails.php?search=%s&submit=search&album=search&title=checked&caption=checked&keywords=checked&type=AND' % str(artist).replace(", ","+").replace("(The)","").replace(" ","+")
-                        print thumb
                         req2 = urllib2.Request(thumb)
                         req2.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
                         response2 = urllib2.urlopen(req2)
@@ -469,15 +559,18 @@ def MUSIC_SEARCH(url):
                         fanart = 'http://www.htbackdrops.com/v2/%s' % str(normal).replace('thumb_','')
                 except:
                             fanart = ''
+                uniques= []
                 for url1,url2, url3, url4, name in match:
-                    changeboost4 = 'http://'+username+':'+password+'@' +boost
-                    url = str(changeboost4)+'downloads.members.easynews.com/news/'+str(url1)+'/'+str(url2)+'/'+str(url3)+'/'+str(url4)+'/'+str(name)+'.mp3'
-                    name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
-                    addLink1(name,url,iconimage,fanart)        
-                    setView('movies', 'easy-view') 
+                        if name[:2] not in uniques:
+                            uniques.append(name[:2])
+                            changeboost4 = 'http://'+username+':'+password+'@' +boost
+                            url = str(changeboost4)+'downloads.members.easynews.com/news/'+str(url1)+'/'+str(url2)+'/'+str(url3)+'/'+str(url4)+'/'+str(name)+'.mp3'
+                            name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
+                            xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
+                            addLink1(name,url,iconimage,fanart)        
+                            setView('movies', 'easy-view') 
         else:
-                theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+artist+'+'+album+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
-                print theurl
+                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+artist+'+'+album+'&pby=20&pno=1&s1=dtime&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=10&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=AUDIO&u=1&st=adv&safeO=0&boost=1&sb=1'
                 username = ADDON.getSetting('easy_user')
                 password = ADDON.getSetting('easy_pass')
                 passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -490,7 +583,6 @@ def MUSIC_SEARCH(url):
                 match=re.compile('downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?).mp3" length=".+?"').findall(link)
                 try:
                         thumb = 'http://www.htbackdrops.com/v2/thumbnails.php?search=%s&submit=search&album=search&title=checked&caption=checked&keywords=checked&type=AND' % str(artist).replace(", ","+").replace("(The)","").replace(" ","+")
-                        print thumb
                         req2 = urllib2.Request(thumb)
                         req2.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
                         response2 = urllib2.urlopen(req2)
@@ -510,14 +602,18 @@ def MUSIC_SEARCH(url):
                 try:
                         fanart = 'http://www.htbackdrops.com/v2/%s' % str(normal).replace('thumb_','')
                 except:
-                            fanart = ''
+                            fanart = ''    
+                uniques= []
                 for url1,url2, url3, url4, name in match:
-                    changeboost4 = 'http://'+username+':'+password+'@' +boost
-                    url = str(changeboost4)+'downloads.members.easynews.com/news/'+str(url1)+'/'+str(url2)+'/'+str(url3)+'/'+str(url4)+'/'+str(name)+'.mp3'
-                    name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
-                    addLink2(name,url,iconimage,fanart)        
-                    setView('movies', 'easy-view')     
-               
+                        if name[:2] not in uniques:
+                            uniques.append(name[:2])
+                            changeboost4 = 'http://'+username+':'+password+'@' +boost
+                            url = str(changeboost4)+'downloads.members.easynews.com/news/'+str(url1)+'/'+str(url2)+'/'+str(url3)+'/'+str(url4)+'/'+str(name)+'.mp3'
+                            name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
+                            xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
+                            addLink2(name,url,iconimage,fanart)        
+                            setView('movies', 'easy-view')     
+           
             
 def ITUNES_LIST(url):
         req = urllib2.Request(url)
@@ -551,8 +647,7 @@ def MUSIC_LIST_SEARCH(name, url):
         xbmc.PlayList(0).clear()
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Add Album To Playlist", "     If Any Music Is Found Would You Like To", "       Add All The Songs To Your PlayList ?"):
-                        theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+str(name).replace(' ','+')+'+'+str(url).replace(' ','+')+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
-                        print theurl
+                        theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+str(name).replace(' ','+')+'+'+str(url).replace(' ','+')+'&pby=20&pno=1&s1=dtime&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=10&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=AUDIO&u=1&st=adv&safeO=0&boost=1&sb=1'
                         username = ADDON.getSetting('easy_user')
                         password = ADDON.getSetting('easy_pass')
                         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -565,7 +660,6 @@ def MUSIC_LIST_SEARCH(name, url):
                         match=re.compile('downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?).mp3" length=".+?"').findall(link)
                         try:
                                 thumb = 'http://www.htbackdrops.com/v2/thumbnails.php?search=%s&submit=search&album=search&title=checked&caption=checked&keywords=checked&type=AND' % str(name).replace(", ","+").replace("(The)","").replace(" ","+")
-                                print thumb
                                 req2 = urllib2.Request(thumb)
                                 req2.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
                                 response2 = urllib2.urlopen(req2)
@@ -582,17 +676,19 @@ def MUSIC_LIST_SEARCH(name, url):
                                 fanart = 'http://www.htbackdrops.com/v2/%s' % str(normal).replace('thumb_','')
                         except:
                                     fanart = ''
+                        uniques= []     
                         for url1,url2, url3, url4, name in match:
-                            changeboost4 = 'http://'+username+':'+password+'@' +boost
-                            url = str(changeboost4)+'downloads.members.easynews.com/news/'+str(url1)+'/'+str(url2)+'/'+str(url3)+'/'+str(url4)+'/'+str(name)+'.mp3'
-                            name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
-                            xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
-                            addLink1(name,url,iconimage,fanart)
-                            setView('movies', 'easy-view')     
- 
+                            if name[:2] not in uniques:
+                                    uniques.append(name[:2])
+                                    changeboost4 = 'http://'+username+':'+password+'@' +boost
+                                    url = str(changeboost4)+'downloads.members.easynews.com/news/'+str(url1)+'/'+str(url2)+'/'+str(url3)+'/'+str(url4)+'/'+str(name)+'.mp3'
+                                    name = str(name).replace(str(url),'').replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
+                                    xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
+                                    addLink1(name,url,iconimage,fanart)        
+                                    setView('movies', 'easy-view') 
+
         else:
-                        theurl = 'http://members-beta.easynews.com/global5/index.html?&safeO=1&boost=1&sb=1&chxu=1&pby=40&u=1&chxgx=1&st=basic&s1=dtime&s1d=-&gps='+str(name).replace(' ','+')+'+'+str(url).replace(' ','+')+'&fty%5B%5D=AUDIO&FileType=AUDIO&SelectOther=ARCHIVE&pno=&sS=5'
-                        print theurl
+                        theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+str(name).replace(' ','+')+'+'+str(url).replace(' ','+')+'&pby=20&pno=1&s1=dtime&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=10&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=AUDIO&u=1&st=adv&safeO=0&boost=1&sb=1'
                         username = ADDON.getSetting('easy_user')
                         password = ADDON.getSetting('easy_pass')
                         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -605,7 +701,6 @@ def MUSIC_LIST_SEARCH(name, url):
                         match=re.compile('downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?).mp3" length=".+?"').findall(link)
                         try:
                                 thumb = 'http://www.htbackdrops.com/v2/thumbnails.php?search=%s&submit=search&album=search&title=checked&caption=checked&keywords=checked&type=AND' % str(name).replace(", ","+").replace("(The)","").replace(" ","+")
-                                print thumb
                                 req2 = urllib2.Request(thumb)
                                 req2.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
                                 response2 = urllib2.urlopen(req2)
@@ -622,13 +717,16 @@ def MUSIC_LIST_SEARCH(name, url):
                                 fanart = 'http://www.htbackdrops.com/v2/%s' % str(normal).replace('thumb_','')
                         except:
                                     fanart = ''
+                        uniques= []     
                         for url1,url2, url3, url4, name in match:
-                            changeboost4 = 'http://'+username+':'+password+'@' +boost
-                            url = str(changeboost4)+'downloads.members.easynews.com/news/'+str(url1)+'/'+str(url2)+'/'+str(url3)+'/'+str(url4)+'/'+str(name)+'.mp3'
-                            name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
-                            xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
-                            addLink2(name,url,iconimage,fanart)
-                            setView('movies', 'easy-view')     
+                            if name[:2] not in uniques:
+                                    uniques.append(name[:2])
+                                    changeboost4 = 'http://'+username+':'+password+'@' +boost
+                                    url = str(changeboost4)+'downloads.members.easynews.com/news/'+str(url1)+'/'+str(url2)+'/'+str(url3)+'/'+str(url4)+'/'+str(name)+'.mp3'
+                                    name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
+                                    xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
+                                    addLink2(name,url,iconimage,fanart)        
+                                    setView('movies', 'easy-view')     
             
 def HMV_SEARCH(url):
         req = urllib2.Request(url)
