@@ -18,17 +18,46 @@ def CATEGORIES():
         
 def MOVIE_CATEGORIES():
         addDir('Search Movies','url',6,'','','','','')
-        addDir('Now Playing','http://www.themoviedb.org/movie/now-playing',2,'','','','','')
+        addDir('Top 1000','url',21,'','','','','')
+        addDir('In Theatres','url',22,'','','','','')
         addDir('Blu-ray & DVD This Week','http://www.lovefilm.com/browse/film/new-releases/dvd/films/new-this-week/?sort_by=release_date&rows=50',14,'','','','','')
         addDir('Blu-ray & DVD Last Week','http://www.lovefilm.com/browse/film/new-releases/dvd/films/new-last-week/?sort_by=release_date&rows=50',14,'','','','','')
         addDir('Blu-ray & DVD 2 Weeks Ago','http://www.lovefilm.com/browse/film/new-releases/dvd/films/new-2-weeks/?sort_by=release_date&rows=50',14,'','','','','')
         addDir('Blu-ray & DVD 3 Weeks Ago','http://www.lovefilm.com/browse/film/new-releases/dvd/films/new-3-weeks/?sort_by=release_date&rows=50',14,'','','','','')
         addDir('Blu-ray & DVD 4 Weeks Ago','http://www.lovefilm.com/browse/film/new-releases/dvd/films/new-4-weeks/?sort_by=release_date&rows=50',14,'','','','','')
         addDir('Blu-ray & DVD 2 Months Ago','http://www.lovefilm.com/browse/film/new-releases/dvd/films/new-2-months/?sort_by=release_date&rows=50',14,'','','','','')
-        addDir('Top Rated','http://www.themoviedb.org/movie/top-rated',2,'','','','','')
         addDir('Genres','http://www.imdb.com/genre',7,'','','','','')
         setView('movies', 'default-view')
-
+        
+def IN_THEATRES_CATEGORIES():
+        addDir('PAGE 1','http://www.themoviedb.org/movie/now-playing',2,'','','','','')
+        addDir('PAGE 2','http://www.themoviedb.org/movie/now-playing?page=2',2,'','','','','')
+        addDir('PAGE 3','http://www.themoviedb.org/movie/now-playing?page=3',2,'','','','','')
+        
+        
+def TOP_CATEGORIES():
+        addDir('50','http://www.lovefilm.com/browse/film/dvd/films/?rows=50',14,'','','','','')
+        addDir('100','http://www.lovefilm.com/browse/film/dvd/films/p2/?rows=50',14,'','','','','')
+        addDir('150','http://www.lovefilm.com/browse/film/dvd/films/p3/?rows=50',14,'','','','','')
+        addDir('200','http://www.lovefilm.com/browse/film/dvd/films/p4/?rows=50',14,'','','','','')
+        addDir('250','http://www.lovefilm.com/browse/film/dvd/films/p5/?rows=50',14,'','','','','')
+        addDir('300','http://www.lovefilm.com/browse/film/dvd/films/p6/?rows=50',14,'','','','','')
+        addDir('350','http://www.lovefilm.com/browse/film/dvd/films/p7/?rows=50',14,'','','','','')
+        addDir('400','http://www.lovefilm.com/browse/film/dvd/films/p8/?rows=50',14,'','','','','')
+        addDir('450','http://www.lovefilm.com/browse/film/dvd/films/p9/?rows=50',14,'','','','','')
+        addDir('500','http://www.lovefilm.com/browse/film/dvd/films/p10/?rows=50',14,'','','','','')
+        addDir('550','http://www.lovefilm.com/browse/film/dvd/films/p11/?rows=50',14,'','','','','')
+        addDir('600','http://www.lovefilm.com/browse/film/dvd/films/p12/?rows=50',14,'','','','','')
+        addDir('650','http://www.lovefilm.com/browse/film/dvd/films/p13/?rows=50',14,'','','','','')
+        addDir('700','http://www.lovefilm.com/browse/film/dvd/films/p14/?rows=50',14,'','','','','')
+        addDir('750','http://www.lovefilm.com/browse/film/dvd/films/p15/?rows=50',14,'','','','','')
+        addDir('800','http://www.lovefilm.com/browse/film/dvd/films/p16/?rows=50',14,'','','','','')
+        addDir('850','http://www.lovefilm.com/browse/film/dvd/films/p17/?rows=50',14,'','','','','')
+        addDir('900','http://www.lovefilm.com/browse/film/dvd/films/p18/?rows=50',14,'','','','','')
+        addDir('950','http://www.lovefilm.com/browse/film/dvd/films/p19/?rows=50',14,'','','','','')
+        addDir('1000','http://www.lovefilm.com/browse/film/dvd/films/p20/?rows=50',14,'','','','','')
+        
+        
 def TV_CATEGORIES():
         addDir('Search Tv Shows','url',12,'','','','','')
         addDir('Most Popular','http://www.imdb.com/search/title?num_votes=5000,&sort=moviemeter&title_type=tv_series',9,'','','','','')
@@ -60,7 +89,7 @@ def SEARCH(url):
         opener = urllib2.build_opener(authhandler)
         urllib2.install_opener(opener)
         pagehandle = urllib2.urlopen(theurl)
-        link= pagehandle.read()      
+        link= pagehandle.read()    
         match=re.compile('url="http://.+?-(.+?)" length="(.+?)" type="application/octet-stream" />\n<link>http.+?com/news/.+?/.+?/.+?/.+?/(.+?)</link>').findall(link)
         eng=''
         ger=''
@@ -68,33 +97,39 @@ def SEARCH(url):
         tur=''
         jap=''
         spa=''
+        chi=''
         li=len(match)
         if re.search('alt=&#34;English', link, re.IGNORECASE):
-                eng= 'English'    
+                eng= ' English,'    
         if not re.search('alt=&#34;English', link, re.IGNORECASE):
                 eng= ''          
         if re.search('alt=&#34;German', link, re.IGNORECASE):
-                ger= 'German' 
+                ger= 'German,' 
         if not re.search('alt=&#34;German', link, re.IGNORECASE):
                 ger= ''          
         if re.search('alt=&#34;French', link, re.IGNORECASE):
-                fre= 'French'
+                fre= 'French,'
         if not re.search('alt=&#34;French', link, re.IGNORECASE):
                 fre= ''     
         if re.search('alt=&#34;Turkish', link, re.IGNORECASE):
-                tur= 'Turkish'
+                tur= 'Turkish,'
         if not re.search('alt=&#34;Turkish', link, re.IGNORECASE):
                 tur= '' 
         if re.search('alt=&#34;Japanese', link, re.IGNORECASE):
-                jap= 'Japanese'
+                jap= 'Japanese,'
         if not re.search('alt=&#34;Japanese', link, re.IGNORECASE):
                 jap= ''     
         if re.search('alt=&#34;Spanish', link, re.IGNORECASE):
-                spa= 'Spanish'
+                spa= 'Spanish,'
         if not re.search('alt=&#34;Spanish', link, re.IGNORECASE):
                 spa= '' 
-        all= '[B]%s%s %s[/B] %s\n%s %s %s\n%s %s %s' % ('','Links Found',li,'',eng,ger,fre,tur,jap,spa)
-        xbmcgui.Dialog().ok('Found These Languages',str(all))
+        if re.search('alt=&#34;Chinese', link, re.IGNORECASE):
+                chi= 'Chinese,'
+        if not re.search('alt=&#34;Chinese', link, re.IGNORECASE):
+                chi= ''         
+        all= '%s %s %s %s\n%s %s %s' % (eng,ger,chi,fre,jap,spa,tur)
+        found='[B]%s  LINKS FOUND[/B]' % (li)
+        xbmcgui.Dialog().ok(found,str(all))
         for url1 ,filesize, name in match:
             regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
             match = regex.search(url1)
@@ -105,6 +140,7 @@ def SEARCH(url):
             mov=''
             mp4=''
             iso=''
+            m4v=''
             if re.search('.mkv', name, re.IGNORECASE):
                     mkv= 'MKV'    
             if not re.search('.mkv', name, re.IGNORECASE):
@@ -128,9 +164,13 @@ def SEARCH(url):
             if re.search('.iso', name, re.IGNORECASE):
                     iso= 'ISO'
             if not re.search('.iso', name, re.IGNORECASE):
+                    iso= ''
+            if re.search('.m4v', name, re.IGNORECASE):
+                    iso= 'M4V'
+            if not re.search('.iso', name, re.IGNORECASE):
                     iso= ''  
-            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)
-            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.vob','')
+            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)
+            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.vob','').replace('.m4v','')
             changeboost4 = 'http://'+username+':'+password+'@' +boost
             url = str(changeboost4)+str(url1)
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
@@ -179,11 +219,11 @@ def ONDVD(url):
         response = urllib2.urlopen(req)
         link=response.read()
         response.close()
-        match= re.compile('src="(.+?)" alt=".+?" .+?\n.+?</a>\n        </div>\n\n\n\n\t    <ul id=".+?" class=".+?">\n                <li class=".+?">\n        <a rel="nofollow" href=".+?" class=".+?" title=".+?" >\n\t\t.+?\n\t\t</a>\n    </li>\n\n</ul>\n</div> \n<div class=".+?">\n\t<h2><a href=".+?"title=".+?">.+?</a>\n\n\n        <span class="release_decade">(.+?)</span>\n    </h2>\n    \n\n<ul class=".+?">\n    \n\n        <li property=".+?" content="(.+?)">\n            \n        <div class=".+?" data-rating_id=".+?">\n            <span class=".+?" style=".+?"><em>.+?</em></span>\n            <span class=".+?" style=".+?"><em></em></span>\n            <a class=".+?" title=".+?" data-product_media=".+?" data-product_name="(.+?)" .+?=".+?" .+?=".+?" .+?=".+?"></a>\n    </div>\n    \n        </li>\n            <li><small property=".+?" content=".+?">\n.+?\n            </small></li>\n            \n\n</ul>\n\n\n\n\t<div.+?>(.+?)<').findall(link)
-        for iconimage, year, rating, name, description in match:
-            name = str(name).replace('/','').replace('-','').replace("'","")
-            iconimage = str(iconimage).replace('77x109','large')
-            xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
+        link=str(link).replace('\n','').replace('\t','')
+        match=re.compile('<img ref=".+?" src="(.+?)".+?<div class="fl_detail_info"><h2><a href=".+?"title=".+?">(.+?)</a>.+?<div class="read_more">(.+?)<').findall(link)
+        for iconimage, name, description in match:
+            name = str(name).replace('/','').replace('-','').replace("'","").replace(",","").replace(",","").replace(" Extended Version","")
+            iconimage = str(iconimage).replace('77x109.gif','lrg2.gif').replace('77x109','large')
             addDir(name,url,3,iconimage,fanart,series,description,rating)
             setView('movies', 'movies-view')
             
@@ -213,7 +253,7 @@ def GENRE_LIST(url):
             regex1=re.compile('(.+?).gif')
             try:
                     match = regex.search(iconimage1)
-                    iconimage= '%s_V1.jpg'%(match.group(1))
+                    iconimage= '%s_V1_.SX593_SY799_.jpg'%(match.group(1))
             except:
                     pass
             try:    
@@ -227,7 +267,7 @@ def GENRE_LIST(url):
                     setView('movies', 'movies-view') 
                     
 def EasySearch(name,iconimage):
-        search_entered = str(name).replace(' ','+') .replace(':','') .replace(', ','+').replace(',','+').replace('[','').replace(']',' ').replace('(The)','').replace('(','') .replace(')','') .replace('-','+').replace("'",'+')       
+        search_entered = str(name).replace(', ','+').replace(' ','+') .replace(':','').replace('[','').replace(']',' ').replace('(The)','').replace('(','') .replace(')','') .replace('-','+').replace("'",'') .replace("&",'and')       
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", mvfn, "Any"):
                 theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'&fex=&pby=1000&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mvfs+'&b2t=&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO&spamf=1&u=1&st=adv&safeO=0&boost=1&sb=1'
@@ -249,33 +289,39 @@ def EasySearch(name,iconimage):
         tur=''
         jap=''
         spa=''
+        chi=''
         li=len(match)
         if re.search('alt=&#34;English', link, re.IGNORECASE):
-                eng= 'English'    
+                eng= 'English,'    
         if not re.search('alt=&#34;English', link, re.IGNORECASE):
                 eng= ''          
         if re.search('alt=&#34;German', link, re.IGNORECASE):
-                ger= 'German' 
+                ger= 'German,' 
         if not re.search('alt=&#34;German', link, re.IGNORECASE):
                 ger= ''          
         if re.search('alt=&#34;French', link, re.IGNORECASE):
-                fre= 'French'
+                fre= 'French,'
         if not re.search('alt=&#34;French', link, re.IGNORECASE):
                 fre= ''     
         if re.search('alt=&#34;Turkish', link, re.IGNORECASE):
-                tur= 'Turkish'
+                tur= 'Turkish,'
         if not re.search('alt=&#34;Turkish', link, re.IGNORECASE):
                 tur= '' 
         if re.search('alt=&#34;Japanese', link, re.IGNORECASE):
-                jap= 'Japanese'
+                jap= 'Japanese,'
         if not re.search('alt=&#34;Japanese', link, re.IGNORECASE):
                 jap= ''     
         if re.search('alt=&#34;Spanish', link, re.IGNORECASE):
-                spa= 'Spanish'
+                spa= 'Spanish,'
         if not re.search('alt=&#34;Spanish', link, re.IGNORECASE):
                 spa= '' 
-        all= '[B]%s%s %s[/B] %s\n%s %s %s\n%s %s %s' % ('','Links Found',li,'',eng,ger,fre,tur,jap,spa)
-        xbmcgui.Dialog().ok('Found These Languages',str(all))
+        if re.search('alt=&#34;Chinese', link, re.IGNORECASE):
+                chi= 'Chinese,'
+        if not re.search('alt=&#34;Chinese', link, re.IGNORECASE):
+                chi= ''         
+        all= '%s %s %s %s\n%s %s %s' % (eng,ger,chi,fre,jap,spa,tur)
+        found='[B]%s  LINKS FOUND[/B]' % (li)
+        xbmcgui.Dialog().ok(found,str(all))
         for url1 ,filesize, name in match:
             regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
             match = regex.search(url1)
@@ -286,6 +332,7 @@ def EasySearch(name,iconimage):
             mov=''
             mp4=''
             iso=''
+            m4v=''
             if re.search('.mkv', name, re.IGNORECASE):
                     mkv= 'MKV'    
             if not re.search('.mkv', name, re.IGNORECASE):
@@ -309,9 +356,13 @@ def EasySearch(name,iconimage):
             if re.search('.iso', name, re.IGNORECASE):
                     iso= 'ISO'
             if not re.search('.iso', name, re.IGNORECASE):
+                    iso= ''
+            if re.search('.m4v', name, re.IGNORECASE):
+                    iso= 'M4V'
+            if not re.search('.iso', name, re.IGNORECASE):
                     iso= ''  
-            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)
-            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.vob','')
+            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)
+            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.vob','').replace('.m4v','')
             changeboost4 = 'http://'+username+':'+password+'@' +boost
             url = str(changeboost4)+str(url1)
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
@@ -327,6 +378,7 @@ def TV_POPULAR(url):
         response.close()
         match = re.compile('<img src="(.+?)" height="74" width="54" alt=".+?" title=".+?"></a>\n  </td>\n  <td class="title">\n    \n\n<span class="wlb_wrapper" data-tconst="(.+?)" data-size="small" data-caller-name="search"></span>\n\n    <a href=".+?">(.+?)</a>\n    <span class="year_type">.+?</span><br>\n<div class="user_rating">\n\n\n<div class="rating rating-list" data-auth=".+?" id=".+?" data-ga-identifier="advsearch"\n title=".+?click stars to rate">\n<span class="rating-bg">&nbsp;</span>\n<span class="rating-imdb" style="width.+?">&nbsp;</span>\n<span class="rating-stars">\n<a href=".+?" title="Register or login to rate this title" rel="nofollow"><span>1</span></a>\n<a href=".+?" title="Register or login to rate this title" rel="nofollow"><span>2</span></a>\n<a href=".+?" title="Register or login to rate this title" rel="nofollow"><span>3</span></a>\n<a href=".+?" title="Register or login to rate this title" rel="nofollow"><span>4</span></a>\n<a href=".+?" title="Register or login to rate this title" rel="nofollow"><span>5</span></a>\n<a href=".+?" title="Register or login to rate this title" rel="nofollow"><span>6</span></a>\n<a href=".+?" title="Register or login to rate this title" rel="nofollow"><span>7</span></a>\n<a href=".+?" title="Register or login to rate this title" rel="nofollow"><span>8</span></a>\n<a href=".+?" title="Register or login to rate this title" rel="nofollow"><span>9</span></a>\n<a href=".+?" title="Register or login to rate this title" rel="nofollow"><span>10</span></a>\n</span>\n<span class="rating-rating"><span class="value">.+?</span><span class="grey">/</span><span class="grey">10</span></span>\n<span class="rating-cancel"><a href=".+?" title="Delete" rel="nofollow"><span>X</span></a></span>\n&nbsp;</div>\n\n</div>\n<span class="outline">(.+?)</span>').findall(link)
         for iconimage, url, name, description in match:
+            name = str(name).replace('&#xB7;','').replace('&#x27;','').replace('&#x2;','And')
             iconimage1 = iconimage
             url = 'http://www.imdb.com/title/'+str(url)+'/'
             series = str(name).replace('&#xB7','').replace('&#x27;','').replace('&#x2;','And')
@@ -334,7 +386,7 @@ def TV_POPULAR(url):
             regex1=re.compile('(.+?).gif')
             try:
                     match = regex.search(iconimage1)
-                    iconimage= '%s_V1.jpg'%(match.group(1))
+                    iconimage= '%s_V1_.SX593_SY799_.jpg'%(match.group(1))
             except:
                     pass
             try:    
@@ -356,6 +408,7 @@ def TV_SEASON(url,iconimage,series):
         for url1, name in match:
             url = str(url2)+str(url1)
             name = 'Season '+str(name)
+            xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
             addDir(name,url,11,iconimage,fanart,series,description,rating) 
             setView('movies', 'seasons-view') 
             
@@ -368,6 +421,7 @@ def TV_EPISODE(url,iconimage,series):
         match = re.compile('src="(.+?)">\n<div>(.+?)</div>\n</div>\n</a>  </div>\n  <div class="info" itemprop="episodes" itemscope itemtype="http://schema.org/TVEpisode">\n    <meta itemprop="episodeNumber" content=".+?"/>\n    <div class="airdate">\n.+?\n    </div>\n    <strong><a\nonclick=".+?src=.+?\nhref=".+?"\ntitle=".+?"\nitemprop="name">(.+?)</a></strong>\n    <div class="item_description" itemprop="description">(.+?)</div>').findall(link)
         series1=series
         for iconimage, episode, name, description in match:
+            description= str(description).replace('&#700;','')
             iconimage1= iconimage
             episode='['+str(episode).replace('26,','26').replace('25,','25').replace('24,','24').replace('23,','23').replace('22,','22').replace('21,','21').replace('20,','20').replace('19,','19').replace('18,','18').replace('17,','17').replace('16,','16').replace('15,','15').replace('14,','14').replace('13,','13').replace('12,','12').replace('11,','11').replace('10,','10').replace('9,','09').replace('8,','08').replace('7,','07').replace('6,','06').replace('5,','05').replace('4,','04').replace('3,','03').replace('2,','02').replace('1,','01').replace('p26','26').replace('p25','25').replace('p24','24').replace('p23','23').replace('p22','22').replace('p21','p21').replace('p20','20').replace('p19','19').replace('p18','18').replace('p17','17').replace('p16','16').replace('p15','15').replace('p14','14').replace('p13','13').replace('p12','12').replace('p11','11').replace('p10','10').replace('p9','09').replace('p8','08').replace('p7','07').replace('p6','06').replace('p5','05').replace('p4','04').replace('p3','03').replace('p2','02').replace('p1','01')+']'
             name= str(episode)+' '+str(name).replace('&#xB7;','').replace('&#x27;','').replace('&#x2;','And')
@@ -376,7 +430,7 @@ def TV_EPISODE(url,iconimage,series):
             regex1=re.compile('(.+?).gif')
             try:
                     match = regex.search(iconimage1)
-                    iconimage= '%s_V1.jpg'%(match.group(1))
+                    iconimage= '%s_V1_.SX593_SY799_.jpg'%(match.group(1))
             except:
                     pass
             try:    
@@ -410,7 +464,7 @@ def TV_SEARCH(name, iconimage):
             series = name
             regex=re.compile('(.+?)_V1.+?.jpg')
             match = regex.search(iconimage1)
-            iconimage= '%s_V1.jpg'%(match.group(1))
+            iconimage= '%s_V1_.SX593_SY799_.jpg'%(match.group(1))
             addDir(name,url,10,iconimage,fanart,series,description,rating)   
             setView('movies', 'seasons-view')
                   
@@ -419,6 +473,7 @@ def TV_EASY_SEARCH(series):
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", tvfn, "Any"):
                 theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'&fex=&pby=1000&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfs+'&b2t=&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO&spamf=1&u=1&st=adv&safeO=0&boost=1&sb=1'
+                print theurl
         else:
                 theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'&fex='+tvfn+'&pby=1000&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfs+'&b2t=&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO&spamf=1&u=1&st=adv&safeO=0&boost=1&sb=1'
                 print theurl
@@ -438,33 +493,39 @@ def TV_EASY_SEARCH(series):
         tur=''
         jap=''
         spa=''
+        chi=''
         li=len(match)
         if re.search('alt=&#34;English', link, re.IGNORECASE):
-                eng= 'English'    
+                eng= 'English,'    
         if not re.search('alt=&#34;English', link, re.IGNORECASE):
                 eng= ''          
         if re.search('alt=&#34;German', link, re.IGNORECASE):
-                ger= 'German' 
+                ger= 'German,' 
         if not re.search('alt=&#34;German', link, re.IGNORECASE):
                 ger= ''          
         if re.search('alt=&#34;French', link, re.IGNORECASE):
-                fre= 'French'
+                fre= 'French,'
         if not re.search('alt=&#34;French', link, re.IGNORECASE):
                 fre= ''     
         if re.search('alt=&#34;Turkish', link, re.IGNORECASE):
-                tur= 'Turkish'
+                tur= 'Turkish,'
         if not re.search('alt=&#34;Turkish', link, re.IGNORECASE):
                 tur= '' 
         if re.search('alt=&#34;Japanese', link, re.IGNORECASE):
-                jap= 'Japanese'
+                jap= 'Japanese,'
         if not re.search('alt=&#34;Japanese', link, re.IGNORECASE):
                 jap= ''     
         if re.search('alt=&#34;Spanish', link, re.IGNORECASE):
-                spa= 'Spanish'
+                spa= 'Spanish,'
         if not re.search('alt=&#34;Spanish', link, re.IGNORECASE):
                 spa= '' 
-        all= '[B]%s%s %s[/B] %s\n%s %s %s\n%s %s %s' % ('','Links Found',li,'',eng,ger,fre,tur,jap,spa)
-        xbmcgui.Dialog().ok('Found These Languages',str(all))
+        if re.search('alt=&#34;Chinese', link, re.IGNORECASE):
+                chi= 'Chinese,'
+        if not re.search('alt=&#34;Chinese', link, re.IGNORECASE):
+                chi= ''         
+        all= '%s %s %s %s\n%s %s %s' % (eng,ger,chi,fre,jap,spa,tur)
+        found='[B]%s  LINKS FOUND[/B]' % (li)
+        xbmcgui.Dialog().ok(found,str(all))
         for url1 ,filesize, name in match:
             regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
             match = regex.search(url1)
@@ -475,6 +536,7 @@ def TV_EASY_SEARCH(series):
             mov=''
             mp4=''
             iso=''
+            m4v=''
             if re.search('.mkv', name, re.IGNORECASE):
                     mkv= 'MKV'    
             if not re.search('.mkv', name, re.IGNORECASE):
@@ -498,9 +560,13 @@ def TV_EASY_SEARCH(series):
             if re.search('.iso', name, re.IGNORECASE):
                     iso= 'ISO'
             if not re.search('.iso', name, re.IGNORECASE):
+                    iso= ''
+            if re.search('.m4v', name, re.IGNORECASE):
+                    iso= 'M4V'
+            if not re.search('.iso', name, re.IGNORECASE):
                     iso= ''  
-            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)
-            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.vob','')
+            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)
+            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.vob','').replace('.m4v','')
             changeboost4 = 'http://'+username+':'+password+'@' +boost
             url = str(changeboost4)+str(url1)
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
@@ -948,6 +1014,14 @@ elif mode==19:
                          
 elif mode==20:
         print ""+url
-        ITUNES_RSS(url)           
+        ITUNES_RSS(url) 
+        
+elif mode==21:
+        print ""+url
+        TOP_CATEGORIES() 
+        
+elif mode==22:
+        print ""+url
+        IN_THEATRES_CATEGORIES() 
                                              
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
