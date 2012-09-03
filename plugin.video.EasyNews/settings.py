@@ -131,3 +131,7 @@ def BOOST():
         return 'boost5-'
     elif quality == '3':
         return ''
+
+def imdbtv_watchlist_url():
+    return "http://www.imdb.com/user/" + ADDON.getSetting('imdb_user') + "/watchlist?start=1&view=detail&sort=listorian:asc&defaults=1&lists=TAELHXhBHTM"
+    
