@@ -135,3 +135,5 @@ def BOOST():
 def imdbtv_watchlist_url():
     return "http://www.imdb.com/user/" + ADDON.getSetting('imdb_user') + "/watchlist?start=1&view=detail&sort=listorian:asc&defaults=1&lists=TAELHXhBHTM"
     
+def imdb_list_url():
+    return 'http://www.imdb.com/user/' + ADDON.getSetting('imdb_user') + '/lists?tab=public'

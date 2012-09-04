@@ -9,59 +9,60 @@ tvfn = settings.TV_FILENAME()
 mvfn = settings.MOVIE_FILENAME()
 boost = settings.BOOST()
 IMDBTV_WATCHLIST = settings.imdbtv_watchlist_url()
+IMDB_LIST = settings.imdb_list_url()
 
 
 def CATEGORIES():
-        addDir('Search Easy News','url',1,'','','','','')
-        addDir('Movies','url',4,'','','','','')
-        addDir('TV','url',5,'','','','','')
-        addDir('Music','url',15,'','','','','')
-        addDir('My IMDB Watch List','url',8,'','','','','')
+        addDir('Search Easy News','url',1,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/searcheasy.png','','','','')
+        addDir('Movies','url',4,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/movies.png','','','','')
+        addDir('TV','url',5,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/tv.png','','','','')
+        addDir('Music','url',15,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/music.png','','','','')
+        addDir('My IMDB Lists','url',25,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/imdb.png','','','','')
         setView('movies', 'default-view') 
            
 def MOVIE_CATEGORIES():
-        addDir('Search Movies','url',6,'','','','','')
-        addDir('New DVD Releases','http://www.lovefilm.com/browse/film/dvd/new-releases/films/?sort_by=release_date&rows=50',14,'','','','','')
-        addDir('In Theatres','http://www.themoviedb.org/movie/now-playing',2,'','','','','')
-        addDir('Top Movies','http://www.lovefilm.com/browse/film/dvd/films/?rows=50',14,'','','','','')
-        addDir('Genres','url',21,'','','','','')
-        addDir('<< Return To Main Menu','','','','','','','')    
+        addDir('Search Movies','url',6,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/searchmovies.png','','','','')
+        addDir('New DVD Releases','http://www.lovefilm.com/browse/film/dvd/new-releases/films/?sort_by=release_date&rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/newreleases.png','','','','')
+        addDir('In Theatres','http://www.themoviedb.org/movie/now-playing',2,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/intheatres.png','','','','')
+        addDir('Top Movies','http://www.lovefilm.com/browse/film/dvd/films/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/topmovies.png','','','','')
+        addDir('Genres','url',21,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/genres.png','','','','')
+        addDir('<< Return To Main Menu','','','https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'default-view')
             
 def TOP_CATEGORIES():
-        addDir('Action','http://www.lovefilm.com/browse/film/films/dvd/action/p1/?rows=50',14,'','','','','')
-        addDir('Animated','http://www.lovefilm.com/browse/film/films/dvd/animated/p1/?rows=50',14,'','','','','')
-        addDir('BollyWood','http://www.lovefilm.com/browse/film/films/dvd/bollywood/p1/?rows=50',14,'','','','','')
-        addDir('Children','http://www.lovefilm.com/browse/film/films/dvd/childrens/p1/?rows=50',14,'','','','','')
-        addDir('Comedy','http://www.lovefilm.com/browse/film/films/dvd/comedy/p1/?rows=50',14,'','','','','')
-        addDir('Crime','http://www.lovefilm.com/browse/film/films/dvd/action/crime/p1/?rows=50',14,'','','','','')
-        addDir('Drama','http://www.lovefilm.com/browse/film/films/dvd/drama/p1/?rows=50',14,'','','','','')
-        addDir('Family','http://www.lovefilm.com/browse/film/films/dvd/family/p1/?rows=50',14,'','','','','')
-        addDir('Historical','http://www.lovefilm.com/browse/film/films/dvd/action/historical/p1/?rows=50',14,'','','','','')
-        addDir('Horror','http://www.lovefilm.com/browse/film/films/dvd/horror/p1/?rows=50',14,'','','','','')
-        addDir('Musical','http://www.lovefilm.com/browse/film/films/dvd/music/p1/?rows=50',14,'','','','','')
-        addDir('Romance','http://www.lovefilm.com/browse/film/films/dvd/romance/p1/?rows=50',14,'','','','','')
-        addDir('Sci-Fi','http://www.lovefilm.com/browse/film/films/dvd/sci-fi/p1/?rows=50',14,'','','','','')
-        addDir('Super Heroes','http://www.lovefilm.com/browse/film/films/dvd/music/p1/?rows=50',14,'','','','','')
-        addDir('Thriller','http://www.lovefilm.com/browse/film/films/dvd/thriller/p1/?rows=50',14,'','','','','')
-        addDir('War','http://www.lovefilm.com/browse/film/films/dvd/action/war/p1/?rows=50',14,'','','','','')
-        addDir('<< Return To Movie Menu','url',4,'','','','','')    
+        addDir('Action','http://www.lovefilm.com/browse/film/films/dvd/action/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/action.png','','','','')
+        addDir('Animated','http://www.lovefilm.com/browse/film/films/dvd/animated/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/animated.png','','','','')
+        addDir('BollyWood','http://www.lovefilm.com/browse/film/films/dvd/bollywood/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/bollywood.png','','','','')
+        addDir('Children','http://www.lovefilm.com/browse/film/films/dvd/childrens/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/childrens.png','','','','')
+        addDir('Comedy','http://www.lovefilm.com/browse/film/films/dvd/comedy/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/comedy.png','','','','')
+        addDir('Crime','http://www.lovefilm.com/browse/film/films/dvd/action/crime/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/crime.png','','','','')
+        addDir('Drama','http://www.lovefilm.com/browse/film/films/dvd/drama/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/drama.png','','','','')
+        addDir('Family','http://www.lovefilm.com/browse/film/films/dvd/family/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/family.png','','','','')
+        addDir('Historical','http://www.lovefilm.com/browse/film/films/dvd/action/historical/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/historical.png','','','','')
+        addDir('Horror','http://www.lovefilm.com/browse/film/films/dvd/horror/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/horror.png','','','','')
+        addDir('Musical','http://www.lovefilm.com/browse/film/films/dvd/music/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/musical.png','','','','')
+        addDir('Romance','http://www.lovefilm.com/browse/film/films/dvd/romance/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/romance.png','','','','')
+        addDir('Sci-Fi','http://www.lovefilm.com/browse/film/films/dvd/sci-fi/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/sci-fi.png','','','','')
+        addDir('Super Heroes','http://www.lovefilm.com/browse/film/films/dvd/action/superheroes/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/superheros.png','','','','')
+        addDir('Thriller','http://www.lovefilm.com/browse/film/films/dvd/thriller/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/thriller.png','','','','')
+        addDir('War','http://www.lovefilm.com/browse/film/films/dvd/action/war/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/war.png','','','','')
+        addDir('<< Return To Movie Menu','url',4,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'default-view')    
         
 def TV_CATEGORIES():
-        addDir('Search Tv Shows','url',12,'','','','','')
-        addDir('Current Popular','http://www.imdb.com/search/title?num_votes=5000,&sort=moviemeter&title_type=tv_series',9,'','','','','')
-        addDir('All Time Popular','http://www.imdb.com/search/title?num_votes=5000,&sort=user_rating&title_type=tv_series',9,'','','','','')
-        addDir('A to Z','http://www.imdb.com/search/title?num_votes=5000,&sort=alpha,asc&start=&title_type=tv_series',9,'','','','','')
-        addDir('<< Return To Main Menu','','','','','','','')    
+        addDir('Search Tv Shows','url',12,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/searchtv.png','','','','')
+        addDir('Current Popular','http://www.imdb.com/search/title?num_votes=5000,&sort=moviemeter&title_type=tv_series',9,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/currentpopular.png','','','','')
+        addDir('All Time Popular','http://www.imdb.com/search/title?num_votes=5000,&sort=user_rating&title_type=tv_series',9,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/alltimepopular.png','','','','')
+        addDir('A to Z','http://www.imdb.com/search/title?num_votes=5000,&sort=alpha,asc&start=&title_type=tv_series',9,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/atoz.png','','','','')
+        addDir('<< Return To Main Menu','','','https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'default-view')
         
 def MUSIC_CATEGORIES():
-        addDir('Search Music','url',16,'','','','','')
-        addDir('BillBoard Album Charts','http://www.billboard.com/#/charts',22,'','','','','')
-        addDir('HMV Best Selling','http://hmv.com/hmvweb/directQuery.do?pagingOptionSelect=%2Fhmvweb%2FdirectQuery.do%3FNo%3D0%26pagingOptionSelect%3D192%26N%3D1573%26adultFlag%3Dfalse%26rid%3D1394ED72CCC4',19,'','','','','')
-        addDir('iTunes Charts','http://musicchartfeeds.com/itunes-rss/',17,'','','','','')
-        addDir('<< Return To Main Menu','','','','','','','')    
+        addDir('Search Music','url',16,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/searchmusic.png','','','','')
+        addDir('BillBoard Album Charts','http://www.billboard.com/#/charts',22,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/bbca.png','','','','')
+        addDir('HMV Best Selling','http://hmv.com/hmvweb/directQuery.do?pagingOptionSelect=%2Fhmvweb%2FdirectQuery.do%3FNo%3D0%26pagingOptionSelect%3D192%26N%3D1573%26adultFlag%3Dfalse%26rid%3D1394ED72CCC4',19,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/hmvbs.png','','','','')
+        addDir('iTunes Charts','http://musicchartfeeds.com/itunes-rss/',17,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/ituneschart.png','','','','')
+        addDir('<< Return To Main Menu','','','https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'default-view') 
            
 def SEARCH(url):
@@ -212,11 +213,11 @@ def TMDB(url):
         try:
                 url=str(nextp1)
                 name= 'Next Page >>'
-                addDir(name,url,2,'','','','','')    
+                addDir(name,url,2,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/next.png','','','','')    
                 setView('movies', 'movies-view') 
         except:
                 pass
-        addDir('<< Return To Movies Menu','url',4,'','','','','')    
+        addDir('<< Return To Movies Menu','url',4,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'movies-view') 
              
 def ONDVD(url):
@@ -240,24 +241,13 @@ def ONDVD(url):
         try:
                 url=str(nextp1)
                 name= 'Next Page >>'
-                addDir(name,url,14,'','','','','')    
+                addDir(name,url,14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/next.png','','','','')    
                 setView('movies', 'movies-view') 
         except:
                 pass
-        addDir('<< Return To Movies Menu','url',4,'','','','','')    
+        addDir('<< Return To Movies Menu','url',4,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'movies-view') 
             
-def ITUNES_MOVIES_CATEGORIES(url):
-        req = urllib2.Request(url)
-        req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
-        response = urllib2.urlopen(req)
-        link=response.read()
-        response.close()
-        match = re.compile('src="(.+?)" width="113" height="170" alt=".+?"></a><h3><a href=".+?">(.+?)</a>').findall(link)
-        for iconimage, name in match:
-            iconimage=str(iconimage).replace('170x170','600x600')
-            addDir(name,url,3,iconimage,fanart,series,description,rating)    
-            setView('movies', 'default-view')    
             
                                               
 def EasySearch(name,iconimage):
@@ -399,11 +389,11 @@ def TV_POPULAR(url):
         try:
                 url='http://www.imdb.com'+str(nextp1)
                 name= 'Next Page >>'
-                addDir(name,url,9,'','','','','')
+                addDir(name,url,9,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/next.png','','','','')
                 setView('movies', 'tvshows-view') 
         except:
                 pass
-        addDir('<< Return To Movies Menu','url',5,'','','','','')    
+        addDir('<< Return To TV Menu','url',5,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'tvshows-view') 
              
 def TV_SEASON(url,iconimage,series):
@@ -713,6 +703,7 @@ def ITUNES_RSS(url):
             url=str(url).replace('+','plus').replace('Deluxe','').replace('deluxe','').replace('Version','').replace('version','').replace('(','').replace(')','').replace('&amp;','and').replace('Edition','').replace('edition','')
             name=str(name).replace('&amp;','and').replace('&#039;','').replace("\'","")
             iconimage=str(iconimage).replace('100x100','600x600')
+            description=str(url)
             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
             addDir(name,url,18,iconimage,fanart,series,description,rating)    
             setView('movies', 'music-view')    
@@ -722,7 +713,7 @@ def MUSIC_LIST_SEARCH(name, url):
         xbmc.PlayList(0).clear()
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Add Album To Playlist", "     If Any Music Is Found Would You Like To", "       Add All The Songs To Your PlayList ?"):
-                        theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+str(name).replace(' ','+')+'+'+str(url).replace(' ','+')+'&pby=20&pno=1&s1=dtime&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=10&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=AUDIO&u=1&st=adv&safeO=0&boost=1&sb=1'
+                        theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+str(name).replace(' ','+').replace('Various Artists','')+'+'+str(url).replace(':','+').replace('...','+').replace(' ','+')+'&pby=20&pno=1&s1=dtime&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=10&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=AUDIO&u=1&st=adv&safeO=0&boost=1&sb=1'
                         username = ADDON.getSetting('easy_user')
                         password = ADDON.getSetting('easy_pass')
                         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -763,7 +754,7 @@ def MUSIC_LIST_SEARCH(name, url):
                                     setView('movies', 'easy-view') 
 
         else:
-                        theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+str(name).replace(' ','+')+'+'+str(url).replace(' ','+')+'&pby=20&pno=1&s1=dtime&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=10&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=AUDIO&u=1&st=adv&safeO=0&boost=1&sb=1'
+                        theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+str(name).replace(' ','+').replace('Various Artists','')+'+'+str(url).replace(':','+').replace('...','+').replace(' ','+')+'&pby=20&pno=1&s1=dtime&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=10&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=AUDIO&u=1&st=adv&safeO=0&boost=1&sb=1'
                         username = ADDON.getSetting('easy_user')
                         password = ADDON.getSetting('easy_pass')
                         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -810,34 +801,44 @@ def HMV_SEARCH(url):
         link=response.read()
         response.close()
         match = re.compile('src="(.+?)" alt="Picture of - (.+?)&nbsp;(.+?)"').findall(link)
+        match1 = re.compile('src="(.+?)" alt="Picture of - (.+?)&nbsp;(.+?):').findall(link)
         nextp=re.compile('<a class="next" href="(.+?)">next</a></li>').findall(link)
+        uniques=[]
         try:
                 nextp1=nextp[0]
         except:
                 pass
-        for iconimage, name, url in match:
-            url=str(url).replace('Hmv.com Exclusive','').replace('+','').replace('Deluxe','').replace('deluxe','').replace('Version','').replace('version','').replace('(','').replace(')','').replace('&amp;','and').replace('Edition','').replace('edition','').replace(':','').replace('2cd','').replace('Artcards','')
-            name=str(name).replace('&amp;','and').replace('&#039;','').replace('Va','Various Artists').replace(':','')
+        for iconimage, name, url in match1:
+            url=str(url)
+            name=str(name).replace('&amp;','and').replace('&#039;','')
+            description = str(url)
             addDir(name,url,18,iconimage,fanart,series,description,rating)    
+        for iconimage, name, url in match:
+            if name[:10] not in uniques:
+                uniques.append(name[:10])
+                url=str(url).replace('Inc Bonus Cd Single 2cd Box Set','').replace('Ltd Sleeve','').replace('2cd','').replace('3cd','').replace('4cd','').replace('Includes Dvd','').replace('Inc Bonus Cd Single 2cd Box Set','').replace('Hmv Exclusive','').replace('Hmv.com Exclusive','').replace('+','').replace('Deluxe','').replace('deluxe','').replace('Version','').replace('version','').replace('(','').replace(')','').replace('&amp;','and').replace('Edition','').replace('edition','').replace(':','').replace('2cd','').replace('Artcards','')
+                name=str(name).replace('&amp;','and').replace('&#039;','')
+                description = str(url).replace('Inc Bonus Cd Single 2cd Box Set','').replace('Ltd Sleeve','').replace('2cd','').replace('3cd','').replace('4cd','').replace('Includes Dvd','').replace('Inc Bonus Cd Single 2cd Box Set','').replace('Hmv Exclusive','').replace('Hmv.com Exclusive','').replace('+','').replace('Deluxe','').replace('deluxe','').replace('Version','').replace('version','').replace('(','').replace(')','').replace('&amp;','and').replace('Edition','').replace('edition','').replace(':','').replace('2cd','').replace('Artcards','')
+                addDir(name,url,18,iconimage,fanart,series,description,rating)
         try:
                 url='http://hmv.com'+str(nextp1)
                 name= 'Next Page >>'
-                addDir(name,url,19,'','','','','')    
+                addDir(name,url,19,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/next.png','','','','')    
         except:
                 pass
-        addDir('<< Return To Music Menu','url',15,'','','','','')    
+        addDir('<< Return To Music Menu','url',15,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'music-view') 
         
         
 def BILLBOARD_MAIN_LIST(url):
-        addDir('BillBoard 200','http://www.billboard.com/charts/billboard-200#/charts/billboard-200',7,'','','','','')
-        addDir('Country Albums','http://www.billboard.com/charts/country-albums#/charts/country-albums',7,'','','','','')
-        addDir('HeatSeeker Albums','http://www.billboard.com/charts/heatseekers-albums#/charts/heatseekers-albums',7,'','','','','')
-        addDir('Independent Albums','http://www.billboard.com/charts/independent-albums#/charts/independent-albums',7,'','','','','')
-        addDir('Catalogue Albums','http://www.billboard.com/charts/catalog-albums#/charts/catalog-albums',7,'','','','','')
-        addDir('Folk Albums','http://www.billboard.com/charts/folk-albums#/charts/folk-albums',7,'','','','','')
-        addDir('Digital Albums','http://www.billboard.com/charts/digital-albums#/charts/digital-albums',7,'','','','','')
-        addDir('<< Return To Music Menu','url',15,'','','','','')    
+        addDir('BillBoard 200','http://www.billboard.com/charts/billboard-200#/charts/billboard-200',7,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/bbca.png','','','','')
+        addDir('Country Albums','http://www.billboard.com/charts/country-albums#/charts/country-albums',7,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/bbca.png','','','','')
+        addDir('HeatSeeker Albums','http://www.billboard.com/charts/heatseekers-albums#/charts/heatseekers-albums',7,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/bbca.png','','','','')
+        addDir('Independent Albums','http://www.billboard.com/charts/independent-albums#/charts/independent-albums',7,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/bbca.png','','','','')
+        addDir('Catalogue Albums','http://www.billboard.com/charts/catalog-albums#/charts/catalog-albums',7,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/bbca.png','','','','')
+        addDir('Folk Albums','http://www.billboard.com/charts/folk-albums#/charts/folk-albums',7,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/bbca.png','','','','')
+        addDir('Digital Albums','http://www.billboard.com/charts/digital-albums#/charts/digital-albums',7,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/bbca.png','','','','')
+        addDir('<< Return To Music Menu','url',15,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         
 def BILLBOARD_ALBUM_LISTS(url):
         req = urllib2.Request(url)
@@ -847,32 +848,47 @@ def BILLBOARD_ALBUM_LISTS(url):
         response.close()
         match = re.compile('"title" : "(.+?)"\r\n        ,"artist" : "(.+?)"\r\n        ,"image" : "(.+?)"\r\n').findall(link)
         for url, name, iconimage in match:
+            description = str(url)
             addDir(name,url,18,iconimage,fanart,series,description,rating)    
             setView('movies', 'default-view')  
-        addDir('<< Return To Billboard Menu','url',22,'','','','','')    
+        addDir('<< Return To Billboard Menu','url',22,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'music-view') 
+        
+def IMDB_LISTS(url):        
+        addDir('Watch List',IMDBTV_WATCHLIST,8,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/imdb.png','','','','')
+        url=IMDB_LIST
+        print url
+        req = urllib2.Request(url)
+        req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+        response = urllib2.urlopen(req)
+        link=response.read()
+        response.close()
+        match = re.compile('<div class="list_name"><b><a    onclick=".+?"     href="(.+?)"    >(.+?)</a>').findall(link)
+        for url, name in match:
+            url='http://www.imdb.com'+str(url)   
+            addDir(name,url,8,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/imdb.png',fanart,series,description,rating)    
+            setView('movies', 'default-view')  
            
 def WATCH_TV_LIST(url):
-        url=IMDBTV_WATCHLIST
         req = urllib2.Request(url)
         req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
         response = urllib2.urlopen(req)
         link=response.read()
         response.close()
         link=str(link).replace('\n','').replace('\t','')
-        match = re.compile('data-const=".+?"><img src="(.+?)" height="209" width="140" alt=".+?" class="zero-z-index"></div></a></div>.+?href="/title/(.+?)/"    >(.+?)</a>    <span class="year_type">.+?</span>.+?<div class="item_description">(.+?)<span>').findall(link)
+        match=re.compile('data-const=".+?">.+?="http://ia.media-imdb.com/images/(.+?)".+?height=".+?".+?idth=".+?".+?lt=".+?".+?lass=".+?".+?href="/title/(.+?)/"    >(.+?)</a>    <span class="year_type">.+?</span></b>    <div class="rating rating-list" data-auth=".+?" id=".+?" data-ga-identifier="list" title=".+?"><span class="rating-bg">.+?<div class="item_description">(.+?)<').findall(link)
         for iconimage, url, name, description in match:
             iconimage1 = iconimage
             regex=re.compile('(.+?)_V1.+?.jpg')
             regex1=re.compile('(.+?).gif')
             try:
                     match = regex.search(iconimage1)
-                    iconimage= '%s_V1_.SX593_SY799_.jpg'%(match.group(1))
+                    iconimage= 'http://ia.media-imdb.com/images/'+'%s_V1_.SX593_SY799_.jpg'%(match.group(1))
             except:
                     pass
             try:    
                     match= regex1.search(iconimage1)
-                    iconimage= '%s.gif'%(match.group(1))
+                    iconimage= 'http://ia.media-imdb.com/images/'+'%s.gif'%(match.group(1))
             except:
                     pass
                     url = 'http://www.imdb.com/title/'+str(url)+'/'
@@ -1224,7 +1240,11 @@ elif mode==23:
         
 elif mode==24:
         print ""+url
-        WATCH_LIST_SEARCH(name,url,iconimage,description)  
+        WATCH_LIST_SEARCH(name,url,iconimage,description)
+        
+elif mode==25:
+        print ""+url
+        IMDB_LISTS(url)
         
                                                        
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
