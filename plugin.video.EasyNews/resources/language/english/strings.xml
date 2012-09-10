@@ -3,10 +3,37 @@
 	<string id="30300">Easy account</string>
 	<string id="easy_user">Username</string>
     <string id="easy_pass">Password</string>
-	<!-- TV Settings -->
-	<string id="tvfilename">tvfilename</string>
-    <string id="tvfilesize">tvfilesize</string>
-    	<!-- Movie Settings -->
-	<string id="moviefilename">moviefilenamee</string>
-    <string id="moviefilesize">moviefilesize</string>      
+    
+	<!-- Movie Settings -->
+    <string id="mlangex">Language  Exclusion</string>
+    <string id="mresex">Resolution  Exclusion</string>
+	<string id="mfilesize">Minimum File Size</string>
+	<string id="mmaxfilesize">Maximum Filesize</string>
+	<string id="mspam">Spam Filter</string>
+	<string id="mrem">Remove Duplicates</string>
+	<string id="mgrex">Group Exclusion</string>
+	<string id="msubject">Subject</string>
+	<string id="mposter">Poster</string>
+	<string id="mnewsgroup">Newsgroup</string>
+	<string id="mfilename">Filename</string>
+	<string id="mfileext">File Extension</string>
+	<string id="mvcodec">Video Codec</string>
+	<string id="macodec">Audio Codec</string>
+	<string id="mresults">Results</string>
+    	<!-- Tv-Show Settings -->
+    <string id="tvlangex">Language  Exclusion</string>
+    <string id="tvresex">Resolution  Exclusion</string>
+	<string id="tvfilesize">Minimum File Size</string>
+	<string id="tvmaxfilesize">Maximum Filesize</string>
+	<string id="tvspam">Spam Filter</string>
+	<string id="tvrem">Remove Duplicates</string>
+	<string id="tvgrex">Group Exclusion</string>
+	<string id="tvsubject">Subject</string>
+	<string id="tvposter">Poster</string>
+	<string id="tvnewsgroup">Newsgroup</string>
+	<string id="tvfilename">Filename</string>
+	<string id="tvfileext">File Extension</string>
+	<string id="tvvcodec">Video Codec</string>
+	<string id="tvacodec">Audio Codec</string>
+	<string id="tvresults">Results</string>
 </strings>

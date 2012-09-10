@@ -7,14 +7,41 @@
     <setting id="boost" type="enum" values="Easyboost4|Easyboost1|Easyboost5|Non" label="Easyboost" default="0" />
 	<setting id="imdb_user" type="text" label="IMDB User Number" default="ur********" enable="!eq(-1,false)"/>
 </category> 	
-<category label="TV Settings">
-	<setting id="tvfilename" type="enum" values="Any|AVI|MKV|MP4|ISO|DIVX|MPG|FLV|WMV|MOV|ASF|RM" label="Tv File Extension" default="0" />
-	<setting id="tvfilesize" type="enum" values="Any|300Mb|400Mb|500Mb|750M|1Gb|1.5Gb|2Gb|3Gb|4Gb|5GB|6Gb" label="Tv Minimum File Size" default="2" />
+<category label="Movies">
+	<setting id="mfileext" type="enum" values="Any|AVI|MKV|MP4|ISO|DIVX|MPG|FLV|WMV|MOV|ASF|RM" label="File Extension:" default="2" />
+	<setting id="mfilesize" type="enum" values="Any|1MB|5Mb|15MB|25Mb|30Mb|40Mb|50Mb|75Mb|100Mb|200Mb|300Mb|400Mb|500Mb|750M|1Gb|1.5Gb|2Gb|2.5Gb|3Gb|3.5Gb|4Gb|5GB|6Gb|7GB|8Gb" label="Minimum File Size" default="0" />
+	<setting id="mmaxfilesize" type="enum" values="Any|1MB|5Mb|15MB|25Mb|30Mb|40Mb|50Mb|75Mb|100Mb|200Mb|300Mb|400Mb|500Mb|750M|1Gb|1.5Gb|2Gb|2.5Gb|3Gb|3.5Gb|4Gb|5GB|6Gb|7GB|8Gb" label="Max File Size:" default="0" />
+	<setting id="mresults" type="number" label="Maximum Results:" default="1000" enable="!eq(-1,false)"/>
+	<setting id="mlangex" type="text" label="Language Exclusions:" default="" enable="!eq(-3,false)"/>
+	<setting id="mresex" type="text" label="Resolution Exclusions:" default="" enable="!eq(-4,false)"/>
+	<setting id="mspam" type="bool" label="Enable Spam Filter:" default="true"/>
+	<setting id="mrem" type="bool" label="Remove Duplicates:" default="true"/>
+	<setting id="mgrex" type="bool" label="Enable Group Exclusion:" default="false"/>
+	<setting id="msubject" type="text" label="Subject:" default="" enable="!eq(-2,false)"/>
+	<setting id="mposter" type="text" label="Poster:" default="" enable="!eq(-3,false)"/>
+	<setting id="mnewsgroup" type="text" label="Newsgroup:" default="" enable="!eq(-4,false)"/>
+	<setting id="mfilename" type="text" label="Filename:" default="" enable="!eq(-5,false)"/>
+	<setting id="mvcodec" type="text" label="Video Codec:" default="" enable="!eq(-6,false)"/>
+	<setting id="macodec" type="text" label="Audio Codec:" default="" enable="!eq(-7,false)"/>
 </category>
-<category label="Movie Settings">
-	<setting id="moviefilename" type="enum" values="Any|AVI|MKV|MP4|ISO|DIVX|MPG|FLV|WMV|MOV|ASF|RM" label="Movie File Extension" default="0" />
-	<setting id="moviefilesize" type="enum" values="Any|300Mb|400Mb|500Mb|750M|1Gb|1.5Gb|2Gb|3Gb|4Gb|5GB|6Gb" label="Movie Minimum File Size" default="2" />
-</category>	
+<category label="Tv-Shows">
+	<setting id="tvfileext" type="enum" values="Any|AVI|MKV|MP4|ISO|DIVX|MPG|FLV|WMV|MOV|ASF|RM" label="File Extension:" default="1" />
+	<setting id="tvfilesize" type="enum" values="Any|1MB|5Mb|15MB|25Mb|30Mb|40Mb|50Mb|75Mb|100Mb|200Mb|300Mb|400Mb|500Mb|750M|1Gb|1.5Gb|2Gb|2.5Gb|3Gb|3.5Gb|4Gb|5GB|6Gb|7GB|8Gb" label="Minimum File Size" default="0" />
+	<setting id="tvmaxfilesize" type="enum" values="Any|1MB|5Mb|15MB|25Mb|30Mb|40Mb|50Mb|75Mb|100Mb|200Mb|300Mb|400Mb|500Mb|750M|1Gb|1.5Gb|2Gb|2.5Gb|3Gb|3.5Gb|4Gb|5GB|6Gb|7GB|8Gb" label="Max File Size:" default="0" />
+	<setting id="tvresults" type="number" label="Maximum Results:" default="1000" enable="!eq(-1,false)"/>
+	<setting id="tvlangex" type="text" label="Language Exclusions:" default="" enable="!eq(-3,false)"/>
+	<setting id="tvresex" type="text" label="Resolution Exclusions:" default="" enable="!eq(-4,false)"/>
+	<setting id="tvspam" type="bool" label="Enable Spam Filter:" default="true"/>
+	<setting id="tvrem" type="bool" label="Remove Duplicates:" default="true"/>
+	<setting id="tvgrex" type="bool" label="Enable Group Exclusion:" default="false"/>
+	<setting id="tvsubject" type="text" label="Subject:" default="" enable="!eq(-2,false)"/>
+	<setting id="tvposter" type="text" label="Poster:" default="" enable="!eq(-3,false)"/>
+	<setting id="tvnewsgroup" type="text" label="Newsgroup:" default="" enable="!eq(-4,false)"/>
+	<setting id="tvfilename" type="text" label="Filename:" default="" enable="!eq(-5,false)"/>
+	<setting id="tvvcodec" type="text" label="Video Codec:" default="" enable="!eq(-6,false)"/>
+	<setting id="tvacodec" type="text" label="Audio Codec:" default="" enable="!eq(-7,false)"/>
+</category>
+	
 <category label="Auto-View">
 	<setting id="auto-view" type="bool" label="Enable Automatic View" default="false"/>
 	<setting id="movies-view" type="number" label="Movies View" default="50" enable="!eq(-1,false)"/>
@@ -23,6 +50,6 @@
 	<setting id="episodes-view" type="number" label="Episodes View" default="503" enable="!eq(-4,false)"/>
 	<setting id="easy-view" type="number" label="Easy News View" default="50" enable="!eq(-5,false)"/>
 	<setting id="music-view" type="number" label="Music View" default="50" enable="!eq(-6,false)"/>
-	<setting id="default-view" type="number" label="Default View" default="50" enable="!eq(-6,false)"/>
+	<setting id="default-view" type="number" label="Default View" default="50" enable="!eq(-7,false)"/>
 </category>
 </settings>
