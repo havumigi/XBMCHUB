@@ -4,7 +4,7 @@ from urlparse import urlparse
 
 ADDON = settings.addon()
 mlangex = settings.mlang_ex()
-mresex = settings.mres_ex()
+mreso = settings.m_reso()
 boost = settings.BOOST()
 mfilesize=settings.m_filesize()
 mmaxfilesize= settings.m_maxfilesize()
@@ -20,13 +20,13 @@ mresults =settings.m_results()
 mspam = settings.m_spam()
 mrem = settings.m_rem()
 mgrex = settings.m_grex()
-tvresults = settings.m_results()
+tvresults = settings.tv_results()
 tvfileext= settings.tv_fileext()
 tvfilesize=settings.tv_filesize()
 tvmaxfilesize= settings.tv_maxfilesize()
 tvgrex = settings.tv_grex()
 tvlangex = settings.tvlang_ex()
-tvresex = settings.tvres_ex()
+tvreso = settings.tv_reso()
 tvsubject = settings.tv_subject()
 tvposter =settings.tv_poster()
 tvnewsgroup =settings.tv_newsgroup()
@@ -35,6 +35,21 @@ tvacodec = settings.tv_acodec()
 tvfilename = settings.tv_filename()
 tvspam = settings.tv_spam()
 tvrem = settings.tv_rem()
+glresults = settings.gl_results()
+glfileext= settings.gl_fileext()
+glfilesize=settings.gl_filesize()
+glmaxfilesize= settings.gl_maxfilesize()
+glgrex = settings.gl_grex()
+gllangex = settings.gllang_ex()
+glreso = settings.gl_reso()
+glsubject = settings.gl_subject()
+glposter =settings.gl_poster()
+glnewsgroup =settings.gl_newsgroup()
+glvcodec= settings.gl_vcodec()
+glacodec = settings.gl_acodec()
+glfilename = settings.gl_filename()
+glspam = settings.gl_spam()
+glrem = settings.gl_rem()
 IMDBTV_WATCHLIST = settings.imdbtv_watchlist_url()
 IMDB_LIST = settings.imdb_list_url()
 
@@ -101,7 +116,11 @@ def SEARCH(url):
             search_entered = keyboard.getText() .replace(' ','+')  # sometimes you need to replace spaces with + or %20#
             if search_entered == None:
                 return False          
-        theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'&fex=&pby=1000&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO&spamf=1&u=1&st=adv&safeO=0&boost=1&sb=1'
+        dialog = xbmcgui.Dialog()
+        if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", glfileext, "Any"):
+                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+gllangex+'&sbj='+glsubject+'&from='+glposter+'&ns='+glnewsgroup+'&fil='+glfilename+'&fex=&vc='+glvcodec+'&ac='+glacodec+'&pby='+glresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+glfilesize+'&b2t='+glmaxfilesize+glreso+'&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+glspam+glrem+glgrex+'&st=adv&safeO=0&boost=1&sb=1'
+        else:
+                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+gllangex+'&sbj='+glsubject+'&from='+glposter+'&ns='+glnewsgroup+'&fil='+glfilename+'&fex='+glfileext+'&vc='+glvcodec+'&ac='+glacodec+'&pby='+glresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+glfilesize+'&b2t='+glmaxfilesize+glreso+'&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+glspam+glrem+glgrex+'&st=adv&safeO=0&boost=1&sb=1'
         username = ADDON.getSetting('easy_user')
         password = ADDON.getSetting('easy_pass')
         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -162,6 +181,8 @@ def SEARCH(url):
             mp4=''
             iso=''
             m4v=''
+            wmv=''
+            flv=''
             if re.search('.mkv', name, re.IGNORECASE):
                     mkv= 'MKV'    
             if not re.search('.mkv', name, re.IGNORECASE):
@@ -187,11 +208,19 @@ def SEARCH(url):
             if not re.search('.iso', name, re.IGNORECASE):
                     iso= ''
             if re.search('.m4v', name, re.IGNORECASE):
-                    iso= 'M4V'
-            if not re.search('.iso', name, re.IGNORECASE):
-                    iso= ''  
-            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)
-            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('%5B','').replace('%5C','').replace('%5A','')
+                    m4v='M4V'
+            if not re.search('.m4v', name, re.IGNORECASE):
+                    m4v= '' 
+            if re.search('.flv', name, re.IGNORECASE):
+                    flv='FLV'
+            if not re.search('.flv', name, re.IGNORECASE):
+                    flv= '' 
+            if re.search('.wmv', name, re.IGNORECASE):
+                    wmv='WMV'
+            if not re.search('.wmv', name, re.IGNORECASE):
+                    wmv= ''  
+            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)+str(flv)+str(wmv)
+            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('.flv','').replace('.wmv','').replace('%5B','').replace('%5C','').replace('%5A','')
             changeboost4 = 'http://'+username+':'+password+'@' +boost
             url = str(changeboost4)+str(url1)
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
@@ -283,9 +312,9 @@ def EasySearch(name,iconimage):
         search_entered = str(name).replace('.','').replace(', ','+').replace(' ','+') .replace(':','').replace('[','').replace(']',' ').replace('(The)','').replace('(','') .replace(')','') .replace('-','+').replace("'",'') .replace("&",'and').replace("!",'')      
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", mfileext, "Any"):
-                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+mlangex+'+'+mresex+'&fex=&sbj='+msubject+'&from='+mposter+'&ns='+mnewsgroup+'&fil='+mfilename+'&fex=&vc='+mvcodec+'&ac='+macodec+'&pby='+mresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mfilesize+'&b2t='+mmaxfilesize+'&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+mspam+mrem+mgrex+'&st=adv&safeO=0&boost=1&sb=1'
+                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+mlangex+'&sbj='+msubject+'&from='+mposter+'&ns='+mnewsgroup+'&fil='+mfilename+'&fex=&vc='+mvcodec+'&ac='+macodec+'&pby='+mresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mfilesize+'&b2t='+mmaxfilesize+mreso+'&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+mspam+mrem+mgrex+'&st=adv&safeO=0&boost=1&sb=1'
         else:
-                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+mlangex+'+'+mresex+'&sbj='+msubject+'&from='+mposter+'&ns='+mnewsgroup+'&fil='+mfilename+'&fex='+mfileext+'&vc='+mvcodec+'&ac='+macodec+'&pby='+mresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mfilesize+'&b2t='+mmaxfilesize+'&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+mspam+mrem+mgrex+'&st=adv&safeO=0&boost=1&sb=1'
+                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+mlangex+'&sbj='+msubject+'&from='+mposter+'&ns='+mnewsgroup+'&fil='+mfilename+'&fex='+mfileext+'&vc='+mvcodec+'&ac='+macodec+'&pby='+mresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mfilesize+'&b2t='+mmaxfilesize+mreso+'&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+mspam+mrem+mgrex+'&st=adv&safeO=0&boost=1&sb=1'
         username = ADDON.getSetting('easy_user')
         password = ADDON.getSetting('easy_pass')
         print theurl
@@ -347,6 +376,8 @@ def EasySearch(name,iconimage):
             mp4=''
             iso=''
             m4v=''
+            wmv=''
+            flv=''
             if re.search('.mkv', name, re.IGNORECASE):
                     mkv= 'MKV'    
             if not re.search('.mkv', name, re.IGNORECASE):
@@ -372,11 +403,19 @@ def EasySearch(name,iconimage):
             if not re.search('.iso', name, re.IGNORECASE):
                     iso= ''
             if re.search('.m4v', name, re.IGNORECASE):
-                    iso= 'M4V'
-            if not re.search('.iso', name, re.IGNORECASE):
-                    iso= ''  
-            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)
-            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('%5B','').replace('%5C','').replace('%5A','')
+                    m4v='M4V'
+            if not re.search('.m4v', name, re.IGNORECASE):
+                    m4v= '' 
+            if re.search('.flv', name, re.IGNORECASE):
+                    flv='FLV'
+            if not re.search('.flv', name, re.IGNORECASE):
+                    flv= '' 
+            if re.search('.wmv', name, re.IGNORECASE):
+                    wmv='WMV'
+            if not re.search('.wmv', name, re.IGNORECASE):
+                    wmv= ''  
+            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)+str(flv)+str(wmv)
+            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('.flv','').replace('.wmv','').replace('%5B','').replace('%5C','').replace('%5A','')
             changeboost4 = 'http://'+username+':'+password+'@' +boost
             url = str(changeboost4)+str(url1)
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
@@ -501,9 +540,9 @@ def TV_EASY_SEARCH(series):
         search_entered = str(series).replace('.','').replace(' ','+') .replace(':','') .replace(',','').replace('[','').replace(']','')   
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", tvfileext, "Any"):
-                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+tvlangex+'+'+tvresex+'&fex=&sbj='+tvsubject+'&from='+tvposter+'&ns='+tvnewsgroup+'&fil='+tvfilename+'&fex=&vc='+tvvcodec+'&ac='+tvacodec+'&pby='+tvresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfilesize+'&b2t='+tvmaxfilesize+'&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+tvspam+tvrem+tvgrex+'&st=adv&safeO=0&boost=1&sb=1'
+                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+tvlangex+'&sbj='+tvsubject+'&from='+tvposter+'&ns='+tvnewsgroup+'&fil='+tvfilename+'&fex=&vc='+tvvcodec+'&ac='+tvacodec+'&pby='+tvresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfilesize+'&b2t='+tvmaxfilesize+tvreso+'&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+tvspam+tvrem+tvgrex+'&st=adv&safeO=0&boost=1&sb=1'
         else:
-                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+tvlangex+'+'+tvresex+'&sbj='+tvsubject+'&from='+tvposter+'&ns='+tvnewsgroup+'&fil='+tvfilename+'&fex='+tvfileext+'&vc='+tvvcodec+'&ac='+tvacodec+'&pby='+tvresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfilesize+'&b2t='+tvmaxfilesize+'&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+tvspam+tvrem+tvgrex+'&st=adv&safeO=0&boost=1&sb=1'
+                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+tvlangex+'&sbj='+tvsubject+'&from='+tvposter+'&ns='+tvnewsgroup+'&fil='+tvfilename+'&fex='+tvfileext+'&vc='+tvvcodec+'&ac='+tvacodec+'&pby='+tvresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfilesize+'&b2t='+tvmaxfilesize+tvreso+'&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+tvspam+tvrem+tvgrex+'&st=adv&safeO=0&boost=1&sb=1'
         username = ADDON.getSetting('easy_user')
         password = ADDON.getSetting('easy_pass')
         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -564,6 +603,8 @@ def TV_EASY_SEARCH(series):
             mp4=''
             iso=''
             m4v=''
+            wmv=''
+            flv=''
             if re.search('.mkv', name, re.IGNORECASE):
                     mkv= 'MKV'    
             if not re.search('.mkv', name, re.IGNORECASE):
@@ -589,11 +630,19 @@ def TV_EASY_SEARCH(series):
             if not re.search('.iso', name, re.IGNORECASE):
                     iso= ''
             if re.search('.m4v', name, re.IGNORECASE):
-                    iso= 'M4V'
-            if not re.search('.iso', name, re.IGNORECASE):
-                    iso= ''  
-            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)
-            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('%5B','').replace('%5C','').replace('%5A','')
+                    m4v='M4V'
+            if not re.search('.m4v', name, re.IGNORECASE):
+                    m4v= '' 
+            if re.search('.flv', name, re.IGNORECASE):
+                    flv='FLV'
+            if not re.search('.flv', name, re.IGNORECASE):
+                    flv= '' 
+            if re.search('.wmv', name, re.IGNORECASE):
+                    wmv='WMV'
+            if not re.search('.wmv', name, re.IGNORECASE):
+                    wmv= ''  
+            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)+str(flv)+str(wmv)
+            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('.flv','').replace('.wmv','').replace('%5B','').replace('%5C','').replace('%5A','')
             changeboost4 = 'http://'+username+':'+password+'@' +boost
             url = str(changeboost4)+str(url1)
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
@@ -953,9 +1002,9 @@ def WATCH_LIST_SEARCH(name,url,iconimage,description):
                         search_entered = str(name).replace('.','').replace(', ','+').replace(' ','+') .replace(':','').replace('[','').replace(']',' ').replace('(The)','').replace('(','') .replace(')','') .replace('-','+').replace("'",'') .replace("&",'and').replace("!",'')      
                         dialog = xbmcgui.Dialog()
                         if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", mfileext, "Any"):
-                                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+mlangex+'+'+mresex+'&fex=&sbj='+msubject+'&from='+mposter+'&ns='+mnewsgroup+'&fil='+mfilename+'&fex=&vc='+mvcodec+'&ac='+macodec+'&pby='+mresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mfilesize+'&b2t='+mmaxfilesize+'&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+mspam+mrem+mgrex+'&st=adv&safeO=0&boost=1&sb=1'
+                                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+mlangex+'+'+mreso+'&fex=&sbj='+msubject+'&from='+mposter+'&ns='+mnewsgroup+'&fil='+mfilename+'&fex=&vc='+mvcodec+'&ac='+macodec+'&pby='+mresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mfilesize+'&b2t='+mmaxfilesize+'&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+mspam+mrem+mgrex+'&st=adv&safeO=0&boost=1&sb=1'
                         else:
-                                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+mlangex+'+'+mresex+'&sbj='+msubject+'&from='+mposter+'&ns='+mnewsgroup+'&fil='+mfilename+'&fex='+mfileext+'&vc='+mvcodec+'&ac='+macodec+'&pby='+mresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mfilesize+'&b2t='+mmaxfilesize+'&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+mspam+mrem+mgrex+'&st=adv&safeO=0&boost=1&sb=1'
+                                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+mlangex+'+'+mreso+'&sbj='+msubject+'&from='+mposter+'&ns='+mnewsgroup+'&fil='+mfilename+'&fex='+mfileext+'&vc='+mvcodec+'&ac='+macodec+'&pby='+mresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mfilesize+'&b2t='+mmaxfilesize+'&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+mspam+mrem+mgrex+'&st=adv&safeO=0&boost=1&sb=1'
                         username = ADDON.getSetting('easy_user')
                         password = ADDON.getSetting('easy_pass')
                         print theurl
@@ -1017,6 +1066,8 @@ def WATCH_LIST_SEARCH(name,url,iconimage,description):
                             mp4=''
                             iso=''
                             m4v=''
+                            wmv=''
+                            flv=''
                             if re.search('.mkv', name, re.IGNORECASE):
                                     mkv= 'MKV'    
                             if not re.search('.mkv', name, re.IGNORECASE):
@@ -1042,11 +1093,19 @@ def WATCH_LIST_SEARCH(name,url,iconimage,description):
                             if not re.search('.iso', name, re.IGNORECASE):
                                     iso= ''
                             if re.search('.m4v', name, re.IGNORECASE):
-                                    iso= 'M4V'
-                            if not re.search('.iso', name, re.IGNORECASE):
-                                    iso= ''  
-                            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)
-                            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('%5B','').replace('%5C','').replace('%5A','')
+                                    m4v='M4V'
+                            if not re.search('.m4v', name, re.IGNORECASE):
+                                    m4v= '' 
+                            if re.search('.flv', name, re.IGNORECASE):
+                                    flv='FLV'
+                            if not re.search('.flv', name, re.IGNORECASE):
+                                    flv= '' 
+                            if re.search('.wmv', name, re.IGNORECASE):
+                                    wmv='WMV'
+                            if not re.search('.wmv', name, re.IGNORECASE):
+                                    wmv= ''  
+                            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)+str(flv)+str(wmv)
+                            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('.flv','').replace('.wmv','').replace('%5B','').replace('%5C','').replace('%5A','')
                             changeboost4 = 'http://'+username+':'+password+'@' +boost
                             url = str(changeboost4)+str(url1)
                             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 

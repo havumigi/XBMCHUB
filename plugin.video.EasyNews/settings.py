@@ -9,10 +9,7 @@ def addon():
     
 def mlang_ex():
     return ADDON.getSetting('mlangex').replace(' ','+')
-    
-def mres_ex():
-    return ADDON.getSetting('mresex').replace(' ','+')
-    
+      
     
 def m_filesize():
     quality = ADDON.getSetting('mfilesize')
@@ -395,8 +392,212 @@ def tv_grex():
 def tvlang_ex():
     return ADDON.getSetting('tvlangex').replace(' ','+')
     
-def tvres_ex():
-    return ADDON.getSetting('tvresex').replace(' ','+')
+def tv_reso():
+    quality = ADDON.getSetting('tvreso')
+    if quality == '0':
+        return '&px1=&px1t=&px2=&px2t='
+    elif quality == '1':
+        return '&px1=&px1t=5&px2=&px2t=9'
+    elif quality == '2':
+        return '&px1=&px1t=8&px2=&px2t=10'
+        
+def m_reso():
+    quality = ADDON.getSetting('mreso')
+    if quality == '0':
+        return '&px1=&px1t=&px2=&px2t='
+    elif quality == '1':
+        return '&px1=&px1t=5&px2=&px2t=9'
+    elif quality == '2':
+        return '&px1=&px1t=8&px2=&px2t=10'
+    
+def gl_filesize():
+    quality = ADDON.getSetting('glfilesize')
+    if quality == '0':
+        return ''
+    elif quality == '1':
+        return '8'
+    elif quality == '2':
+        return '9'
+    elif quality == '3':
+        return '10'
+    elif quality == '4':
+        return '11'
+    elif quality == '5':
+        return '12'
+    elif quality == '6':
+        return '13'
+    elif quality == '7':
+        return '14'
+    elif quality == '8':
+        return '15'
+    elif quality == '9':
+        return '16'
+    elif quality == '10':
+        return '17'
+    elif quality == '11':
+        return '18'
+    elif quality == '12':
+        return '19'
+    elif quality == '13':
+        return '20'
+    elif quality == '14':
+        return '21'
+    elif quality == '15':
+        return '22'
+    elif quality == '16':
+        return '23'
+    elif quality == '17':
+        return '24'
+    elif quality == '18':
+        return '25'
+    elif quality == '19':
+        return '26'
+    elif quality == '20':
+        return '27'
+    elif quality == '21':
+        return '28'
+    elif quality == '22':
+        return '29'
+    elif quality == '23':
+        return '30'
+    elif quality == '24':
+        return '31'
+    elif quality == '25':
+        return '32'
+        
+        
+def gl_maxfilesize():
+    quality = ADDON.getSetting('glmaxfilesize')
+    if quality == '0':
+        return ''
+    elif quality == '1':
+        return '8'
+    elif quality == '2':
+        return '9'
+    elif quality == '3':
+        return '10'
+    elif quality == '4':
+        return '11'
+    elif quality == '5':
+        return '12'
+    elif quality == '6':
+        return '13'
+    elif quality == '7':
+        return '14'
+    elif quality == '8':
+        return '15'
+    elif quality == '9':
+        return '16'
+    elif quality == '10':
+        return '17'
+    elif quality == '11':
+        return '18'
+    elif quality == '12':
+        return '19'
+    elif quality == '13':
+        return '20'
+    elif quality == '14':
+        return '21'
+    elif quality == '15':
+        return '22'
+    elif quality == '16':
+        return '23'
+    elif quality == '17':
+        return '24'
+    elif quality == '18':
+        return '25'
+    elif quality == '19':
+        return '26'
+    elif quality == '20':
+        return '27'
+    elif quality == '21':
+        return '28'
+    elif quality == '22':
+        return '29'
+    elif quality == '23':
+        return '30'
+    elif quality == '24':
+        return '31'
+    elif quality == '25':
+        return '32'
+
+def gl_fileext():
+    quality = ADDON.getSetting('glfileext')
+    if quality == '0':
+        return ''
+    elif quality == '1':   
+        return 'AVI'
+    elif quality == '2':
+        return 'MKV'
+    elif quality == '3':
+        return 'MP4'
+    elif quality == '4':
+        return 'ISO'
+    elif quality == '5':
+        return 'DIVX'
+    elif quality == '6':
+        return 'MPG'
+    elif quality == '7':
+        return 'FLV'
+    elif quality == '8':
+        return 'WMV'
+    elif quality == '9':
+        return 'MOV'
+    elif quality == '10':
+        return 'ASF'
+    elif quality == '11':
+        return 'RM'
+
+def gl_subject():
+    return ADDON.getSetting('glsubject')
+    
+def gl_poster():
+    return ADDON.getSetting('glposter')
+    
+def gl_newsgroup():
+    return ADDON.getSetting('glnewsgroup').replace(',','%2c')
+    
+def gl_vcodec():
+    return ADDON.getSetting('glvcodec')
+    
+def gl_acodec():
+    return ADDON.getSetting('glacodec')
+    
+def gl_filename():
+    return ADDON.getSetting('glfilename')
+    
+def gl_results():
+    return ADDON.getSetting('glresults')
+
+def gl_spam():
+    if ADDON.getSetting('glspam') == "true":
+        return '&spamf=1'
+    if ADDON.getSetting('glspam') == "false":
+        return ''
+
+def gl_rem():
+    if ADDON.getSetting('glrem') == "true":
+        return '&u=1'
+    if ADDON.getSetting('glrem') == "false":
+        return ''
+        
+def gl_grex():
+    if ADDON.getSetting('glgrex') == "true":
+        return '&gx=1'
+    if ADDON.getSetting('glgrex') == "false":
+        return ''
+        
+def gllang_ex():
+    return ADDON.getSetting('gllangex').replace(' ','+')
+    
+def gl_reso():
+    quality = ADDON.getSetting('glreso')
+    if quality == '0':
+        return '&px1=&px1t=&px2=&px2t='
+    elif quality == '1':
+        return '&px1=&px1t=5&px2=&px2t=9'
+    elif quality == '2':
+        return '&px1=&px1t=8&px2=&px2t=10'
 
     
 def imdbtv_watchlist_url():
