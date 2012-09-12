@@ -96,6 +96,7 @@ def TV_CATEGORIES():
         addDir('Search Tv Shows','url',12,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/searchtv.png','','','','')
         addDir('Current Popular','http://www.imdb.com/search/title?num_votes=5000,&sort=moviemeter&title_type=tv_series',9,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/currentpopular.png','','','','')
         addDir('All Time Popular','http://www.imdb.com/search/title?num_votes=5000,&sort=user_rating&title_type=tv_series',9,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/alltimepopular.png','','','','')
+        addDir('Release Date','http://www.imdb.com/search/title?num_votes=5000,&sort=release_date_us,desc&title_type=tv_series',9,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/newreleases.png','','','','')
         addDir('A to Z','http://www.imdb.com/search/title?num_votes=5000,&sort=alpha,asc&start=&title_type=tv_series',9,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/atoz.png','','','','')
         addDir('<< Return To Main Menu','','','https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'default-view')
