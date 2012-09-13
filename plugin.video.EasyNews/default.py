@@ -60,7 +60,7 @@ def CATEGORIES():
         addDir('TV','url',5,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/tv.png','','','','')
         addDir('Music','url',15,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/music.png','','','','')
         addDir('IMDb List','url',25,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/imdb.png','','','','')
-        addDir('<< Exit EasyNews','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+        addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'default-view') 
            
 def MOVIE_CATEGORIES():
@@ -69,7 +69,7 @@ def MOVIE_CATEGORIES():
         addDir('In Theatres','http://www.themoviedb.org/movie/now-playing',2,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/intheatres.png','','','','')
         addDir('Top Movies','http://www.lovefilm.com/browse/film/dvd/films/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/topmovies.png','','','','')
         addDir('Genres','url',21,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/genres.png','','','','')
-        addDir('<< Return To Main Menu','','','https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+        addDir('[COLOR red][B]<< Return Main Menu[/B][/COLOR]','','','https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'default-view')
             
 def TOP_CATEGORIES():
@@ -89,7 +89,7 @@ def TOP_CATEGORIES():
         addDir('Super Heroes','http://www.lovefilm.com/browse/film/films/dvd/action/superheroes/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/superheros.png','','','','')
         addDir('Thriller','http://www.lovefilm.com/browse/film/films/dvd/thriller/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/thriller.png','','','','')
         addDir('War','http://www.lovefilm.com/browse/film/films/dvd/action/war/p1/?rows=50',14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/war.png','','','','')
-        addDir('<< Return To Movie Menu','url',4,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+        addDir('[COLOR red][B]<< Return Movie Menu[/B][/COLOR]','url',4,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'default-view')    
         
 def TV_CATEGORIES():
@@ -98,7 +98,7 @@ def TV_CATEGORIES():
         addDir('All Time Popular','http://www.imdb.com/search/title?num_votes=5000,&sort=user_rating&title_type=tv_series',9,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/alltimepopular.png','','','','')
         addDir('Release Date','http://www.imdb.com/search/title?num_votes=5000,&sort=release_date_us,desc&title_type=tv_series',9,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/newreleases.png','','','','')
         addDir('A to Z','http://www.imdb.com/search/title?num_votes=5000,&sort=alpha,asc&start=&title_type=tv_series',9,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/atoz.png','','','','')
-        addDir('<< Return To Main Menu','','','https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+        addDir('[COLOR red][B]<< Return Main Menu[/B][/COLOR]','','','https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'default-view')
         
 def MUSIC_CATEGORIES():
@@ -106,7 +106,7 @@ def MUSIC_CATEGORIES():
         addDir('BillBoard Album Charts','http://www.billboard.com/#/charts',22,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/bbca.png','','','','')
         addDir('HMV Best Selling','http://hmv.com/hmvweb/directQuery.do?pagingOptionSelect=%2Fhmvweb%2FdirectQuery.do%3FNo%3D0%26pagingOptionSelect%3D192%26N%3D1573%26adultFlag%3Dfalse%26rid%3D1394ED72CCC4',19,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/hmvbs.png','','','','')
         addDir('iTunes Charts','http://musicchartfeeds.com/itunes-rss/',17,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/ituneschart.png','','','','')
-        addDir('<< Return To Main Menu','','','https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+        addDir('[COLOR red][B]<< Return Main Menu[/B][/COLOR]','','','https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'default-view') 
            
 def SEARCH(url):
@@ -227,7 +227,7 @@ def SEARCH(url):
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
             addLink(name,url,iconimage,fanart,series,description,rating)
-        addDir('<< Exit EasyNews','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+        addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'easy-view')     
             
 def IMDB_SEARCH(name, iconimage):
@@ -238,16 +238,16 @@ def IMDB_SEARCH(name, iconimage):
             search_entered = keyboard.getText() .replace(' ','+')  # sometimes you need to replace spaces with + or %20#
             if search_entered == None:
                 return False   
-        url= 'http://www.themoviedb.org/search/movie?query=%s&movie_page=&movie_collection_page=&person_page=&company_page=&keyword_page=&active=0'% (search_entered)           
+        url= 'http://api.themoviedb.org/2.1/Movie.search/en/xml/1b0d3c6ac6a6c0fa87b55a1069d6c9c8/%s'% (search_entered)           
         req = urllib2.Request(url)
         req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
         response = urllib2.urlopen(req)
-        link=response.read()
-        response.close()      
-        match=re.compile('title="(.+?)"><img class=".+?" src="(.+?)" width=".+?" height=".+?" /></a>').findall(link)
-        for name, iconimage in match:
-            name= str(name).replace('-',' ')
-            iconimage= str(iconimage).replace('w92','original')
+        link1=response.read()
+        response.close()  
+        link=str(link1).replace('\n','')      
+        match=re.compile('<name>(.+?)</name>.+?type>.+?</type>      <id>.+?</id>      <imdb_id>.+?</imdb_id>      <url>.+?</url>      <votes>.+?</votes>      <rating>(.+?)</rating>      <certification>.+?</certification>      <overview>(.+?)</overview>      <released>.+?</released>      <images>        <image type="poster" url=".+?" size="thumb" width=".+?" height=".+?" id=".+?"/>        <image type="poster" url=".+?" size="w154" width=".+?" height=".+?" id=".+?"/>        <image type="poster" url=".+?" size="cover" width=".+?" height=".+?" id=".+?"/>        <image type="poster" url=".+?" size=".+?" width=".+?" height=".+?" id=".+?"/>        <image type="poster" url="(.+?)" size="mid" width=".+?" height=".+?" id=".+?"/>        <image type="poster" url=".+?" size="original" width=".+?" height=".+?" id=".+?"/>        <image type="backdrop" url=".+?" size="thumb" width="300" height="169" id=".+?"/>        <image type="backdrop" url=".+?" size="poster" width=".+?" height=".+?" id=".+?"/>        <image type="backdrop" url=".+?" size=".+?" width=".+?" height=".+?" id=".+?"/>        <image type="backdrop" url="(.+?)" size="original"').findall(link)
+        for name, rating, description, iconimage, fanart in match:
+            name= str(name).replace('-',' ').replace('&amp;','And').replace('the','The')
             addDir(name,url,3,iconimage,fanart,series,description,rating)
             setView('movies', 'movies-view')
                                                                 
@@ -271,12 +271,12 @@ def TMDB(url):
             setView('movies', 'default-view') 
         try:
                 url=str(nextp1)
-                name= 'Next Page >>'
+                name= '[COLOR blue][B]Next Page >>[/B][/COLOR]'
                 addDir(name,url,2,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/next.png','','','','')    
                 setView('movies', 'movies-view') 
         except:
                 pass
-        addDir('<< Return To Movies Menu','url',4,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+        addDir('[COLOR red][B]<< Return To Movie Menu[/B][/COLOR]','url',4,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'movies-view') 
              
 def ONDVD(url):
@@ -299,12 +299,12 @@ def ONDVD(url):
             setView('movies', 'movies-view')
         try:
                 url=str(nextp1)
-                name= 'Next Page >>'
+                name= '[COLOR blue][B]Next Page >>[/B][/COLOR]'
                 addDir(name,url,14,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/next.png','','','','')    
                 setView('movies', 'movies-view') 
         except:
                 pass
-        addDir('<< Return To Movies Menu','url',4,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+        addDir('[COLOR red][B]<< Return To Movie Menu[/B][/COLOR]','url',4,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'movies-view') 
             
             
@@ -422,7 +422,7 @@ def EasySearch(name,iconimage):
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
             addLink(name,url,iconimage,fanart,series,description,rating)
-        addDir('<< Exit EasyNews','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+        addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'easy-view') 
     
 def TV_POPULAR(url):
@@ -458,12 +458,12 @@ def TV_POPULAR(url):
                     setView('movies', 'tvshows-view') 
         try:
                 url='http://www.imdb.com'+str(nextp1)
-                name= 'Next Page >>'
+                name= '[COLOR blue][B]Next Page >>[/B][/COLOR]'
                 addDir(name,url,9,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/next.png','','','','')
                 setView('movies', 'tvshows-view') 
         except:
                 pass
-        addDir('<< Return To TV Menu','url',5,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+        addDir('[COLOR red][B]<< Return To TV Menu[/B][/COLOR]','url',5,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'tvshows-view') 
              
 def TV_SEASON(url,iconimage,series):
@@ -649,7 +649,123 @@ def TV_EASY_SEARCH(series):
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
             addLink(name,url,iconimage,fanart,series,description,rating)
-        addDir('<< Exit EasyNews','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+        addDir('[COLOR blue][B]IM NOT HAPPY WITH THE RESULTS PLEASE SEARCH AGAIN[/B][/COLOR]','url',27,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/searchtv.png','',series,description,'')    
+        addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+        setView('movies', 'easy-view')
+        
+def TV_EASY_SEARCH2(series):
+        search_entered = str(series).replace('.','').replace(' ','+') .replace(':','') .replace(',','').replace('[','').replace(']','').replace('01','1').replace('02','2').replace('03','3').replace('04','4').replace('05','5').replace('06','6').replace('07','7').replace('08','8') .replace('09','9')    
+        dialog = xbmcgui.Dialog()
+        if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", tvfileext, "Any"):
+                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+tvlangex+'&sbj='+tvsubject+'&from='+tvposter+'&ns='+tvnewsgroup+'&fil='+tvfilename+'&fex=&vc='+tvvcodec+'&ac='+tvacodec+'&pby='+tvresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfilesize+'&b2t='+tvmaxfilesize+tvreso+'&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+tvspam+tvrem+tvgrex+'&st=adv&safeO=0&boost=1&sb=1'
+        else:
+                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+tvlangex+'&sbj='+tvsubject+'&from='+tvposter+'&ns='+tvnewsgroup+'&fil='+tvfilename+'&fex='+tvfileext+'&vc='+tvvcodec+'&ac='+tvacodec+'&pby='+tvresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfilesize+'&b2t='+tvmaxfilesize+tvreso+'&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+tvspam+tvrem+tvgrex+'&st=adv&safeO=0&boost=1&sb=1'
+        username = ADDON.getSetting('easy_user')
+        password = ADDON.getSetting('easy_pass')
+        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+        passman.add_password(None, theurl, username, password)
+        authhandler = urllib2.HTTPBasicAuthHandler(passman)
+        opener = urllib2.build_opener(authhandler)
+        urllib2.install_opener(opener)
+        pagehandle = urllib2.urlopen(theurl)
+        link= pagehandle.read()      
+        match=re.compile('url="http://.+?-(.+?)" length="(.+?)" type="application/octet-stream" />\n<link>http.+?com/news/.+?/.+?/.+?/.+?/(.+?)</link>').findall(link)
+        eng=''
+        ger=''
+        fre=''
+        tur=''
+        jap=''
+        spa=''
+        chi=''
+        li=len(match)
+        if re.search('alt=&#34;English', link, re.IGNORECASE):
+                eng= 'English,'    
+        if not re.search('alt=&#34;English', link, re.IGNORECASE):
+                eng= ''          
+        if re.search('alt=&#34;German', link, re.IGNORECASE):
+                ger= 'German,' 
+        if not re.search('alt=&#34;German', link, re.IGNORECASE):
+                ger= ''          
+        if re.search('alt=&#34;French', link, re.IGNORECASE):
+                fre= 'French,'
+        if not re.search('alt=&#34;French', link, re.IGNORECASE):
+                fre= ''     
+        if re.search('alt=&#34;Turkish', link, re.IGNORECASE):
+                tur= 'Turkish,'
+        if not re.search('alt=&#34;Turkish', link, re.IGNORECASE):
+                tur= '' 
+        if re.search('alt=&#34;Japanese', link, re.IGNORECASE):
+                jap= 'Japanese,'
+        if not re.search('alt=&#34;Japanese', link, re.IGNORECASE):
+                jap= ''     
+        if re.search('alt=&#34;Spanish', link, re.IGNORECASE):
+                spa= 'Spanish,'
+        if not re.search('alt=&#34;Spanish', link, re.IGNORECASE):
+                spa= '' 
+        if re.search('alt=&#34;Chinese', link, re.IGNORECASE):
+                chi= 'Chinese,'
+        if not re.search('alt=&#34;Chinese', link, re.IGNORECASE):
+                chi= ''         
+        all= '%s %s %s %s\n%s %s %s' % (eng,ger,chi,fre,jap,spa,tur)
+        found='[B]%s  LINKS FOUND[/B]' % (li)
+        xbmcgui.Dialog().ok(found,str(all))
+        for url1 ,filesize, name in match:
+            regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
+            match = regex.search(url1)
+            output = "downloads.members.easynews.com/news/%s/%s/%s/pr-%s/pr-%s" %(match.group(1), match.group(2), match.group(3), match.group(4), match.group(5))
+            mkv=''
+            avi=''
+            vob=''
+            mov=''
+            mp4=''
+            iso=''
+            m4v=''
+            wmv=''
+            flv=''
+            if re.search('.mkv', name, re.IGNORECASE):
+                    mkv= 'MKV'    
+            if not re.search('.mkv', name, re.IGNORECASE):
+                    mkv= ''          
+            if re.search('.avi', name, re.IGNORECASE):
+                    avi= 'AVI' 
+            if not re.search('.avi', name, re.IGNORECASE):
+                    avi= ''          
+            if re.search('.vob', name, re.IGNORECASE):
+                    vob= 'VOB'
+            if not re.search('.vob', name, re.IGNORECASE):
+                    vob= ''     
+            if re.search('.mov', name, re.IGNORECASE):
+                    mov= 'MOV'
+            if not re.search('.mov', name, re.IGNORECASE):
+                    mov= '' 
+            if re.search('.mp4', name, re.IGNORECASE):
+                    mp4= 'MP4'
+            if not re.search('.mp4', name, re.IGNORECASE):
+                    mp4= '' 
+            if re.search('.iso', name, re.IGNORECASE):
+                    iso= 'ISO'
+            if not re.search('.iso', name, re.IGNORECASE):
+                    iso= ''
+            if re.search('.m4v', name, re.IGNORECASE):
+                    m4v='M4V'
+            if not re.search('.m4v', name, re.IGNORECASE):
+                    m4v= '' 
+            if re.search('.flv', name, re.IGNORECASE):
+                    flv='FLV'
+            if not re.search('.flv', name, re.IGNORECASE):
+                    flv= '' 
+            if re.search('.wmv', name, re.IGNORECASE):
+                    wmv='WMV'
+            if not re.search('.wmv', name, re.IGNORECASE):
+                    wmv= ''  
+            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)+str(flv)+str(wmv)
+            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('.flv','').replace('.wmv','').replace('%5B','').replace('%5C','').replace('%5A','')
+            changeboost4 = 'http://'+username+':'+password+'@' +boost
+            url = str(changeboost4)+str(url1)
+            iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
+            xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
+            addLink(name,url,iconimage,fanart,series,description,rating)
+        addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
         setView('movies', 'easy-view')
             
 def MUSIC_SEARCH(url):
@@ -712,7 +828,7 @@ def MUSIC_SEARCH(url):
                             name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
                             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_PLAYLIST_ORDER)
                             Music_Playlist_Link(name,url,iconimage,fanart)
-                addDir('<< Exit EasyNews','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+                addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
                 setView('movies', 'easy-view') 
         else:
                 theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+artist+'+'+album+'&pby=20&pno=1&s1=dtime&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=10&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=AUDIO&u=1&st=adv&safeO=0&boost=1&sb=1'
@@ -757,7 +873,7 @@ def MUSIC_SEARCH(url):
                             name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
                             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
                             Music_Link(name,url,iconimage,fanart)
-                addDir('<< Exit EasyNews','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+                addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
                 setView('movies', 'easy-view')     
            
             
@@ -832,7 +948,7 @@ def MUSIC_LIST_SEARCH(name, url):
                                     name = str(name).replace(str(url),'').replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
                                     xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
                                     Music_Playlist_Link(name,url,iconimage,fanart)
-                        addDir('<< Exit EasyNews','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+                        addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
                         setView('movies', 'easy-view') 
 
         else:
@@ -874,7 +990,7 @@ def MUSIC_LIST_SEARCH(name, url):
                                     name = str(name).replace('%20',' ').replace('%28','').replace('%29','').replace('-',' ').replace('_',' ').replace('%5B','').replace('%2C','').replace('%27','').replace('%26','')
                                     xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
                                     Music_Link(name,url,iconimage,fanart)
-                        addDir('<< Exit EasyNews','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+                        addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
                         setView('movies', 'easy-view')     
             
 def HMV_SEARCH(url):
@@ -905,7 +1021,7 @@ def HMV_SEARCH(url):
                 addDir(name,url,18,iconimage,fanart,series,description,rating)
         try:
                 url='http://hmv.com'+str(nextp1)
-                name= 'Next Page >>'
+                name= '[COLOR blue][B]Next Page >>[/B][/COLOR]'
                 addDir(name,url,19,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/next.png','','','','')    
         except:
                 pass
@@ -1112,7 +1228,7 @@ def WATCH_LIST_SEARCH(name,url,iconimage,description):
                             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
                             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
                             addLink(name,url,iconimage,fanart,series,description,rating) 
-                        addDir('<< Exit EasyNews','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
+                        addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/back.png','','','','')    
                         setView('movies', 'easy-view') 
  
  
@@ -1143,17 +1259,23 @@ def addDir(name,url,mode,iconimage,fanart,series,description,rating):
         u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)+"&iconimage="+urllib.quote_plus(iconimage)+"&fanart="+urllib.quote_plus(fanart)+"&series="+urllib.quote_plus(series)+"&description="+urllib.quote_plus(description)+"&rating="+urllib.quote_plus(rating)
         ok=True
         liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
-        liz.setInfo( type="Video", infoLabels={ "Title": name,"Plot":description,"Rating":rating  } )
-        liz.setProperty( "Fanart_Image", fanart )
+        liz.setInfo( type="Video", infoLabels={ "Title": name,"Plot":description,"Rating":rating } )
+        if ADDON.getSetting('fanart') == 'true':
+	        liz.setProperty( "Fanart_Image", fanart )
+        if ADDON.getSetting('fanart') == 'false':
+	        ''
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
                 
 def addLink(name,url,iconimage,fanart,series,description,rating):
         ok=True
         liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
-        liz.setInfo( type="Video", infoLabels={ "Title": name,"Plot":description  } )
+        liz.setInfo( type="Video", infoLabels={ "Title": name,"Plot":description,"Rating":rating } )
         liz.setProperty("IsPlayable","true")
-        liz.setProperty( "Fanart_Image", fanart )
+        if ADDON.getSetting('fanart') == 'true':
+	        liz.setProperty( "Fanart_Image", fanart )
+        if ADDON.getSetting('fanart') == 'false':
+	        ''
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
         return ok 
                       
@@ -1162,7 +1284,10 @@ def Music_Playlist_Link(name,url,iconimage,fanart):
         liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
         liz.setInfo(type="Video", infoLabels={ "Title": name})
         liz.setProperty('mimetype', 'audio/mpeg')
-        liz.setProperty( "Fanart_Image", fanart )
+        if ADDON.getSetting('mufanart') == 'true':
+	        liz.setProperty( "Fanart_Image", fanart )
+        if ADDON.getSetting('mufanart') == 'false':
+	        ''
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
         pl=xbmc.PlayList(0)
         pl.add(url, liz)
@@ -1175,7 +1300,10 @@ def Music_Link(name,url,iconimage,fanart):
         liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
         liz.setInfo(type="Video", infoLabels={ "Title": name})
         liz.setProperty('mimetype', 'audio/mpeg')
-        liz.setProperty( "Fanart_Image", fanart )
+        if ADDON.getSetting('mufanart') == 'true':
+	        liz.setProperty( "Fanart_Image", fanart )
+        if ADDON.getSetting('mufanart') == 'false':
+	        ''
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
         return ok
                
@@ -1349,5 +1477,9 @@ elif mode==25:
         
 elif mode==26:
         EXIT_EASYNEWS()
+        
+elif mode==27:
+        print ""+series
+        TV_EASY_SEARCH2(series) 
         
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
