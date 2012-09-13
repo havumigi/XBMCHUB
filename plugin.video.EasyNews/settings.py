@@ -1,6 +1,7 @@
 import xbmc, xbmcaddon, xbmcgui, xbmcplugin
 import os
 import re
+
 ADDON = xbmcaddon.Addon(id='plugin.video.EasyNews')
 
 
@@ -605,3 +606,6 @@ def imdbtv_watchlist_url():
     
 def imdb_list_url():
     return 'http://www.imdb.com/user/' + ADDON.getSetting('imdb_user') + '/lists?tab=public'
+    
+    
+

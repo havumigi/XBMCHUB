@@ -1,5 +1,7 @@
 <strings>
 	<!-- Easy News -->
+	<string id="fanart">Movie Fanart</string>
+	<string id="mufanart">Music Fanart</string>
 	<string id="30300">Easy account</string>
 	<string id="easy_user">Username</string>
     <string id="easy_pass">Password</string>

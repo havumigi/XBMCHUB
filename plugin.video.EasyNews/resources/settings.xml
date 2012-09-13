@@ -1,6 +1,8 @@
 <settings>
 
 <category label="Easy News">
+	<setting id="fanart" type="bool" label="Enable Movie & TV Fanart" default="false"/>
+	<setting id="mufanart" type="bool" label="Enable Music Fanart" default="false"/>
 	<setting id="easy_account" type="bool" label="30300" default="false"/>
 	<setting id="easy_user" type="text" label="Username" default="" enable="!eq(-1,false)"/>
 	<setting id="easy_pass" type="text" option="hidden" label="Password" default="" enable="!eq(-2,false)"/>
