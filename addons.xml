@@ -2,7 +2,7 @@
 <addons>
 <addon id="plugin.video.EasyNews"
        name="EasyNews...XBMCHUB.COM"
-       version="2.3.1d"
+       version="2.3.1e"
        provider-name="Mikey1234">
   <requires>
     <import addon="xbmc.python" version="2.0"/>
