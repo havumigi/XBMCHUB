@@ -20,7 +20,7 @@
 
 <addon id="plugin.video.FilmOn"
        name="FilmON...XBMCHUB.COM"
-       version="1.0"
+       version="1.1"
        provider-name="Mikey1234">
   <requires>
     <import addon="xbmc.python" version="2.0"/>

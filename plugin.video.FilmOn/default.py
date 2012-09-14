@@ -21,15 +21,15 @@ def CATEGORIES():
             
             
                       
-def FilmOn(url,iconimage,name):
+def FilmOn(url,iconimage):
         req = urllib2.Request(url)
         req.add_header('User-Agent', USER_AGENT)
         response = urllib2.urlopen(req)
         link1=response.read()
         response.close()  
         link=str(link1).replace('\n','')      
-        match=re.compile('"name":"(.+?)".+?"quality":"360p".+?"url":"(.+?)}]').findall(link)
-        for playPath, a in match:
+        match=re.compile('"name":"(.+?)".+?"quality":"(.+?)".+?"url":"(.+?)}').findall(link)
+        for playPath, name, a in match:
             url1=str(a).replace('\\','')
             url2=str(a).replace('\\','').replace('"','')
             regex = re.compile('rtmp://(.+?)/(.+?)/(.+?)id=([a-f0-9]*?)"')
@@ -39,11 +39,7 @@ def FilmOn(url,iconimage,name):
             swfUrl= 'http://www.filmon.com/tv/modules/FilmOnTV/files/flashapp/filmon/FilmonPlayer.swf'
             pageUrl = 'http://www.filmon.com/'
             url= str(url2)+' playpath='+str(playPath)+' app='+str(app)+' swfUrl='+str(swfUrl)+' tcUrl='+str(tcUrl)+' pageurl='+str(pageUrl)
-            print playPath
-            print 'hello this below is the app'         
-            print app
-            print 'hello this below is the tcurl'         
-            print tcUrl          
+            xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
             addLink(name,url,playPath,app,pageUrl,swfUrl,tcUrl)
                                                                 
  
@@ -122,7 +118,7 @@ if mode==None or url==None or len(url)<1:
        
 elif mode==1:
         print ""+url
-        FilmOn(url,iconimage,name)
+        FilmOn(url,iconimage)
         
 
        
