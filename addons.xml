@@ -19,8 +19,8 @@
 </addon>
 
 <addon id="plugin.video.FilmOn"
-       name="EasyNews...XBMCHUB.COM"
-       version="1.3"
+       name="FilmON...XBMCHUB.COM"
+       version="1.3a"
        provider-name="Mikey1234">
   <requires>
     <import addon="xbmc.python" version="2.0"/>
@@ -30,8 +30,8 @@
         <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en">Easynews</summary>
-    <description lang="en">Stream From EasyNews.....Official Support....XBMCHUB.COM</description>
+    <summary lang="en">FilmOn</summary>
+    <description lang="en">Stream From FilmON.....Official Support....XBMCHUB.COM</description>
     <platform>all</platform>
   </extension>
 </addon>
