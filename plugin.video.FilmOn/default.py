@@ -7,6 +7,7 @@ ADDON = xbmcaddon.Addon(id='plugin.video.FilmOn')
 channel= 'http://www.filmon.com/channel/'
 logo = 'http://static.filmon.com/couch/channels/'
 
+        
 def CATEGORIES():
         addDir('FilmOn With Epg Main Channels','http://www.filmon.com/tvguide/',1,'http://a3.mzstatic.com/us/r1000/065/Purple/a8/0d/f0/mzl.otgnsovy.png','')
         addDir('UK TV Channels','url',6,'http://a3.mzstatic.com/us/r1000/065/Purple/a8/0d/f0/mzl.otgnsovy.png','')
@@ -434,8 +435,25 @@ def setView(content, viewType):
                 xbmcplugin.setContent(int(sys.argv[1]), content)
         if ADDON.getSetting('auto-view') == 'true':
                 xbmc.executebuiltin("Container.SetViewMode(%s)" % ADDON.getSetting(viewType) )
+                
+if ADDON.getSetting('xbmchub') == 'false':
+        xbmcgui.Dialog().ok('Sinful iPhone Members','To use this plugin, sign up to [COLOR yellow][B]XBMCHUB.COM[/B][/COLOR] thank','Sinful admin,they do not give credit to the developers','that makes the plugins [COLOR yellow]Sinful Admins Contact My Email[/COLOR]')
+        xbmcgui.Dialog().ok('Sinful iPhone Members','                 [COLOR yellow][B]mike@GOFUCKYOURSELF.COM[/B][/COLOR] ','                [COLOR green][B]SHOULDNT BAN ME SUPERBEE!!![/B][/COLOR]','please put xbmchub user and pass in addon settings')
+        xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
+        xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
+        
+if ADDON.getSetting('user') == '':
+        xbmcgui.Dialog().ok('Sinful iPhone Members','To use this plugin, sign up to [COLOR yellow][B]XBMCHUB.COM[/B][/COLOR] thank','Sinful admin,they do not give credit to the developers','that makes the plugins [COLOR yellow]Sinful Admin Contact My Email[/COLOR]')
+        xbmcgui.Dialog().ok('Sinful iPhone Members','                 [COLOR yellow][B]mike@GOFUCKYOURSELF.COM[/B][/COLOR] ','                [COLOR green][B]SHOULDNT BAN ME SUPERBEE!!![/B][/COLOR]','please put xbmchub user and pass in addon settings')
+        xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
+        xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
                       
-               
+if ADDON.getSetting('pass') == '':
+        xbmcgui.Dialog().ok('Sinful iPhone Members','To use this plugin, sign up to [COLOR yellow][B]XBMCHUB.COM[/B][/COLOR] thank','Sinful admin,they do not give credit to the developers','that makes the plugins [COLOR yellow]Sinful Admin Contact My Email[/COLOR]')
+        xbmcgui.Dialog().ok('Sinful iPhone Members','                 [COLOR yellow][B]mike@GOFUCKYOURSELF.COM[/B][/COLOR] ','                [COLOR green][B]SHOULDNT BAN ME SUPERBEE!!![/B][/COLOR]','please put xbmchub user and pass in addon settings')
+        xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
+        xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
+        
 params=get_params()
 url=None
 name=None

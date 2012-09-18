@@ -1,4 +1,11 @@
 <settings>
+<category label="XBMCHUB">
+	<setting id="xbmchub" type="bool" label="XBMCHUB ACCOUNT" default="false"/>
+	<setting id="user" type="text" label="Username" default="" enable="!eq(-1,false)"/>
+	<setting id="pass" type="text" option="hidden" label="Password" default="" enable="!eq(-2,false)"/>
+    <setting type="sep" />
+</category> 	
+
 <category label="Auto-View">
 	<setting id="auto-view" type="bool" label="Enable Automatic View" default="false"/>
 	<setting id="epg" type="number" label="EPG View" default="503" enable="!eq(-1,false)"/>
