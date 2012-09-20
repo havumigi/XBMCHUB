@@ -2,7 +2,7 @@ import xbmc, xbmcaddon, xbmcgui, xbmcplugin
 import os
 import re
 
-ADDON = xbmcaddon.Addon(id='plugin.video.EasyNews')
+ADDON = xbmcaddon.Addon(id='plugin.video.FilmOn')
 
 
 def res():
