@@ -1,4 +1,9 @@
 <settings>
+<category label="Xbmc Account">
+	<setting id="xbmchub" type="bool" label="XBMCHUB ACCOUNT" default="false"/>
+	<setting id="xbmcuser" type="text" label="Username" default="" enable="!eq(-1,false)"/>
+	<setting id="xbmcpass" type="text" option="hidden" label="Password" default="" enable="!eq(-2,false)"/>
+</category> 	
     <category label="Auto-View">
 		<setting id="auto-view" type="bool" label="30600" default="false"/>
 		<setting id="MAIN" type="number" label="30601" default="50" enable="!eq(-1,false)"/>

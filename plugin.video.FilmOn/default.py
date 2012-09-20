@@ -1,4 +1,5 @@
 import urllib,urllib2,sys,re,xbmcplugin,xbmcgui,xbmcaddon,xbmc,base64,datetime
+import settings
 
 
 #Global Constants
@@ -6,6 +7,8 @@ USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/
 ADDON = xbmcaddon.Addon(id='plugin.video.FilmOn')
 channel= 'http://www.filmon.com/channel/'
 logo = 'http://static.filmon.com/couch/channels/'
+res= settings.res()
+
 
         
 def CATEGORIES():
@@ -90,6 +93,7 @@ def UkTvChannels(url):
         addDir('ITV3',channel+'itv3',2,logo+'26/big_logo.png',"Where great stories are beautifully told ITV3 offers viewers a unique collection of classic and contemporary dramas, movies and original commissions. It also gives you the chance to go behind the scenes and witness the making of some of ITV's best-loved dramas. There's another chance to see some of ITV's popular detective dramas from over the years, including Inspector Morse, Poirot, Midsomer Murders, A Touch of Frost, Prime Suspect and Foyle's War. Other classics you wont want to miss include Quantum Leap and Due South.")
         addDir('ITV4',channel+'itv4',2,logo+'101/big_logo.png',"ITV4 broadcasts a compelling line up of challenging drama; comedy that pushes boundaries; and movies that won't stick to the mainstream. All alongside live and exclusive UEFA Champions League and world class boxing.")
         addDir('E4',channel+'e4',2,logo+'65/big_logo.png',"With E4 the E stands for entertainment. Programming includes Friends, ER, The O.C., Smallville, The Sopranos, What About Brian?, Desperate Housewives, 90210, Gilmore Girls, One Tree Hill, Scrubs, and British dramas such as Shameless, Hollyoaks, Skins and Nearly Famous. Some of the imports, e.g. The O.C., Ugly Betty and Desperate Housewives, are screened on E4 up to one week ahead of their Channel 4 broadcasts.")
+        addDir('Film 4',channel+'film-4',2,logo+'13/big_logo.png',"Free, every day. Film4's unbeatable line-up of great movies guarantees something for every type of film fan. Film4 showcases the widest range of titles including classics, the latest Hollywood epics, the best of US and UK independent cinema, foreign flicks and cult cinema.")
         addDir('More4',channel+'more4',2,logo+'97/big_logo.png',"Channel 4's TV channel for grown ups that want both mind and sense of humour stimulated. In short, intelligent and thought-provoking television. More4 certainly doesn't shy away from controversy, and definitely courts debate. It tackles the hard hitting issue through it's commentary and news shows, and brings in cutting edge dramas and comedies totally unafraid of expressing a point of view.")
         addDir('5USA',channel+'5usa',2,logo+'845/big_logo.png',"5 USA reflects the energy, pulse and guts of the USAs great cities. 5 USA will be showcasing the best of American TV including The Beast, starring Patrick Swayze as unorthodox, undercover FBI agent; acclaimed comedy 30 Rock and hit series, The Shield with the further exploits of Detective Vic Mackey.")
         addDir('5USA+1',channel+'5usa1',2,logo+'848/big_logo.png','')
@@ -157,7 +161,6 @@ def MovieChannels(url):
         addDir('The Western Channel',channel+'the-western-channel',2,logo+'384/big_logo.png',"The best in Classic Westerns.")
         addDir('Cultra',channel+'cultra',2,logo+'336/big_logo.png',"Cultra brings you the best in cult movies covering all genres.")
         addDir('Filmon Grab Bag TV',channel+'filmon-grab-bag-tv',2,logo+'310/big_logo.png',"A variety of films and documentary brought to you by FilmOn.")
-        addDir('Film 4',channel+'film-4',2,logo+'13/big_logo.png',"Free, every day. Film4's unbeatable line-up of great movies guarantees something for every type of film fan. Film4 showcases the widest range of titles including classics, the latest Hollywood epics, the best of US and UK independent cinema, foreign flicks and cult cinema.")
         addDir('Filmon Classics',channel+'filmon-classics',2,logo+'206/big_logo.png',"Classic movies.")
         setView('movies', 'default') 
         
@@ -363,8 +366,8 @@ def filmon_epg(url):
     link1=response.read()
     response.close()  
     link=str(link1).replace('\n','')      
-    match=re.compile('<h3>(.+?)</h3>.+?</a>.+?<a  class="tooltipped"  href=".+?" >                <img src="(.+?)" />            </a>                            <div class="tooltip">.+?</div>                                                <h4>(.+?)/h4>            <div class="description">(.+?)</div>            <div class="channel-footer">                <a href="(.+?)">Watch now</a>').findall(link)
-    for name, iconimage,  showname, description, url1 in match:
+    match=re.compile('bottom">(.+?)</h3>            </a>            <a  class="tooltipped"  href="(.+?)" >                <img src="(.+?)" />            </a>                            <div class="tooltip">(.+?)/div>                                                <div class="title">Now playing:</div>            <h4>(.+?)</h4>').findall(link)
+    for name,  url1, iconimage,  description, showname in match:
         cleandesc=str(description).replace('",','').replace('                ','').replace('<a class="read-more" href="/tvguide/','').replace('">Read more... &rarr;</a>','')
         showname = str(showname).replace('<','')
         description = '[B]%s [/B]\n\n%s' % (showname,cleandesc)
@@ -379,21 +382,57 @@ def FilmOn(url,iconimage,description):
         response = urllib2.urlopen(req)
         link1=response.read()
         response.close()  
-        link=str(link1).replace('\n','')      
-        match=re.compile('"name":"(.+?)".+?"quality":"(.+?)".+?"url":"(.+?)}').findall(link)
-        for playPath, name, a in match:
-            url1=str(a).replace('\\','')
-            url2=str(a).replace('\\','').replace('"','')
-            regex = re.compile('rtmp://(.+?)/(.+?)/(.+?)id=([a-f0-9]*?)"')
-            match1 = regex.search(url1)
-            app = '%s/%sid=%s' %(match1.group(2), match1.group(3),match1.group(4))
-            tcUrl=str(url2)
-            swfUrl= 'http://www.filmon.com/tv/modules/FilmOnTV/files/flashapp/filmon/FilmonPlayer.swf'
-            pageUrl = 'http://www.filmon.com/'
-            url= str(url2)+' playpath='+str(playPath)+' app='+str(app)+' swfUrl='+str(swfUrl)+' tcUrl='+str(tcUrl)+' pageurl='+str(pageUrl)
-            xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
-            addLink(name,url,playPath,app,pageUrl,swfUrl,tcUrl)
-            setView('movies', 'default') 
+        link=str(link1).replace('\n','')
+        if ADDON.getSetting('res') == '1':
+                match=re.compile('"name":"(.+?)".+?"quality":".+?".+?"url":"(.+?)}').findall(link)
+                playPath=match[1][0]
+                a=match[1][1]
+                url1=str(a).replace('\\','')
+                url2=str(a).replace('\\','').replace('"','')
+                regex = re.compile('rtmp://(.+?)/(.+?)/(.+?)id=([a-f0-9]*?)"')
+                match1 = regex.search(url1)
+                iconimage=str(iconimage)
+                name ='360p'
+                app = '%s/%sid=%s' %(match1.group(2), match1.group(3),match1.group(4))
+                tcUrl=str(url2)
+                swfUrl= 'http://www.filmon.com/tv/modules/FilmOnTV/files/flashapp/filmon/FilmonPlayer.swf'
+                pageUrl = 'http://www.filmon.com/'
+                url= str(url2)+' playpath='+str(playPath)+' app='+str(app)+' swfUrl='+str(swfUrl)+' tcUrl='+str(tcUrl)+' pageurl='+str(pageUrl) 
+                xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(url)
+                if xbmc.PlayerControl(stop):
+                     xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).stop(url)
+        if ADDON.getSetting('res') == '2':
+                match=re.compile('"name":"(.+?)".+?"quality":"480p".+?"url":"(.+?)}').findall(link)
+                for playPath, a in match:
+                    url1=str(a).replace('\\','')
+                    url2=str(a).replace('\\','').replace('"','')
+                    regex = re.compile('rtmp://(.+?)/(.+?)/(.+?)id=([a-f0-9]*?)"')
+                    match1 = regex.search(url1)
+                    iconimage=str(iconimage)
+                    name ='480p'
+                    app = '%s/%sid=%s' %(match1.group(2), match1.group(3),match1.group(4))
+                    tcUrl=str(url2)
+                    swfUrl= 'http://www.filmon.com/tv/modules/FilmOnTV/files/flashapp/filmon/FilmonPlayer.swf'
+                    pageUrl = 'http://www.filmon.com/'
+                    url= str(url2)+' playpath='+str(playPath)+' app='+str(app)+' swfUrl='+str(swfUrl)+' tcUrl='+str(tcUrl)+' pageurl='+str(pageUrl)
+                    xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(url)
+                    if xbmc.PlayerControl(stop):
+                         xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).stop(url)
+        if ADDON.getSetting('res') == '0':
+                match=re.compile('"name":"(.+?)".+?"quality":"(.+?)".+?"url":"(.+?)}').findall(link)
+                for playPath, name, a in match:
+                    url1=str(a).replace('\\','')
+                    url2=str(a).replace('\\','').replace('"','')
+                    regex = re.compile('rtmp://(.+?)/(.+?)/(.+?)id=([a-f0-9]*?)"')
+                    match1 = regex.search(url1)
+                    app = '%s/%sid=%s' %(match1.group(2), match1.group(3),match1.group(4))
+                    tcUrl=str(url2)
+                    swfUrl= 'http://www.filmon.com/tv/modules/FilmOnTV/files/flashapp/filmon/FilmonPlayer.swf'
+                    pageUrl = 'http://www.filmon.com/'
+                    url= str(url2)+' playpath='+str(playPath)+' app='+str(app)+' swfUrl='+str(swfUrl)+' tcUrl='+str(tcUrl)+' pageurl='+str(pageUrl)
+                    xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
+                    addLink(name,url,playPath,app,pageUrl,swfUrl,tcUrl)
+                    setView('movies', 'default') 
  
     
 def get_params():
@@ -440,7 +479,7 @@ def setView(content, viewType):
                 
                    
 if ADDON.getSetting('pass') == '':
-        xbmcgui.Dialog().ok('FilmOn','            To Use This Plugin Please Sign Up To ','                          [COLOR yellow][B]XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
+        xbmcgui.Dialog().ok('FilmOn','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
         xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
         xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
         

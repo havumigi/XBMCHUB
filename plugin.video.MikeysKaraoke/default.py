@@ -13,6 +13,10 @@ def CATEGORIES():
         setView('movies', 'MAIN')
 
 def AtoZArtist(url):
+        if ADDON.getSetting('xbmcpass') == '':
+                xbmcgui.Dialog().ok('MikeysKaraoke Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
+                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
+                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
         addDir1('0-9','http://www.lyricsmania.com/lyrics/num.html',4,'http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/AtoZ/0-9.png','http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/Main/Fanart_A.jpg')
         addDir1('A','http://www.lyricsmania.com/lyrics/A.html',4,'http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/AtoZ/A.png','http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/Main/Fanart_A.jpg')
         addDir1('B','http://www.lyricsmania.com/lyrics/B.html',4,'http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/AtoZ/B.png','http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/Main/Fanart_A.jpg') 
@@ -43,6 +47,10 @@ def AtoZArtist(url):
         setView('movies', 'A-Z')
         
 def AtoZTracks(url):
+        if ADDON.getSetting('xbmcpass') == '':
+                xbmcgui.Dialog().ok('MikeysKaraoke Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
+                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
+                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
         addDir1('A','http://www.sunflykaraoke.com/browse/tracks/a?pgBrowseTracksAll=&show_BrowseTracksAll=1000',7,'http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/AtoZ/A.png','http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/Main/Fanart_T.jpg')
         addDir1('B','http://www.sunflykaraoke.com/browse/tracks/b?pgBrowseTracksAll=&show_BrowseTracksAll=1000',7,'http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/AtoZ/B.png','http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/Main/Fanart_T.jpg') 
         addDir1('C','http://www.sunflykaraoke.com/browse/tracks/c?pgBrowseTracksAll=&show_BrowseTracksAll=1000',7,'http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/AtoZ/C.png','http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/Main/Fanart_T.jpg')
@@ -72,6 +80,10 @@ def AtoZTracks(url):
         setView('movies', 'A-Z')
         
 def GENRE(url):
+        if ADDON.getSetting('xbmcpass') == '':
+                xbmcgui.Dialog().ok('MikeysKaraoke Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
+                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
+                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
         addDir1('40s/50s','http://www.sunflykaraoke.com/search/genre/40-s-and-50-s-pop/song-titles,albums,artists/3429190/?pg_Song%20Titles=&show_Song%20Titles=500&sort_Song%20Titles=popularity-desc',10,'http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/Genre/4050POP.png','http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/Main/Fanart_G.jpg')
         addDir1('60s','http://www.sunflykaraoke.com/search/genre/60-s-pop/song-titles,albums,artists/3429191/?pg_Song%20Titles=&show_Song%20Titles=500&sort_Song%20Titles=popularity-desc',10,'http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/Genre/60POP.png','http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/Main/Fanart_G.jpg') 
         addDir1('70s','http://www.sunflykaraoke.com/search/genre/70-s-pop/song-titles,albums,artists/3429192/?pg_Song%20Titles=&show_Song%20Titles=500&sort_Song%20Titles=popularity-desc',10,'http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/Genre/70POP.png','http://live-tv-stream.googlecode.com/svn/Karaoke%20Icons/Main/Fanart_G.jpg')
@@ -144,6 +156,10 @@ def SEARCH(url):
         response = urllib2.urlopen(req)
         link=response.read()
         response.close()
+        if ADDON.getSetting('xbmcpass') == '':
+                xbmcgui.Dialog().ok('MikeysKaraoke Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
+                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
+                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
         match=re.compile('&amp;v=(.+?)">(.+?)\n').findall(link)
         for url, name in match:
             name = str(name).replace("&#39;","'") .replace("&amp;","and") .replace("&#252;","u") .replace("&quot;","")
@@ -330,6 +346,7 @@ def addLink1(name,url,iconimage, fanart):
                 liz.setProperty("Fanart_Image", fanart )
                 ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
                 return ok 
+                
                       
 params=get_params()
 url=None
@@ -371,7 +388,8 @@ def setView(content, viewType):
 		xbmcplugin.setContent(int(sys.argv[1]), content)
 	if ADDON.getSetting('auto-view') == 'true':
 		xbmc.executebuiltin("Container.SetViewMode(%s)" % ADDON.getSetting(viewType) )
-
+		
+        
 if mode==None or url==None or len(url)<1:
         print ""
         CATEGORIES()

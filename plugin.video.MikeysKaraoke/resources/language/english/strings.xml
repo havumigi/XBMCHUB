@@ -20,6 +20,9 @@
     <string id="306016">history_2</string>
     <string id="306017">history_1</string>
 
-    
+	<!-- XBMC -->
+	<string id="xbmchub">XBMCHUB account</string>
+	<string id="xbmcuser">Username</string>
+    <string id="xbmcpass">Password</string>
 
 </strings>

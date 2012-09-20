@@ -1,4 +1,9 @@
 <strings>
+	<!-- XBMC -->
+	<string id="xbmchub">XBMCHUB account</string>
+	<string id="xbmcuser">Username</string>
+    <string id="xbmcpass">Password</string>
+
 	<!-- Easy News -->
 	<string id="fanart">Movie Fanart</string>
 	<string id="mufanart">Music Fanart</string>

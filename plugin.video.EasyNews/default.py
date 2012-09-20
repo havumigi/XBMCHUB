@@ -2,15 +2,13 @@ import urllib,urllib2,sys,re,xbmcplugin,xbmcgui,xbmcaddon,xbmc,base64,datetime
 import settings
 from urlparse import urlparse
 
-
 #Global Constants
 ADDON = settings.addon()
 USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
 art = 'https://raw.github.com/mikey1234/XBMCHUB/master/EasyArt/'
 username = ADDON.getSetting('easy_user')
 password = ADDON.getSetting('easy_pass')
-
-
+        
 mlangex = settings.mlang_ex()
 mreso = settings.m_reso()
 boost = settings.BOOST()
@@ -72,6 +70,10 @@ def CATEGORIES():
         setView('movies', 'default-view') 
            
 def MOVIE_CATEGORIES():
+        if ADDON.getSetting('xbmcpass') == '':
+                xbmcgui.Dialog().ok('EasyNews Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
+                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
+                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
         addDir('Search Movies','url',6,art+'searchmovies.png','','','','')
         addDir('New DVD Releases','http://www.lovefilm.com/browse/film/dvd/new-releases/films/?sort_by=release_date&rows=50',14,art+'newreleases.png','','','','')
         addDir('In Theatres','http://www.themoviedb.org/movie/now-playing',2,art+'intheatres.png','','','','')
@@ -101,6 +103,10 @@ def TOP_CATEGORIES():
         setView('movies', 'default-view')    
         
 def TV_CATEGORIES():
+        if ADDON.getSetting('xbmcpass') == '':
+                xbmcgui.Dialog().ok('EasyNews Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
+                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
+                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
         addDir('Search Tv Shows','url',12,art+'searchtv.png','','','','')
         addDir('Current Popular','http://www.imdb.com/search/title?num_votes=5000,&sort=moviemeter&title_type=tv_series',9,art+'currentpopular.png','','','','')
         addDir('All Time Popular','http://www.imdb.com/search/title?num_votes=5000,&sort=user_rating&title_type=tv_series',9,art+'alltimepopular.png','','','','')
@@ -110,6 +116,10 @@ def TV_CATEGORIES():
         setView('movies', 'default-view')
         
 def MUSIC_CATEGORIES():
+        if ADDON.getSetting('xbmcpass') == '':
+                xbmcgui.Dialog().ok('EasyNews Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
+                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
+                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
         addDir('Search Music','url',16,art+'searchmusic.png','','','','')
         addDir('BillBoard Album Charts','http://www.billboard.com/#/charts',22,art+'bbca.png','','','','')
         addDir('HMV Best Selling','http://hmv.com/hmvweb/directQuery.do?pagingOptionSelect=%2Fhmvweb%2FdirectQuery.do%3FNo%3D0%26pagingOptionSelect%3D192%26N%3D1573%26adultFlag%3Dfalse%26rid%3D1394ED72CCC4',19,art+'hmvbs.png','','','','')
@@ -177,6 +187,10 @@ def SEARCH(url):
         all= '%s %s %s %s\n%s %s %s' % (eng,ger,chi,fre,jap,spa,tur)
         found='[B]%s  LINKS FOUND[/B]' % (li)
         xbmcgui.Dialog().ok(found,str(all))
+        if ADDON.getSetting('xbmcpass') == '':
+                xbmcgui.Dialog().ok('EasyNews Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
+                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
+                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
         for url1 ,filesize, name in match:
             regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
             match = regex.search(url1)
@@ -317,7 +331,7 @@ def ONDVD(url):
             
                                               
 def EasySearch(name,iconimage, fanart):
-        search_entered = str(name).replace('.','').replace(', ','+').replace(' ','+') .replace(':','').replace('[','').replace(']',' ').replace('(The)','').replace('(','') .replace(')','') .replace('-','+').replace("'",'') .replace("&",'and').replace("!",'')      
+        search_entered = str(name).replace('.','').replace(', ','+').replace(' ','+') .replace(':','').replace('[','').replace(']',' ').replace('(The)','').replace('(','') .replace(')','') .replace('-','+').replace("'",'') .replace("&",'').replace("!",'').replace("and",'').replace("The",'').replace("the",'')         
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", mfileext, "Any"):
                 theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+mlangex+'&sbj='+msubject+'&from='+mposter+'&ns='+mnewsgroup+'&fil='+mfilename+'&fex=&vc='+mvcodec+'&ac='+macodec+'&pby='+mresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mfilesize+'&b2t='+mmaxfilesize+mreso+'&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+mspam+mrem+mgrex+'&st=adv&safeO=0&boost=1&sb=1'
@@ -547,7 +561,7 @@ def TV_SEARCH(name, iconimage):
             setView('movies', 'tvshows-view')
                   
 def TV_EASY_SEARCH(series, fanart):
-        search_entered = str(series).replace('.','').replace(' ','+') .replace(':','') .replace(',','').replace('[','').replace(']','')   
+        search_entered = str(series).replace('.','').replace(' ','+') .replace(':','') .replace(',','').replace('[','').replace(']','').replace("and",'').replace("The",'').replace("the",'')   
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", tvfileext, "Any"):
                 theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+tvlangex+'&sbj='+tvsubject+'&from='+tvposter+'&ns='+tvnewsgroup+'&fil='+tvfilename+'&fex=&vc='+tvvcodec+'&ac='+tvacodec+'&pby='+tvresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+tvfilesize+'&b2t='+tvmaxfilesize+tvreso+'&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+tvspam+tvrem+tvgrex+'&st=adv&safeO=0&boost=1&sb=1'
@@ -913,7 +927,7 @@ def MUSIC_LIST_SEARCH(name, url):
         xbmc.PlayList(0).clear()
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Add Album To Playlist", "     If Any Music Is Found Would You Like To", "       Add All The Songs To Your PlayList ?"):
-                        theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+str(name).replace(' ','+').replace('Various Artists','')+'+'+str(url).replace(':','+').replace('...','+').replace(' ','+')+'&pby=20&pno=1&s1=dtime&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=10&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=AUDIO&u=1&st=adv&safeO=0&boost=1&sb=1'
+                        theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+str(name).replace(' ','+').replace("&",'').replace("and",'').replace("The",'').replace("the",'').replace('Various Artists','')+'+'+str(url).replace(':','+').replace('...','+').replace(' ','+').replace("&",'').replace("and",'').replace("The",'').replace("the",'')+'&pby=20&pno=1&s1=dtime&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=10&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=AUDIO&u=1&st=adv&safeO=0&boost=1&sb=1'
                         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
                         passman.add_password(None, theurl, username, password)
                         authhandler = urllib2.HTTPBasicAuthHandler(passman)
@@ -953,7 +967,7 @@ def MUSIC_LIST_SEARCH(name, url):
                         setView('movies', 'easy-view') 
 
         else:
-                        theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+str(name).replace(' ','+').replace('Various Artists','')+'+'+str(url).replace(':','+').replace('...','+').replace(' ','+')+'&pby=20&pno=1&s1=dtime&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=10&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=AUDIO&u=1&st=adv&safeO=0&boost=1&sb=1'
+                        theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+str(name).replace(' ','+').replace("&",'').replace("and",'').replace("The",'').replace("the",'').replace('Various Artists','')+'+'+str(url).replace(':','+').replace('...','+').replace(' ','+').replace("&",'').replace("and",'').replace("The",'').replace("the",'')+'&pby=20&pno=1&s1=dtime&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t=&b2t=10&px1t=&px2t=&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=AUDIO&u=1&st=adv&safeO=0&boost=1&sb=1'
                         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
                         passman.add_password(None, theurl, username, password)
                         authhandler = urllib2.HTTPBasicAuthHandler(passman)
@@ -1053,10 +1067,15 @@ def BILLBOARD_ALBUM_LISTS(url):
         addDir('<< Return To Billboard Menu','url',22,art+'back.png','','','','')    
         setView('movies', 'music-view') 
         
-def IMDB_LISTS(url):        
+def IMDB_LISTS(url): 
         addDir('Watch List',IMDBTV_WATCHLIST,8,art+'imdb.png','','','','')
+        if ADDON.getSetting('imdb_user') == 'ur********':
+                xbmcgui.Dialog().ok('EasyNews Information','You Need To Input Your IMDb Number Into ','Addon Settings')
+        if ADDON.getSetting('xbmcpass') == '':
+                xbmcgui.Dialog().ok('EasyNews Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
+                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
+                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
         url=IMDB_LIST
-        print url
         req = urllib2.Request(url)
         req.add_header('User-Agent', USER_AGENT)
         response = urllib2.urlopen(req)
@@ -1117,7 +1136,7 @@ def WATCH_LIST_SEARCH(name,url,iconimage,fanart,description):
                             addDir(name,url,11,iconimage,fanart,series,description,rating)
                             setView('movies', 'seasons-view') 
         else:
-                        search_entered = str(name).replace('.','').replace(', ','+').replace(' ','+') .replace(':','').replace('[','').replace(']',' ').replace('(The)','').replace('(','') .replace(')','') .replace('-','+').replace("'",'') .replace("&",'and').replace("!",'')      
+                        search_entered = str(name).replace('.','').replace(', ','+').replace(' ','+') .replace(':','').replace('[','').replace(']',' ').replace('(The)','').replace('(','') .replace(')','') .replace('-','+').replace("'",'') .replace("&",'').replace("!",'').replace("and",'').replace("The",'').replace("the",'')      
                         dialog = xbmcgui.Dialog()
                         if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", mfileext, "Any"):
                                 theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+mlangex+'&sbj='+msubject+'&from='+mposter+'&ns='+mnewsgroup+'&fil='+mfilename+'&fex=&vc='+mvcodec+'&ac='+macodec+'&pby='+mresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mfilesize+'&b2t='+mmaxfilesize+mreso+'&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+mspam+mrem+mgrex+'&st=adv&safeO=0&boost=1&sb=1'
@@ -1305,6 +1324,8 @@ def Music_Link(name,url,iconimage,fanart):
 	        ''
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
         return ok
+        
+        
                
 params=get_params()
 url=None
@@ -1367,8 +1388,6 @@ def setView(content, viewType):
         if ADDON.getSetting('auto-view') == 'true':
                 xbmc.executebuiltin("Container.SetViewMode(%s)" % ADDON.getSetting(viewType) )
 
-       
-        
 
 if mode==None or url==None or len(url)<1:
         print ""
@@ -1480,5 +1499,6 @@ elif mode==26:
 elif mode==27:
         print ""+series
         TV_EASY_SEARCH2(series, fanart) 
+        
         
 xbmcplugin.endOfDirectory(int(sys.argv[1]))

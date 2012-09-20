@@ -2,7 +2,7 @@
 <addons>
 <addon id="plugin.video.EasyNews"
        name="EasyNews...XBMCHUB.COM"
-       version="2.3.1e"
+       version="2.4"
        provider-name="Mikey1234">
   <requires>
     <import addon="xbmc.python" version="2.0"/>
@@ -20,7 +20,7 @@
 
 <addon id="plugin.video.FilmOn"
        name="FilmON...XBMCHUB.COM"
-       version="1.4a"
+       version="1.4b"
        provider-name="Mikey1234">
   <requires>
     <import addon="xbmc.python" version="2.0"/>
@@ -58,7 +58,7 @@
 
 <addon id="plugin.video.MikeysKaraoke"
        name="Mikey's Karaoke...XBMCHUB.COM"
-       version="1.4"
+       version="1.5"
        provider-name="Mikey1234">
   <requires>
     <import addon="xbmc.python" version="2.0"/>
