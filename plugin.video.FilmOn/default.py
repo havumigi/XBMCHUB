@@ -399,8 +399,9 @@ def FilmOn(url,iconimage,description):
                 pageUrl = 'http://www.filmon.com/'
                 url= str(url2)+' playpath='+str(playPath)+' app='+str(app)+' swfUrl='+str(swfUrl)+' tcUrl='+str(tcUrl)+' pageurl='+str(pageUrl) 
                 xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(url)
-                if xbmc.PlayerControl(stop):
-                     xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).stop(url)
+                xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
+                addLink(name,url,playPath,app,pageUrl,swfUrl,tcUrl)
+                setView('movies', 'default') 
         if ADDON.getSetting('res') == '2':
                 match=re.compile('"name":"(.+?)".+?"quality":"480p".+?"url":"(.+?)}').findall(link)
                 for playPath, a in match:
@@ -416,8 +417,9 @@ def FilmOn(url,iconimage,description):
                     pageUrl = 'http://www.filmon.com/'
                     url= str(url2)+' playpath='+str(playPath)+' app='+str(app)+' swfUrl='+str(swfUrl)+' tcUrl='+str(tcUrl)+' pageurl='+str(pageUrl)
                     xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(url)
-                    if xbmc.PlayerControl(stop):
-                         xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).stop(url)
+                    xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
+                    addLink(name,url,playPath,app,pageUrl,swfUrl,tcUrl)
+                    setView('movies', 'default') 
         if ADDON.getSetting('res') == '0':
                 match=re.compile('"name":"(.+?)".+?"quality":"(.+?)".+?"url":"(.+?)}').findall(link)
                 for playPath, name, a in match:
