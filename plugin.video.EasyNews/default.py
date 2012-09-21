@@ -331,7 +331,7 @@ def ONDVD(url):
             
                                               
 def EasySearch(name,iconimage, fanart):
-        search_entered = str(name).replace('.','').replace(', ','+').replace(' ','+') .replace(':','').replace('[','').replace(']',' ').replace('(The)','').replace('(','') .replace(')','') .replace('-','+').replace("'",'') .replace("&",'').replace("!",'').replace("and",'').replace("The",'').replace("the",'')         
+        search_entered = str(name).replace('.','').replace(', ','+').replace(' ','+') .replace(':','').replace('[','').replace(']',' ').replace('(The)','').replace('(','') .replace(')','') .replace('-','+').replace("'",'') .replace("&",'').replace("!",'').replace("and",'').replace("The",'').replace("the",'').replace("Assemble",'2012')           
         dialog = xbmcgui.Dialog()
         if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", mfileext, "Any"):
                 theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+mlangex+'&sbj='+msubject+'&from='+mposter+'&ns='+mnewsgroup+'&fil='+mfilename+'&fex=&vc='+mvcodec+'&ac='+macodec+'&pby='+mresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mfilesize+'&b2t='+mmaxfilesize+mreso+'&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+mspam+mrem+mgrex+'&st=adv&safeO=0&boost=1&sb=1'
@@ -1094,7 +1094,7 @@ def WATCH_TV_LIST(url):
         link=response.read()
         response.close()
         link=str(link).replace('\n','').replace('\t','')
-        match=re.compile('data-const=".+?">.+?="(.+?)".+?height=".+?".+?idth=".+?".+?lt=".+?".+?lass=".+?".+?href="/title/(.+?)/"    >(.+?)</a>    <span class="year_type">.+?</span></b>    <div class="rating rating-list" data-auth=".+?" id=".+?" data-ga-identifier="list" title=".+?"><span class="rating-bg">.+?<div class="item_description">(.+?)<').findall(link)
+        match=re.compile('data-const=".+?">.+?="(.+?)".+?height=".+?".+?idth=".+?".+?lt=".+?".+?lass=".+?".+?href="/title/(.+?)/"    >(.+?)</a>    <span class="year_type">.+?</span></b>    <div class="rating rating-list" data-auth=".+?" id=".+?" data-ga-identifier="list" title=".+?"><span class="rating-bg">.+?<div class=".+?">(.+?)<').findall(link)
         for iconimage, url, name, description in match:
             iconimage1 = iconimage
             regex=re.compile('(.+?)_V1.+?.jpg')
@@ -1113,8 +1113,9 @@ def WATCH_TV_LIST(url):
                     print iconimage
             except:
                     pass
+                    description= str(description).replace('Stars:','Sorry I Cant Find Any Description')
                     url = 'http://www.imdb.com/title/'+str(url)+'/'
-                    name = str(name).replace('&#xB7;','').replace('&#x27;','').replace('&#x26;','And')
+                    name = str(name).replace('&#xB7;','').replace('&#x27;','').replace('&#x26;','And').replace(':','')
                     addDir(name,url,24,iconimage,fanart,series,description,rating)   
                     setView('movies', 'movies-view') 
                         
