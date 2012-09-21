@@ -4,7 +4,7 @@
 	<setting id="user" type="text" label="Username" default="" enable="!eq(-1,false)"/>
 	<setting id="pass" type="text" option="hidden" label="Password" default="" enable="!eq(-2,false)"/>
     <setting type="sep" />
-	<setting id="res" type="enum" values="Any|360p|480p" label="File Extension:" default="0" />
+	<setting id="res" type="enum" values="Any|360p|480p" label="Please Choose Resolution:" default="0" />
 </category> 	
 
 <category label="Auto-View">
