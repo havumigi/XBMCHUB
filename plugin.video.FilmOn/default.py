@@ -366,9 +366,9 @@ def filmon_epg(url):
     link1=response.read()
     response.close()  
     link=str(link1).replace('\n','')      
-    match=re.compile('bottom">(.+?)</h3>            </a>            <a  class="tooltipped"  href="(.+?)" >                <img src="(.+?)" />            </a>                            <div class="tooltip">(.+?)/div>                                                <div class="title">Now playing:</div>            <h4>(.+?)</h4>').findall(link)
-    for name,  url1, iconimage,  description, showname in match:
-        cleandesc=str(description).replace('",','').replace('                ','').replace('<a class="read-more" href="/tvguide/','').replace('">Read more... &rarr;</a>','')
+    match=re.compile('bottom">(.+?)</h3>.+?href="(.+?)" >                <img src="(.+?)".+?.+?div class="title">.+?</div>.+?h4>(.+?)/h4>.+?"description">(.+?)/div>').findall(link)
+    for name,  url1, iconimage, showname, description in match:
+        cleandesc=str(description).replace('",','').replace('                ','').replace('<a class="read-more" href="/tvguide/','').replace('">Read more... &rarr;</a>','').replace('\xc3','').replace('\xa2','').replace('\xe2','').replace('\x82','').replace('\xac','').replace('\x84','').replace('\xa2s','').replace('\xc2','').replace('\x9d','').replace('<','')
         showname = str(showname).replace('<','')
         description = '[B]%s [/B]\n\n%s' % (showname,cleandesc)
         url = 'http://www.filmon.com'+str(url1)
