@@ -20,10 +20,11 @@
 
 <addon id="plugin.video.FilmOn"
        name="FilmON...XBMCHUB.COM"
-       version="1.5"
+       version="2"
        provider-name="Mikey1234">
   <requires>
     <import addon="xbmc.python" version="2.0"/>
+    <import addon="script.module.t0mm0.common" version="1.1.0"/>
   </requires>
   <extension point="xbmc.python.pluginsource"
             library="default.py">
@@ -31,7 +32,7 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary lang="en">FilmOn</summary>
-    <description lang="en">Stream From FilmON.....Official Support....XBMCHUB.COM</description>
+    <description lang="en">Stream And Record From FilmON.....Official Support....XBMCHUB.COM</description>
     <platform>all</platform>
   </extension>
 </addon>
