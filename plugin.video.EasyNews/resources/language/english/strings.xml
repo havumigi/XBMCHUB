@@ -3,6 +3,10 @@
 	<string id="xbmchub">XBMCHUB account</string>
 	<string id="xbmcuser">Username</string>
     <string id="xbmcpass">Password</string>
+	<string id="imdb">imdb account</string>
+	<string id="imdb_user">imdb Username</string>
+	<string id="trakt">Trakt account</string>
+	<string id="trakt_user">Trakt Username</string>
 
 	<!-- Easy News -->
 	<string id="fanart">Movie Fanart</string>

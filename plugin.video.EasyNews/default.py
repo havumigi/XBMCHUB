@@ -65,7 +65,10 @@ def CATEGORIES():
         addDir('Movies','url',4,art+'movies.png','','','','')
         addDir('TV','url',5,art+'tv.png','','','','')
         addDir('Music','url',15,art+'music.png','','','','')
-        addDir('IMDb List','url',25,art+'imdb.png','','','','')
+        if ADDON.getSetting('imdb') == 'true':
+                addDir('IMDb List','url',25,art+'imdb.png','','','','')
+        if ADDON.getSetting('trakt') == 'true':
+                addDir('Trakt TV','url',28,art+'trakt.png','','','','')
         addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,art+'back.png','','','','')    
         setView('movies', 'default-view') 
            
@@ -1249,8 +1252,229 @@ def WATCH_LIST_SEARCH(name,url,iconimage,fanart,description):
                             addLink(name,url,iconimage,fanart,series,description,rating) 
                         addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,art+'back.png','','','','')    
                         setView('movies', 'easy-view') 
+                        
+def TRAKT_LISTS(url): 
+        addDir('Watch List','url',31,art+'trakt.png','','','','')
+        if ADDON.getSetting('trakt_user') == '':
+                xbmcgui.Dialog().ok('EasyNews Information','You Need To Input Your Trakt UserName Into ','Addon Settings')
+        if ADDON.getSetting('xbmcpass') == '':
+                xbmcgui.Dialog().ok('EasyNews Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
+                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
+                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
+        url='http://trakt.tv/user/%s/lists'% ADDON.getSetting('trakt_user')
+        req = urllib2.Request(url)
+        req.add_header('User-Agent', USER_AGENT)
+        response = urllib2.urlopen(req)
+        link=response.read()
+        response.close()
+        match = re.compile('<a href="(.+?)">(.+?)</a>\n\t\t\t\t\t\t\t</h3>').findall(link)
+        for url, name in match:
+            url='http://trakt.tv'+str(url)   
+            addDir(name,url,29,art+'trakt.png',fanart,series,description,rating)    
+            setView('movies', 'default-view')  
+
+
+def TRAKT_WATCHLISTS_RESULTS(url): 
+        url = 'http://trakt.tv/user/%s/watchlist' % ADDON.getSetting('trakt_user')
+        req = urllib2.Request(url)
+        req.add_header('User-Agent', USER_AGENT)
+        response = urllib2.urlopen(req)
+        link=response.read()
+        link1=str(link).replace('\n','').replace('\t','')
+        match = re.compile('<img alt="" src="(.+?)" /></a></div><div class="rating-pod"><div class="percent love"><span class="number">.+?</span><span class="percent-sign">.+?/span></div><div class="votes">.+?</div></div><h4><div class="title-overflow"></div><a class="title" href="(.+?)">(.+?)</a>').findall(link1)
+        for iconimage, url, name, in match:
+            series=str(name).replace('(','').replace(')','')    
+            url='http://trakt.tv'+str(url)   
+            addDir(name,url,30,iconimage,fanart,series,description,rating)    
+            setView('movies', 'default-view')
+        url = 'http://trakt.tv/user/%s/watchlist/movies/added' % ADDON.getSetting('trakt_user')
+        req = urllib2.Request(url)
+        req.add_header('User-Agent', USER_AGENT)
+        response = urllib2.urlopen(req)
+        link=response.read()
+        link1=str(link).replace('\n','').replace('\t','')
+        match = re.compile('<img alt="" src="(.+?)" /></a></div><div class="rating-pod"><div class="percent love"><span class="number">.+?</span><span class="percent-sign">.+?/span></div><div class="votes">.+?</div></div><h4><div class="title-overflow"></div><a class="title" href="(.+?)">(.+?)</a>').findall(link1)
+        for iconimage, url, name, in match:
+            series=str(name).replace('(','').replace(')','')    
+            url='http://trakt.tv'+str(url)   
+            addDir(name,url,30,iconimage,fanart,series,description,rating)    
+            setView('movies', 'default-view')  
+            
+            
+def TRAKT_LISTS_RESULTS(url): 
+        req = urllib2.Request(url)
+        req.add_header('User-Agent', USER_AGENT)
+        response = urllib2.urlopen(req)
+        link=response.read()
+        response.close()
+        match = re.compile('<a href="(.+?)">\n\t\t\t\t\t\t\t\t\t\t\t\t<img class="poster-art" alt="(.+?)" src="(.+?)" />').findall(link)
+        for url, name, iconimage, in match:
+            series=str(name).replace('(','').replace(')','')    
+            url='http://trakt.tv'+str(url)   
+            addDir(name,url,30,iconimage,fanart,series,description,rating)    
+            setView('movies', 'default-view')  
+            
+def TRAKTTV_SEASON(url,iconimage,series,fanart):
+        req = urllib2.Request(url)
+        req.add_header('User-Agent', USER_AGENT)
+        response = urllib2.urlopen(req)
+        link=response.read()
+        response.close()
+        match1 = re.compile('href="(.+?)" rel="external" class="button external">IMDb</a>').findall(link)
+        url1 = match1
+        req1 = urllib2.Request(url1)
+        req1.add_header('User-Agent', USER_AGENT)
+        response1 = urllib2.urlopen(req1)
+        link1=response1.read()
+        response1.close()
+        match = re.compile('.+?/rg/tt-episodes/season.+?/images/.+?season.+?     href="(.+?)"    >(.+?)</a>').findall(link1)
+        url2= str(url)
+        for url1, name in match:
+            url = str(url2)+str(url1)
+            name = 'Season '+str(name)
+            xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
+            addDir(name,url,11,iconimage,fanart,series,description,rating) 
+            setView('movies', 'seasons-view') 
  
- 
+def TRAKT_LIST_SEARCH(name,url,iconimage,fanart,description):
+        series = str(name)
+        dialog = xbmcgui.Dialog()
+        if dialog.yesno("Please Select Correct Type", "", "[B]    Please Select If Item Is A Movie Or Tv Series[/B]", '', "MOVIE", "TV"): 
+                                        req = urllib2.Request(url)
+                                        req.add_header('User-Agent', USER_AGENT)
+                                        response = urllib2.urlopen(req)
+                                        link=response.read()
+                                        response.close()
+                                        match1 = re.compile('href="(.+?)" rel="external" class="button external">IMDb</a>').findall(link)
+                                        url2= match1[0]
+                                        for url1 in match1:
+                                                req1 = urllib2.Request(url1)
+                                                req1.add_header('User-Agent', USER_AGENT)
+                                                response1 = urllib2.urlopen(req1)
+                                                link1=response1.read()
+                                                response1.close()
+                                                match = re.compile('.+?/rg/tt-episodes/season.+?/images/.+?season.+?     href="(.+?)"    >(.+?)</a>').findall(link1)
+                                                for url3, name in match:
+                                                    url = str(url2)+'/'+str(url3)
+                                                    name = 'Season '+str(name)
+                                                    xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
+                                                    addDir(name,url,11,iconimage,fanart,series,description,rating) 
+                                                    setView('movies', 'seasons-view') 
+        else:
+                        search_entered = str(name).replace('.','').replace(', ','+').replace(' ','+') .replace(':','').replace('[','').replace(']',' ').replace('(The)','').replace('(','') .replace(')','') .replace('-','+').replace("'",'') .replace("&",'').replace("!",'').replace("and",'').replace("The",'').replace("the",'')      
+                        dialog = xbmcgui.Dialog()
+                        if dialog.yesno("Search Options", "Choose your required quality?", "Custom: Use your custom settings", "Any: Returns any available quality", mfileext, "Any"):
+                                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+mlangex+'&sbj='+msubject+'&from='+mposter+'&ns='+mnewsgroup+'&fil='+mfilename+'&fex=&vc='+mvcodec+'&ac='+macodec+'&pby='+mresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mfilesize+'&b2t='+mmaxfilesize+mreso+'&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+mspam+mrem+mgrex+'&st=adv&safeO=0&boost=1&sb=1'
+                        else:
+                                theurl = 'http://members-beta.easynews.com/global5/search.html?&gps='+search_entered+'+%21+'+mlangex+'&sbj='+msubject+'&from='+mposter+'&ns='+mnewsgroup+'&fil='+mfilename+'&fex='+mfileext+'&vc='+mvcodec+'&ac='+macodec+'&pby='+mresults+'&pno=1&s1=nsubject&s1d=-&s2=nrfile&s2d=-&s3=dsize&s3d=-&sS=5&d1t=&d2t=&b1t='+mfilesize+'&b2t='+mmaxfilesize+mreso+'&fps1t=&fps2t=&bps1t=&bps2t=&hz1t=&hz2t=&rn1t=&rn2t=&fty[]=VIDEO'+mspam+mrem+mgrex+'&st=adv&safeO=0&boost=1&sb=1'
+                        print theurl
+                        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+                        passman.add_password(None, theurl, username, password)
+                        authhandler = urllib2.HTTPBasicAuthHandler(passman)
+                        opener = urllib2.build_opener(authhandler)
+                        urllib2.install_opener(opener)
+                        pagehandle = urllib2.urlopen(theurl)
+                        link= pagehandle.read()      
+                        match=re.compile('url="http://.+?-(.+?)" length="(.+?)" type="application/octet-stream" />\n<link>http.+?com/news/.+?/.+?/.+?/.+?/(.+?)</link>').findall(link)
+                        eng=''
+                        ger=''
+                        fre=''
+                        tur=''
+                        jap=''
+                        spa=''
+                        chi=''
+                        li=len(match)
+                        if re.search('alt=&#34;English', link, re.IGNORECASE):
+                                eng= 'English,'    
+                        if not re.search('alt=&#34;English', link, re.IGNORECASE):
+                                eng= ''          
+                        if re.search('alt=&#34;German', link, re.IGNORECASE):
+                                ger= 'German,' 
+                        if not re.search('alt=&#34;German', link, re.IGNORECASE):
+                                ger= ''          
+                        if re.search('alt=&#34;French', link, re.IGNORECASE):
+                                fre= 'French,'
+                        if not re.search('alt=&#34;French', link, re.IGNORECASE):
+                                fre= ''     
+                        if re.search('alt=&#34;Turkish', link, re.IGNORECASE):
+                                tur= 'Turkish,'
+                        if not re.search('alt=&#34;Turkish', link, re.IGNORECASE):
+                                tur= '' 
+                        if re.search('alt=&#34;Japanese', link, re.IGNORECASE):
+                                jap= 'Japanese,'
+                        if not re.search('alt=&#34;Japanese', link, re.IGNORECASE):
+                                jap= ''     
+                        if re.search('alt=&#34;Spanish', link, re.IGNORECASE):
+                                spa= 'Spanish,'
+                        if not re.search('alt=&#34;Spanish', link, re.IGNORECASE):
+                                spa= '' 
+                        if re.search('alt=&#34;Chinese', link, re.IGNORECASE):
+                                chi= 'Chinese,'
+                        if not re.search('alt=&#34;Chinese', link, re.IGNORECASE):
+                                chi= ''         
+                        all= '%s %s %s %s\n%s %s %s' % (eng,ger,chi,fre,jap,spa,tur)
+                        found='[B]%s  LINKS FOUND[/B]' % (li)
+                        xbmcgui.Dialog().ok(found,str(all))
+                        for url1 ,filesize, name in match:
+                            regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
+                            match = regex.search(url1)
+                            output = "downloads.members.easynews.com/news/%s/%s/%s/pr-%s/pr-%s" %(match.group(1), match.group(2), match.group(3), match.group(4), match.group(5))
+                            mkv=''
+                            avi=''
+                            vob=''
+                            mov=''
+                            mp4=''
+                            iso=''
+                            m4v=''
+                            wmv=''
+                            flv=''
+                            if re.search('.mkv', name, re.IGNORECASE):
+                                    mkv= 'MKV'    
+                            if not re.search('.mkv', name, re.IGNORECASE):
+                                    mkv= ''          
+                            if re.search('.avi', name, re.IGNORECASE):
+                                    avi= 'AVI' 
+                            if not re.search('.avi', name, re.IGNORECASE):
+                                    avi= ''          
+                            if re.search('.vob', name, re.IGNORECASE):
+                                    vob= 'VOB'
+                            if not re.search('.vob', name, re.IGNORECASE):
+                                    vob= ''     
+                            if re.search('.mov', name, re.IGNORECASE):
+                                    mov= 'MOV'
+                            if not re.search('.mov', name, re.IGNORECASE):
+                                    mov= '' 
+                            if re.search('.mp4', name, re.IGNORECASE):
+                                    mp4= 'MP4'
+                            if not re.search('.mp4', name, re.IGNORECASE):
+                                    mp4= '' 
+                            if re.search('.iso', name, re.IGNORECASE):
+                                    iso= 'ISO'
+                            if not re.search('.iso', name, re.IGNORECASE):
+                                    iso= ''
+                            if re.search('.m4v', name, re.IGNORECASE):
+                                    m4v='M4V'
+                            if not re.search('.m4v', name, re.IGNORECASE):
+                                    m4v= '' 
+                            if re.search('.flv', name, re.IGNORECASE):
+                                    flv='FLV'
+                            if not re.search('.flv', name, re.IGNORECASE):
+                                    flv= '' 
+                            if re.search('.wmv', name, re.IGNORECASE):
+                                    wmv='WMV'
+                            if not re.search('.wmv', name, re.IGNORECASE):
+                                    wmv= ''  
+                            all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)+str(flv)+str(wmv)
+                            name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('.flv','').replace('.wmv','').replace('%5B','').replace('%5C','').replace('%5A','')
+                            changeboost4 = 'http://'+username+':'+password+'@' +boost
+                            url = str(changeboost4)+str(url1)
+                            iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
+                            xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
+                            addLink(name,url,iconimage,fanart,series,description,rating) 
+                        addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,art+'back.png','','','','')    
+                        setView('movies', 'easy-view') 
+            
+            
 def EXIT_EASYNEWS():
         xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
         xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
@@ -1280,9 +1504,9 @@ def addDir(name,url,mode,iconimage,fanart,series,description,rating):
         liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
         liz.setInfo( type="Video", infoLabels={ "Title": name,"Plot":description,"Rating":rating } )
         if ADDON.getSetting('fanart') == 'true':
-	        liz.setProperty( "Fanart_Image", fanart )
+                liz.setProperty( "Fanart_Image", fanart )
         if ADDON.getSetting('fanart') == 'false':
-	        ''
+                ''
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
                 
@@ -1292,9 +1516,9 @@ def addLink(name,url,iconimage,fanart,series,description,rating):
         liz.setInfo( type="Video", infoLabels={ "Title": name,"Plot":description,"Rating":rating } )
         liz.setProperty("IsPlayable","true")
         if ADDON.getSetting('fanart') == 'true':
-	        liz.setProperty( "Fanart_Image", fanart )
+                liz.setProperty( "Fanart_Image", fanart )
         if ADDON.getSetting('fanart') == 'false':
-	        ''
+                ''
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
         return ok 
                       
@@ -1304,9 +1528,9 @@ def Music_Playlist_Link(name,url,iconimage,fanart):
         liz.setInfo(type="Video", infoLabels={ "Title": name})
         liz.setProperty('mimetype', 'audio/mpeg')
         if ADDON.getSetting('mufanart') == 'true':
-	        liz.setProperty( "Fanart_Image", fanart )
+                liz.setProperty( "Fanart_Image", fanart )
         if ADDON.getSetting('mufanart') == 'false':
-	        ''
+                ''
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
         pl=xbmc.PlayList(0)
         pl.add(url, liz)
@@ -1320,9 +1544,9 @@ def Music_Link(name,url,iconimage,fanart):
         liz.setInfo(type="Video", infoLabels={ "Title": name})
         liz.setProperty('mimetype', 'audio/mpeg')
         if ADDON.getSetting('mufanart') == 'true':
-	        liz.setProperty( "Fanart_Image", fanart )
+                liz.setProperty( "Fanart_Image", fanart )
         if ADDON.getSetting('mufanart') == 'false':
-	        ''
+                ''
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
         return ok
         
@@ -1500,6 +1724,22 @@ elif mode==26:
 elif mode==27:
         print ""+series
         TV_EASY_SEARCH2(series, fanart) 
+        
+elif mode==28:
+        print ""+url
+        TRAKT_LISTS(url) 
+        
+elif mode==29:
+        print ""+url
+        TRAKT_LISTS_RESULTS(url) 
+        
+elif mode==30:
+        print ""+url
+        TRAKT_LIST_SEARCH(name,url,iconimage,fanart,description) 
+        
+elif mode==31:
+        print ""+url
+        TRAKT_WATCHLISTS_RESULTS(url) 
         
         
 xbmcplugin.endOfDirectory(int(sys.argv[1]))

@@ -1,8 +1,14 @@
 <settings>
-<category label="Xbmc Account">
+<category label="Accounts">
 	<setting id="xbmchub" type="bool" label="XBMCHUB ACCOUNT" default="false"/>
 	<setting id="xbmcuser" type="text" label="Username" default="" enable="!eq(-1,false)"/>
 	<setting id="xbmcpass" type="text" option="hidden" label="Password" default="" enable="!eq(-2,false)"/>
+    <setting type="sep" />
+	<setting id="imdb" type="bool" label="IMDB ACCOUNT" default="false"/>
+	<setting id="imdb_user" type="text" label="IMDB User Number" default="ur********" enable="!eq(-1,false)"/>
+    <setting type="sep" />
+	<setting id="trakt" type="bool" label="TRAKT ACCOUNT" default="false"/>
+	<setting id="trakt_user" type="text" label="Trakt Username" default="" enable="!eq(-1,false)"/>
 </category> 	
 <category label="Easy News">
 	<setting id="fanart" type="bool" label="Enable Movie & TV Fanart" default="false"/>
@@ -11,8 +17,6 @@
 	<setting id="easy_user" type="text" label="Username" default="" enable="!eq(-1,false)"/>
 	<setting id="easy_pass" type="text" option="hidden" label="Password" default="" enable="!eq(-2,false)"/>
     <setting id="boost" type="enum" values="Easyboost4|Easyboost1|Easyboost5|Non" label="Easyboost" default="0" />
-    <setting type="sep" />
-	<setting id="imdb_user" type="text" label="IMDB User Number" default="ur********" enable="!eq(-1,false)"/>
 </category> 	
 <category label="Movies">
 	<setting id="mfileext" type="enum" values="Any|AVI|MKV|MP4|ISO|DIVX|MPG|FLV|WMV|MOV|ASF|RM" label="File Extension:" default="2" />
