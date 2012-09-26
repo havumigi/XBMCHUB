@@ -514,7 +514,10 @@ def TV_EPISODE(url,iconimage,series,fanart):
         match = re.compile('src="(.+?)">\n<div>(.+?)</div>\n</div>\n</a>  </div>\n  <div class="info" itemprop="episodes" itemscope itemtype="http://schema.org/TVEpisode">\n    <meta itemprop="episodeNumber" content=".+?"/>\n    <div class="airdate">\n.+?\n    </div>\n    <strong><a\nonclick=".+?src=.+?\nhref=".+?"\ntitle=".+?"\nitemprop="name">(.+?)</a></strong>\n    <div class="item_description" itemprop="description(.+?)</div>').findall(link)
         series1=series
         replacementicon=series
+        icon=iconimage
         for iconimage, episode, name, description in match:
+            if iconimage.endswith(".png"):
+                    iconimage = str(icon)
             description= str(description).replace('&#700;','').replace('">','')
             iconimage1= iconimage
             episode='['+str(episode).replace('26,','26').replace('25,','25').replace('24,','24').replace('23,','23').replace('22,','22').replace('21,','21').replace('20,','20').replace('19,','19').replace('18,','18').replace('17,','17').replace('16,','16').replace('15,','15').replace('14,','14').replace('13,','13').replace('12,','12').replace('11,','11').replace('10,','10').replace('9,','09').replace('8,','08').replace('7,','07').replace('6,','06').replace('5,','05').replace('4,','04').replace('3,','03').replace('2,','02').replace('1,','01').replace('p26','26').replace('p25','25').replace('p24','24').replace('p23','23').replace('p22','22').replace('p21','p21').replace('p20','20').replace('p19','19').replace('p18','18').replace('p17','17').replace('p16','16').replace('p15','15').replace('p14','14').replace('p13','13').replace('p12','12').replace('p11','11').replace('p10','10').replace('p9','09').replace('p8','08').replace('p7','07').replace('p6','06').replace('p5','05').replace('p4','04').replace('p3','03').replace('p2','02').replace('p1','01')+']'
