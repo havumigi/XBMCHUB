@@ -1099,24 +1099,23 @@ def WATCH_TV_LIST(url):
         response = urllib2.urlopen(req)
         link=response.read()
         response.close()
-        link=str(link).replace('\n','').replace('\t','')
-        match=re.compile('data-const=".+?">.+?="(.+?)".+?height=".+?".+?idth=".+?".+?lt=".+?".+?lass=".+?".+?href="/title/(.+?)/"    >(.+?)</a>    <span class="year_type">.+?</span></b>    <div class="rating rating-list" data-auth=".+?" id=".+?" data-ga-identifier="list" title=".+?"><span class="rating-bg">.+?<div class=".+?">(.+?)<').findall(link)
-        for iconimage, url, name, description in match:
-            iconimage1 = iconimage
+        link1=str(link).replace('\n','').replace('\t','')
+        match=re.compile('data-const=".+?">.+?="http://(.+?)images/(.+?)/(.+?)V1(.+?)".+?lass=".+?".+?href="/title/(.+?)/"    >(.+?)</a>    <span class="year_type">.+?</span></b>    <div class="rating rating-list" data-auth=".+?" id=".+?" data-ga-identifier="list" title=".+?"><span class="rating-bg">.+?<div class=".+?">(.+?)<').findall(link1)
+        for a, b, c, d, url, name, description in match:
+            iconimage1 = 'http://'+str(a)+'images/'+str(b)+'/'+str(c)+'V1'+str(d)
             regex=re.compile('(.+?)_V1.+?.jpg')
             regex1=re.compile('(.+?).gif')
             try:
                     match = regex.search(iconimage1)
-                    iconimage= '%s_V1_.SX593_SY799_.jpg'%(match.group(1))
+                    iconimage2= '%s_V1_.SX593_SY799_.jpg'%(match.group(1))
                     fanart= '%s_V1.jpg'%(match.group(1))
-                    print iconimage
+                    iconimage=str(iconimage2).replace('http://i.media-imdb.com/images/SFaa265aa19162c9e4f3781fbae59f856d/nopicture/medium/film.png"      class="loadlate hidden zero-z-index" loadlate="','')
             except:
                     pass
             try:    
                     match= regex1.search(iconimage1)
                     iconimage= ''+'%s.gif'%(match.group(1))
                     fanart= '%s_V1.gif'%(match.group(1))
-                    print iconimage
             except:
                     pass
                     description= str(description).replace('Stars:','Sorry I Cant Find Any Description')
