@@ -674,7 +674,7 @@ def TV_EASY_SEARCH(series, fanart):
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
             addLink(name,url,iconimage,fanart,series,description,rating)
-        addDir('[COLOR blue][B]IM NOT HAPPY WITH THE RESULTS PLEASE SEARCH AGAIN[/B][/COLOR]','url',27,art+'searchtv.png','',series,description,'')    
+        addDir('[COLOR yellow][B]IM NOT HAPPY!! PLEASE SEARCH AGAIN[/B][/COLOR]','url',27,art+'searchtv.png','',series,description,'')    
         addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,art+'back.png','','','','')    
         setView('movies', 'easy-view')
         

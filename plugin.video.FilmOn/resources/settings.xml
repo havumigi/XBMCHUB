@@ -1,10 +1,10 @@
 <settings>
-<category label="XBMCHUB">
+<category label="FilmOn Settings">
 	<setting id="filmon" type="bool" label="FILMON ACCOUNT" default="false"/>
 	<setting id="user" type="text" label="Email" default="" enable="!eq(-1,false)"/>
 	<setting id="pass" type="text" option="hidden" label="Password" default="" enable="!eq(-2,false)"/>
     <setting type="sep" />
-	<setting id="res" type="enum" values="Any|360p|480p" label="File Extension:" default="0" />
+	<setting id="res" type="enum" values="Any|360p|480p" label="Preferred Resolution:" default="0" />
     <setting type="sep" />
 	<setting id="message" type="bool" label="Turn Pop Up Message Off Please" default="false"/>
 </category> 	
