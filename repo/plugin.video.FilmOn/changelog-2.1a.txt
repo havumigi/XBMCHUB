@@ -1,4 +1,6 @@
-v2
+v2.1a
+Removed Automatically Closing Plugin
+Changed settings was ugly
 Added Ability To Record Free Sign Up Needed
 Added Option To See TV Guide
 

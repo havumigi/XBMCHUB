@@ -35,8 +35,6 @@ net.save_cookies(cookie_jar)
 def CATEGORIES():
         if ADDON.getSetting('message') == 'false':
                 xbmcgui.Dialog().ok('EasyNews Information','            For Full Support For This Plugin Please Visit','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please Turn Off Message in Addon Settings')
-                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
-                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
         addDir('My Recordings','http://www.filmon.com/my/recordings',5,'http://a3.mzstatic.com/us/r1000/065/Purple/a8/0d/f0/mzl.otgnsovy.png','')
         addDir('Live Now Epg Main Channels','http://www.filmon.com/tvguide/',1,'http://a3.mzstatic.com/us/r1000/065/Purple/a8/0d/f0/mzl.otgnsovy.png','')
         url='http://www.filmon.com'
