@@ -73,10 +73,8 @@ def CATEGORIES():
         setView('movies', 'default-view') 
            
 def MOVIE_CATEGORIES():
-        if ADDON.getSetting('xbmcpass') == '':
-                xbmcgui.Dialog().ok('EasyNews Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
-                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
-                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
+        if ADDON.getSetting('message') == 'false':
+                xbmcgui.Dialog().ok('EasyNews Information','            For Full Support For This Plugin Please Visit','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please Turn Off Message in Addon Settings')
         addDir('Search Movies','url',6,art+'searchmovies.png','','','','')
         addDir('New DVD Releases','http://www.lovefilm.com/browse/film/dvd/new-releases/films/?sort_by=release_date&rows=50',14,art+'newreleases.png','','','','')
         addDir('In Theatres','http://www.themoviedb.org/movie/now-playing',2,art+'intheatres.png','','','','')
@@ -106,10 +104,8 @@ def TOP_CATEGORIES():
         setView('movies', 'default-view')    
         
 def TV_CATEGORIES():
-        if ADDON.getSetting('xbmcpass') == '':
-                xbmcgui.Dialog().ok('EasyNews Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
-                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
-                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
+        if ADDON.getSetting('message') == 'false':
+                xbmcgui.Dialog().ok('EasyNews Information','            For Full Support For This Plugin Please Visit','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please Turn Off Message in Addon Settings')
         addDir('Search Tv Shows','url',12,art+'searchtv.png','','','','')
         addDir('Current Popular','http://www.imdb.com/search/title?num_votes=5000,&sort=moviemeter&title_type=tv_series',9,art+'currentpopular.png','','','','')
         addDir('All Time Popular','http://www.imdb.com/search/title?num_votes=5000,&sort=user_rating&title_type=tv_series',9,art+'alltimepopular.png','','','','')
@@ -119,10 +115,8 @@ def TV_CATEGORIES():
         setView('movies', 'default-view')
         
 def MUSIC_CATEGORIES():
-        if ADDON.getSetting('xbmcpass') == '':
-                xbmcgui.Dialog().ok('EasyNews Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
-                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
-                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
+        if ADDON.getSetting('message') == 'false':
+                xbmcgui.Dialog().ok('EasyNews Information','            For Full Support For This Plugin Please Visit','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please Turn Off Message in Addon Settings')
         addDir('Search Music','url',16,art+'searchmusic.png','','','','')
         addDir('BillBoard Album Charts','http://www.billboard.com/#/charts',22,art+'bbca.png','','','','')
         addDir('HMV Best Selling','http://hmv.com/hmvweb/directQuery.do?pagingOptionSelect=%2Fhmvweb%2FdirectQuery.do%3FNo%3D0%26pagingOptionSelect%3D192%26N%3D1573%26adultFlag%3Dfalse%26rid%3D1394ED72CCC4',19,art+'hmvbs.png','','','','')
@@ -190,10 +184,8 @@ def SEARCH(url):
         all= '%s %s %s %s\n%s %s %s' % (eng,ger,chi,fre,jap,spa,tur)
         found='[B]%s  LINKS FOUND[/B]' % (li)
         xbmcgui.Dialog().ok(found,str(all))
-        if ADDON.getSetting('xbmcpass') == '':
-                xbmcgui.Dialog().ok('EasyNews Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
-                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
-                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
+        if ADDON.getSetting('message') == 'false':
+                xbmcgui.Dialog().ok('EasyNews Information','            For Full Support For This Plugin Please Visit','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please Turn Off Message in Addon Settings')
         for url1 ,filesize, name in match:
             regex = re.compile("downloads.members.easynews.com/news/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)")
             match = regex.search(url1)
@@ -246,13 +238,16 @@ def SEARCH(url):
             all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)+str(flv)+str(wmv)
             name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('.flv','').replace('.wmv','').replace('%5B','').replace('%5C','').replace('%5A','')
             changeboost4 = 'http://'+username+':'+password+'@' +boost
-            url = str(changeboost4)+str(url1)
+            if ADDON.getSetting('ssl') == 'false':
+	            url = str(changeboost4)+str(url1)
+            if ADDON.getSetting('ssl') == 'true':
+	            url = str(changeboost4).replace('http','https')+str(url1).replace('downloads.','downloads.secure.')
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
             addLink(name,url,iconimage,fanart,series,description,rating)
         addDir('[COLOR red][B]<< Exit EasyNews[/B][/COLOR]','url',26,art+'back.png','','','','')    
         setView('movies', 'easy-view')     
-            
+        
 def IMDB_SEARCH(name, iconimage):
         search_entered = ''
         keyboard = xbmc.Keyboard(search_entered, 'Search EasyNews...XBMCHUB.COM')
@@ -440,7 +435,10 @@ def EasySearch(name,iconimage, fanart):
             all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)+str(flv)+str(wmv)
             name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('.flv','').replace('.wmv','').replace('%5B','').replace('%5C','').replace('%5A','')
             changeboost4 = 'http://'+username+':'+password+'@' +boost
-            url = str(changeboost4)+str(url1)
+            if ADDON.getSetting('ssl') == 'false':
+	            url = str(changeboost4)+str(url1)
+            if ADDON.getSetting('ssl') == 'true':
+	            url = str(changeboost4).replace('http','https')+str(url1).replace('downloads.','downloads.secure.')
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
             addLink(name,url,iconimage,fanart,series,description,rating)
@@ -673,7 +671,10 @@ def TV_EASY_SEARCH(series, fanart):
             all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)+str(flv)+str(wmv)
             name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('.flv','').replace('.wmv','').replace('%5B','').replace('%5C','').replace('%5A','')
             changeboost4 = 'http://'+username+':'+password+'@' +boost
-            url = str(changeboost4)+str(url1)
+            if ADDON.getSetting('ssl') == 'false':
+	            url = str(changeboost4)+str(url1)
+            if ADDON.getSetting('ssl') == 'true':
+	            url = str(changeboost4).replace('http','https')+str(url1).replace('downloads.','downloads.secure.')
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
             addLink(name,url,iconimage,fanart,series,description,rating)
@@ -788,7 +789,10 @@ def TV_EASY_SEARCH2(series, fanart):
             all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)+str(flv)+str(wmv)
             name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('.flv','').replace('.wmv','').replace('%5B','').replace('%5C','').replace('%5A','')
             changeboost4 = 'http://'+username+':'+password+'@' +boost
-            url = str(changeboost4)+str(url1)
+            if ADDON.getSetting('ssl') == 'false':
+	            url = str(changeboost4)+str(url1)
+            if ADDON.getSetting('ssl') == 'true':
+	            url = str(changeboost4).replace('http','https')+str(url1).replace('downloads.','downloads.secure.')
             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
             addLink(name,url,iconimage,fanart,series,description,rating)
@@ -1077,10 +1081,8 @@ def IMDB_LISTS(url):
         addDir('Watch List',IMDBTV_WATCHLIST,8,art+'imdb.png','','','','')
         if ADDON.getSetting('imdb_user') == 'ur********':
                 xbmcgui.Dialog().ok('EasyNews Information','You Need To Input Your IMDb Number Into ','Addon Settings')
-        if ADDON.getSetting('xbmcpass') == '':
-                xbmcgui.Dialog().ok('EasyNews Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
-                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
-                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
+        if ADDON.getSetting('message') == 'false':
+                xbmcgui.Dialog().ok('EasyNews Information','            For Full Support For This Plugin Please Visit','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please Turn Off Message in Addon Settings')
         url=IMDB_LIST
         req = urllib2.Request(url)
         req.add_header('User-Agent', USER_AGENT)
@@ -1248,7 +1250,10 @@ def WATCH_LIST_SEARCH(name,url,iconimage,fanart,description):
                             all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)+str(flv)+str(wmv)
                             name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('.flv','').replace('.wmv','').replace('%5B','').replace('%5C','').replace('%5A','')
                             changeboost4 = 'http://'+username+':'+password+'@' +boost
-                            url = str(changeboost4)+str(url1)
+                            if ADDON.getSetting('ssl') == 'false':
+                                    url = str(changeboost4)+str(url1)
+                            if ADDON.getSetting('ssl') == 'true':
+                                    url = str(changeboost4).replace('http','https')+str(url1).replace('downloads.','downloads.secure.')
                             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
                             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
                             addLink(name,url,iconimage,fanart,series,description,rating) 
@@ -1259,10 +1264,8 @@ def TRAKT_LISTS(url):
         addDir('Watch List','url',31,art+'trakt.png','','','','')
         if ADDON.getSetting('trakt_user') == '':
                 xbmcgui.Dialog().ok('EasyNews Information','You Need To Input Your Trakt UserName Into ','Addon Settings')
-        if ADDON.getSetting('xbmcpass') == '':
-                xbmcgui.Dialog().ok('EasyNews Information','            To Use This Plugin Please Sign Up To ','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please put XBMCHUB User and Pass in Addon Settings')
-                xbmc.executebuiltin("XBMC.Container.Update(path,replace)")
-                xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
+        if ADDON.getSetting('message') == 'false':
+                xbmcgui.Dialog().ok('EasyNews Information','            For Full Support For This Plugin Please Visit','                    [COLOR yellow][B]WWW.XBMCHUB.COM[/B][/COLOR]','Please Turn Off Message in Addon Settings')
         url='http://trakt.tv/user/%s/lists'% ADDON.getSetting('trakt_user')
         req = urllib2.Request(url)
         req.add_header('User-Agent', USER_AGENT)
@@ -1469,7 +1472,10 @@ def TRAKT_LIST_SEARCH(name,url,iconimage,fanart,description):
                             all=str(mkv)+str(avi)+str(vob)+str(mov)+str(mp4)+str(iso)+str(m4v)+str(flv)+str(wmv)
                             name = '[[B]%s %s[/B]]' % (filesize,all)+'  '+str(name).replace('%20',' ').replace('%28','(').replace('%29',')').replace('.mkv','').replace('.avi','').replace('.iso','').replace('.mov','').replace('.mp4','').replace('.m4v','').replace('.vob','').replace('.flv','').replace('.wmv','').replace('%5B','').replace('%5C','').replace('%5A','')
                             changeboost4 = 'http://'+username+':'+password+'@' +boost
-                            url = str(changeboost4)+str(url1)
+                            if ADDON.getSetting('ssl') == 'false':
+                                    url = str(changeboost4)+str(url1)
+                            if ADDON.getSetting('ssl') == 'true':
+                                    url = str(changeboost4).replace('http','https')+str(url1).replace('downloads.','downloads.secure.')
                             iconimage = str(changeboost4)+str(output).replace('.avi','.jpg').replace('.mkv','.jpg') .replace('.wmv','.jpg').replace('.mov','.jpg').replace('.mpg', '.jpg').replace('.asf', '.jpg').replace('.mp4', '.jpg') .replace('.iso', '.jpg').replace('.rm', '.jpg').replace('.flv', '.jpg') 
                             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
                             addLink(name,url,iconimage,fanart,series,description,rating) 

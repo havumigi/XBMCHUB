@@ -1,3 +1,6 @@
+v2.6
+Added Option To Use SSL
+
 v2.5b
 Fixed Imdb list not showing some thumbails
 Changed Blue To Yellow

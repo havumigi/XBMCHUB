@@ -1,4 +1,22 @@
-V2.3.1d
+v2.6
+Added Option To Use SSL
+
+v2.5b
+Fixed Imdb list not showing some thumbails
+Changed Blue To Yellow
+Added Trakt Tv
+Please enable IMDB or Trakt In Addon Settings
+
+v2.4a
+Fixed Watchlist Hanging On Shows That Have No Description
+Fixed Not Being Able To Watch The Avengers
+
+v2.4
+Added XBMC Account Login
+Added Logs for users
+
+V2.3.1e
+Sorted Some Episodes Not Listing
 Added Enable Fanart
 Added Color to gui for navigation
 Added "IM NOT HAPPY WITH THE RESULTS PLEASE SEARCH AGAIN" to tv shows if links are zero
