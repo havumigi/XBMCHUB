@@ -1,8 +1,2 @@
-[B]Version 1.2
-Moving Repo To DropBox[/B]
-
-[B]Version 1.1[/B]
-Airing My Views
-
-[B]Version 1.0[/B]
+[B]Version 1.0.0[/B]
 - Initial version
