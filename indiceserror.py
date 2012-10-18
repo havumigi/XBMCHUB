@@ -59,9 +59,10 @@ req.add_header('User-Agent', USER_AGENT)
 response = urllib2.urlopen(req)
 link=response.read()
 data = json.loads(link)
-for field in data:
-    print field["id"]
-    print field["title"]
-    print field["logo"]    
+channels = data['channels']
+for channel in channels:
+    print channel["id"]
+    print channel["title"]
+    print channel["logo"]    
 
 
