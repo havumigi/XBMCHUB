@@ -25,7 +25,6 @@ from t0mm0.common.net import Net
 net = Net()
 ADDON = xbmcaddon.Addon(id='plugin.video.FilmOn')
 
-channelist=settings.channels()
 #Global Constants
 USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
 channel= 'http://www.filmon.com/channel/'
