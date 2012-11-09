@@ -24,7 +24,9 @@ from threading import Timer
 from t0mm0.common.net import Net
 net = Net()
 ADDON = xbmcaddon.Addon(id='plugin.video.FilmOn')
+resolution=ADDON.getSetting('res')
 
+channelist=settings.channels()
 #Global Constants
 USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
 channel= 'http://www.filmon.com/channel/'
@@ -42,7 +44,7 @@ def keepAlive():
     if not validWin:
         print '=======================Ending Session======================='
         sess = xbmcgui.Window(10000).getProperty("SessionID")
-        logout=api+'logout?session_key=%s&format=xml' % (sess)
+        logout=api+'logout?session_key=%s' % (sess)
         req =urllib2.Request(logout)
         response = urllib2.urlopen(req)
         link=response.read()
@@ -178,14 +180,6 @@ def Channels(name,url):
                                 dialog.ok("Please Restart", "        FOR YOUR SETTINGS TO TAKE EFFECT", "", "                     [COLOR yellow][B]PLEASE RESTART XBMC[/B][/COLOR] ")    
                 else: 
                         ADDON.setSetting(id='firstrun', value='true')
-        if ADDON.getSetting('epgrun') == 'false':
-                dialog = xbmcgui.Dialog()
-                if dialog.yesno('FilmOn Information','[B]WOULD YOU LIKE TO HAVE WHATS PLAYING NOW[/B]','[B]IF SELECTED CHANNELS WILL LOAD SLOWER YOU [/B]','[B]CAN ALWAYS CHANGE THIS IN ADDON SETTINGS[/B]','NO THANKS','YES PLEASE'):
-                        ADDON.setSetting(id='epgrun', value='true')
-                        ADDON.setSetting(id='epgper', value='true') 
-                else:
-                        ADDON.setSetting(id='epgrun', value='true')
-                        ADDON.setSetting(id='epgper', value='false') 
         r='http://www.filmon.com/api/group/%s?session_key=%s' % (url,ses)
         html = net.http_GET(r).content
         link = html.encode('ascii', 'ignore')
@@ -195,96 +189,46 @@ def Channels(name,url):
             url = field["id"]
             name = field["title"]
             icon = field["logo"]
-            iconimage = str(icon).replace('/logo','/big_logo').replace('/big_logo','/extra_big_logo')
+            iconimage = str(icon).replace('/logo','/extra_big_logo')
             description = ''
             name = name.encode("utf-8")
-            if ADDON.getSetting('epgper') == 'true':
-                        try:
-                            grp='http://www.filmon.com/tvguide/'
-                            req = urllib2.Request(grp)
-                            req.add_header('User-Agent', USER_AGENT)
-                            response = urllib2.urlopen(req)
-                            link1=response.read()
-                            response.close()  
-                            link=str(link1).replace('\n','').replace('\t','')
-                            r='<img src="http://static.filmon.com/couch/channels/%s/big_logo.png" />.+?</a>.+?<div class="tooltip">.+?</div>.+?<div class="title">Now playing:</div>.+?<h4>(.+?)div class="description">(.+?)/div>'%(url)
-                            match1=re.compile(r).findall(link)
-                            a= match1[0][0]
-                            b=match1[0][1]
-                            name=str(name)+'   ('+str(a).replace('</h4>','').replace('   ','').replace('<','') +')'
-                            description=str(b).replace('   ','').replace('<','')
-                        except:
-                            pass
             addDir(name,url,2,iconimage,description,'favorites','','','','tvguide','','')
-            setView('epiodes', 'default') 
+            setView('episodes', 'default') 
             
     
+def getStream(channels,resolution):
+    if resolution == '0':
+        quality  = 'LOW'
+    else:
+        quality = 'HIGH'
+
+    for item in channels:
+        if item['quality'].upper() == quality:
+            return item
+    return None 
      
                       
 def FilmOn(url,iconimage):
-        url='http://www.filmon.com/api/channel/%s?session_key=%s&format=xml' % (url,ses)
+        url='http://www.filmon.com/api/channel/%s?session_key=%s' % (url,ses)
         link = net.http_GET(url).content
-        if ADDON.getSetting('res') == '1':
-                match=re.compile('<stream><id>2</id><quality>low</quality><url>(.+?)/url><name>(.+?)</name>.+?watch-timeout>(.+?)</watch-timeout></stream>.+?extra_big_logo>(.+?)</extra_big_logo>').findall(link)
-                for url, playpath, t , iconimage in match:
-                        if re.search('"name":"mp4:bc', link, re.IGNORECASE):
-                            regex = re.compile('rtmp://(.+?)/(.+?)/')
-                            match1 = regex.search(url)
-                            app = '%s/' %(match1.group(2))
-                        if not re.search('"name":"mp4:bc', link, re.IGNORECASE):
-                            regex = re.compile('rtmp://(.+?)/(.+?)/(.+?)id=([a-f0-9]*?)<')
-                            match1 = regex.search(url)
-                            app = '%s/%sid=%s' %(match1.group(2), match1.group(3),match1.group(4))
-                        url2=str(url).replace('<','')
-                        tcUrl=str(url2)
-                        swfUrl= 'http://www.filmon.com/tv/modules/FilmOnTV/files/flashapp/filmon/FilmonPlayer.swf'
-                        pageUrl = 'http://www.filmon.com/'
-                        url= str(url2)+' playpath='+str(playpath)+' app='+str(app)+' swfUrl='+str(swfUrl)+' tcUrl='+str(tcUrl)+' pageurl='+str(pageUrl) 
-                        xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(url)
-                        addLink('360p',url,iconimage,'','','','','','','','')
-                        setView('movies', 'default') 
-        if ADDON.getSetting('res') == '2':
-                match=re.compile('<stream><id>1</id><quality>high</quality><url>(.+?)/url><name>(.+?)</name>.+?watch-timeout>(.+?)</watch-timeout></stream>.+?extra_big_logo>(.+?)</extra_big_logo>').findall(link)
-                for url, playpath, t,iconimage in match:
-                        if re.search('"name":"mp4:bc', link, re.IGNORECASE):
-                            regex = re.compile('rtmp://(.+?)/(.+?)/')
-                            match1 = regex.search(url)
-                            app = '%s/' %(match1.group(2))
-                        if not re.search('"name":"mp4:bc', link, re.IGNORECASE):
-                            regex = re.compile('rtmp://(.+?)/(.+?)/(.+?)id=([a-f0-9]*?)<')
-                            match1 = regex.search(url)
-                            app = '%s/%sid=%s' %(match1.group(2), match1.group(3),match1.group(4))
-                        url2=str(url).replace('<','')
-                        tcUrl=str(url2)
-                        swfUrl= 'http://www.filmon.com/tv/modules/FilmOnTV/files/flashapp/filmon/FilmonPlayer.swf'
-                        pageUrl = 'http://www.filmon.com/'
-                        url= str(url2)+' playpath='+str(playpath)+' app='+str(app)+' swfUrl='+str(swfUrl)+' tcUrl='+str(tcUrl)+' pageurl='+str(pageUrl) 
-                        xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(url)
-                        addLink('480p',url,iconimage,'','','','','','','','')
-                        setView('movies', 'default') 
-        if ADDON.getSetting('res') == '0':
-                match2=re.compile('<extra_big_logo>(.+?)</extra_big_logo>').findall(link)
-                match=re.compile('<stream><id>(.+?)</id>.+?<url>(.+?)/url><name>(.+?)</name>.+?watch-timeout>(.+?)</watch-timeout></stream>').findall(link)
-                for name, url, playpath, t in match:
-                        if re.search('"name":"mp4:bc', link, re.IGNORECASE):
-                            regex = re.compile('rtmp://(.+?)/(.+?)/')
-                            match1 = regex.search(url)
-                            app = '%s/' %(match1.group(2))
-                        if not re.search('"name":"mp4:bc', link, re.IGNORECASE):
-                            regex = re.compile('rtmp://(.+?)/(.+?)/(.+?)id=([a-f0-9]*?)<')
-                            match1 = regex.search(url)
-                            app = '%s/%sid=%s' %(match1.group(2), match1.group(3),match1.group(4))
-                        name=str(name).replace('1','480p').replace('2','360p')
-                        url2=str(url).replace('<','')
-                        iconimage=match2[0]
-                        tcUrl=str(url2)
-                        swfUrl= 'http://www.filmon.com/tv/modules/FilmOnTV/files/flashapp/filmon/FilmonPlayer.swf'
-                        pageUrl = 'http://www.filmon.com/'
-                        url= str(url2)+' playpath='+str(playpath)+' app='+str(app)+' swfUrl='+str(swfUrl)+' tcUrl='+str(tcUrl)+' pageurl='+str(pageUrl) 
-                        xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_VIDEO_TITLE)
-                        addLink(name,url,iconimage,'','','','','','','','')
-                        setView('movies', 'default') 
-                
+        data = json.loads(link)
+        channels= data['streams']
+        stream = getStream(channels,resolution)
+        if stream is not None:
+            url= stream['url']+'<'
+            playpath=stream['name']
+            name=stream['quality']
+            regex = re.compile('rtmp://(.+?)/(.+?)/(.+?)id=([a-f0-9]*?)<')
+            match1 = regex.search(url)
+            app = '%s/%sid=%s' %(match1.group(2), match1.group(3),match1.group(4))
+            tcUrl=str(url)
+            swfUrl= 'http://www.filmon.com/tv/modules/FilmOnTV/files/flashapp/filmon/FilmonPlayer.swf'
+            pageUrl = 'http://www.filmon.com/'
+            url= str(url)+' playpath='+str(playpath)+' app='+str(app)+' swfUrl='+str(swfUrl)+' tcUrl='+str(tcUrl)+' pageurl='+str(pageUrl) 
+            xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(url)
+            addLink(name,url,iconimage,'','','','','','','','')
+            setView('movies', 'default') 
+                        
                     
 def MyRecordings(url):
         url='http://www.filmon.com/api/dvr-list?session_key=%s'%(ses)
@@ -352,7 +296,7 @@ def Record(url,progid,stime):
                 dialog.ok('FilmOn Information','[COLOR yellow][B]         SORRY BUT TO RECORD YOU WILL NEED TO[/B][/COLOR]','                      [COLOR red][B]EITHER LOG IN!![/B][/COLOR]','[COLOR yellow][B]         OR HAVE A PAID SUBSCRIPTION TO RECORD[/B][/COLOR]')
                 
 def Delete(stime):
-        url='http://www.filmon.com/api/dvr-remove?session_key=%s&recording_id=%s&format=xml'%(ses,stime)
+        url='http://www.filmon.com/api/dvr-remove?session_key=%s&recording_id=%s'%(ses,stime)
         try:
                 link = net.http_GET(url).content
                 if re.search('Task is removed',link ,re.IGNORECASE):

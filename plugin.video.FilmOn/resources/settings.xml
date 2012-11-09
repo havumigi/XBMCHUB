@@ -4,12 +4,9 @@
 	<setting id="user" type="text" label="Email" default="" enable="!eq(-1,false)"/>
 	<setting id="pass" type="text" option="hidden" label="Password" default="" enable="!eq(-2,false)"/>
     <setting type="sep" />
-	<setting id="res" type="enum" values="Any|360p|480p" label="Preferred Resolution:" default="0" />
+	<setting id="res" type="enum" values="LOW|HIGH" label="Preferred Resolution:" default="0" />
     <setting type="sep" />
 	<setting id="firstrun" type="bool" label="DO NOT TOUCH" default="false" visible="false"/>
-    <setting type="sep" />
-	<setting id="epgper" type="bool" label="EPG Per Channel" default="false"/>
-	<setting id="epgrun" type="bool" label="DO NOT TOUCH" default="false" visible="false"/>
 </category> 	
 
 <category label="Auto-View">
