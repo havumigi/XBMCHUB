@@ -215,11 +215,12 @@ def FilmOn(url,iconimage):
         channels= data['streams']
         stream = getStream(channels,resolution)
         if stream is not None:
-            url= stream['url']+'<'
+            foregex= stream['url']+'<'
+            url= stream['url']
             playpath=stream['name']
             name=stream['quality']
             regex = re.compile('rtmp://(.+?)/(.+?)/(.+?)id=([a-f0-9]*?)<')
-            match1 = regex.search(url)
+            match1 = regex.search(foregex)
             app = '%s/%sid=%s' %(match1.group(2), match1.group(3),match1.group(4))
             tcUrl=str(url)
             swfUrl= 'http://www.filmon.com/tv/modules/FilmOnTV/files/flashapp/filmon/FilmonPlayer.swf'
@@ -243,9 +244,10 @@ def MyRecordings(url):
             time = field['time_start']
             status = field['status']
             playPath = field['stream_name']
-            a = field['stream_url']+'<'
+            url= field['stream_url']
+            foregex = field['stream_url']+'<'
             regex = re.compile('rtmp://(.+?)/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)/(.+?)<')
-            match1 = regex.search(a)
+            match1 = regex.search(foregex)
             time=float(time)
             name = name.encode('utf-8')
             desc = desc.encode('utf-8')
@@ -258,9 +260,7 @@ def MyRecordings(url):
 	            app = ''
             swfUrl= 'http://www.filmon.com/tv/modules/FilmOnTV/files/flashapp/filmon/FilmonPlayer.swf'
             pageUrl = 'http://www.filmon.com/my/recordings'
-            a=str(a).replace('<','')
-            tcUrl=str(a)
-            url= str(a)+' playpath='+str(playPath)+' app='+str(app)+' swfUrl='+str(swfUrl)+' tcUrl='+str(a)+' pageurl='+str(pageUrl)
+            url= str(url)+' playpath='+str(playPath)+' app='+str(app)+' swfUrl='+str(swfUrl)+' tcUrl='+str(url)+' pageurl='+str(pageUrl)
             if status=='Recorded':
 	            status='[COLOR green][Recorded][/COLOR]'
 	            name='%s %s' %(status,name)
@@ -280,8 +280,8 @@ def MyRecordings(url):
             setView('movies', 'epg')
                 
                 
-def Record(url,progid,stime):
-        url ='http://filmon.com/api/dvr-add?session_key=%s&channel_id=%s&programme_id=%s&start_time=%s' % (ses,url,progid,stime)
+def Record(url,programme_id,startdate_time):
+        url ='http://filmon.com/api/dvr-add?session_key=%s&channel_id=%s&programme_id=%s&start_time=%s' % (ses,url,programme_id,startdate_time)
         link = net.http_GET(url).content
         try:
                 
@@ -295,8 +295,8 @@ def Record(url,progid,stime):
                 dialog = xbmcgui.Dialog()
                 dialog.ok('FilmOn Information','[COLOR yellow][B]         SORRY BUT TO RECORD YOU WILL NEED TO[/B][/COLOR]','                      [COLOR red][B]EITHER LOG IN!![/B][/COLOR]','[COLOR yellow][B]         OR HAVE A PAID SUBSCRIPTION TO RECORD[/B][/COLOR]')
                 
-def Delete(stime):
-        url='http://www.filmon.com/api/dvr-remove?session_key=%s&recording_id=%s'%(ses,stime)
+def Delete(startdate_time):
+        url='http://www.filmon.com/api/dvr-remove?session_key=%s&recording_id=%s'%(ses,startdate_time)
         try:
                 link = net.http_GET(url).content
                 if re.search('Task is removed',link ,re.IGNORECASE):
@@ -315,25 +315,25 @@ def EPG(url,iconimage):
                 data = json.loads(link)
                 tvguide = data['tvguide']
                 for field in tvguide:
-                    progid= field["programme"]
-                    stime= field["startdatetime"] 
-                    en= field["enddatetime"]
+                    programme_id= field["programme"]
+                    startdate_time= field["startdatetime"] 
+                    enddate_time= field["enddatetime"]
                     day= field["date_of_month"]                
                     cid= field["channel_id"]
                     desc= field["programme_description"] 
                     name= field["programme_name"]                
-                    s=float(stime) 
-                    e=float(en) 
-                    start=datetime.fromtimestamp(s)
-                    end=datetime.fromtimestamp(e)
-                    stclean=start.strftime('%H:%M') 
-                    enclean=end.strftime('%H:%M')
-                    name = '[%s %s] [B]%s[/B]'%(day,stclean,name)
+                    startdate_time_float=float(startdate_time) 
+                    enddate_time_float=float(enddate_time) 
+                    start=datetime.fromtimestamp(startdate_time_float)
+                    end=datetime.fromtimestamp(enddate_time_float)
+                    startdate_time_cleaned=start.strftime('%H:%M') 
+                    enddate_time_cleaned=end.strftime('%H:%M')
+                    name = '[%s %s] [B]%s[/B]'%(day,startdate_time_cleaned,name)
                     iconimage='http://static.filmon.com/couch/channels/%s/extra_big_logo.png'%(cid)
                     name = name.encode('utf-8')
                     description = desc.encode('utf-8')
                     url =str(cid)
-                    addDir(name,url,2,iconimage,description,'','','record','','',progid,stime)
+                    addDir(name,url,2,iconimage,description,'','','record','','',programme_id,startdate_time)
                     setView('movies', 'epg') 
                     
 def channel_dict(url):
@@ -387,8 +387,8 @@ def get_params():
         return param
 
         
-def addDir(name,url,mode,iconimage,description, favorites, deletefav, record, deleterecord, tvguide,progid,stime):
-        u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)+"&iconimage="+urllib.quote_plus(iconimage)+"&description="+urllib.quote_plus(description)+"&progid="+urllib.quote_plus(progid)+"&stime="+urllib.quote_plus(stime)
+def addDir(name,url,mode,iconimage,description, favorites, deletefav, record, deleterecord, tvguide,programme_id,startdate_time):
+        u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)+"&iconimage="+urllib.quote_plus(iconimage)+"&description="+urllib.quote_plus(description)+"&programme_id="+urllib.quote_plus(programme_id)+"&startdate_time="+urllib.quote_plus(startdate_time)
         ok=True
         liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png",thumbnailImage=iconimage)
         liz.setInfo( type="Video", infoLabels={ "Title": name, "Plot":description} )
@@ -400,10 +400,10 @@ def addDir(name,url,mode,iconimage,description, favorites, deletefav, record, de
               menu.append(('Delete From Favorite Channel','XBMC.RunPlugin(%s?name=None&url=%s&mode=11&iconimage=None&description=None)'%(sys.argv[0],url)))
               liz.addContextMenuItems(items=menu, replaceItems=True)
         if record:
-              menu.append(('Record Programme','XBMC.RunPlugin(%s?name=None&url=%s&mode=6&iconimage=None&description=None&progid=%s&stime=%s)'%(sys.argv[0],url,progid,stime)))
+              menu.append(('Record Programme','XBMC.RunPlugin(%s?name=None&url=%s&mode=6&iconimage=None&description=None&programme_id=%s&startdate_time=%s)'%(sys.argv[0],url,programme_id,startdate_time)))
               liz.addContextMenuItems(items=menu, replaceItems=True)
         if deleterecord:
-              menu.append(('Delete Recording','XBMC.RunPlugin(%s?name=None&url=None&mode=7&iconimage=None&description=None&stime=%s)'%(sys.argv[0],stime)))
+              menu.append(('Delete Recording','XBMC.RunPlugin(%s?name=None&url=None&mode=7&iconimage=None&description=None&startdate_time=%s)'%(sys.argv[0],startdate_time)))
               liz.addContextMenuItems(items=menu, replaceItems=True)
         if tvguide:
               menu.append(('TV Guide','XBMC.Container.Update(%s?name=None&url=%s&mode=8&iconimage=%s&description=None)'%(sys.argv[0],url,iconimage)))
@@ -411,7 +411,7 @@ def addDir(name,url,mode,iconimage,description, favorites, deletefav, record, de
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok   
                      
-def addLink(name,url,iconimage,description, favorites, deletefav, record, deleterecord,tvguide,progid,stime):
+def addLink(name,url,iconimage,description, favorites, deletefav, record, deleterecord,tvguide,programme_id,startdate_time):
         ok=True
         liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
         liz.setInfo( type="Video", infoLabels={ "Title": name, "Plot": description } )
@@ -424,10 +424,10 @@ def addLink(name,url,iconimage,description, favorites, deletefav, record, delete
               menu.append(('Delete From Favorite Channel','XBMC.RunPlugin(%s?name=None&url=%s&mode=11&iconimage=None&description=None)'%(sys.argv[0],url)))
               liz.addContextMenuItems(items=menu, replaceItems=True)
         if record:
-              menu.append(('Record Programme','XBMC.RunPlugin(%s?name=None&url=%s&mode=6&iconimage=None&description=None&pid=%s&st=%s)'%(sys.argv[0],url,progid,stime)))
+              menu.append(('Record Programme','XBMC.RunPlugin(%s?name=None&url=%s&mode=6&iconimage=None&description=None&pid=%s&st=%s)'%(sys.argv[0],url,programme_id,startdate_time)))
               liz.addContextMenuItems(items=menu, replaceItems=True)
         if deleterecord:
-              menu.append(('Delete Recording','XBMC.RunPlugin(%s?name=None&url=None&mode=7&iconimage=None&description=None&stime=%s)'%(sys.argv[0],stime)))
+              menu.append(('Delete Recording','XBMC.RunPlugin(%s?name=None&url=None&mode=7&iconimage=None&description=None&startdate_time=%s)'%(sys.argv[0],startdate_time)))
               liz.addContextMenuItems(items=menu, replaceItems=True)
               
         if tvguide:
@@ -454,8 +454,8 @@ favorites=None
 deletefav=None
 record=None
 deleterecord=None
-progid=None
-stime=None
+programme_id=None
+startdate_time=None
 
 try:
         url=urllib.unquote_plus(params["url"])
@@ -478,11 +478,11 @@ try:
 except:
         pass
 try:        
-        progid=urllib.unquote_plus(params["progid"])
+        programme_id=urllib.unquote_plus(params["programme_id"])
 except:
         pass
 try:        
-        stime=urllib.unquote_plus(params["stime"])
+        startdate_time=urllib.unquote_plus(params["startdate_time"])
 except:
         pass
         
@@ -516,11 +516,11 @@ elif mode==5:
         
 elif mode==6:
         print ""+url
-        Record(url,progid,stime)
+        Record(url,programme_id,startdate_time)
         
 elif mode==7:
         print ""+url
-        Delete(stime)
+        Delete(startdate_time)
         
 elif mode==8:
         print ""+url
